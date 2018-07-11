@@ -10,6 +10,7 @@ var config = {
         /* browser.get('!#/register');*/
     },
     suites: {
+<<<<<<< HEAD
         registration: ['ee/ee/account/signup/*.js',
             'ee/ee/account/signin/*.js'],
         contacts: ['e2e/contacts/createcontact/*.spec.js*',
@@ -31,6 +32,34 @@ var config = {
             'e2e/businessunit/createbusinessunit/*.spec.js*',
             'e2e/businessunit/editbusinessunit/*.spec.js*',
             'e2e/updatecompanyinfo/*.spec.js*']
+||||||| parent of 39ae980... Integrate all modules of account into conf file
+        registration: ['ee/ee/account/signup/*.js',
+            'ee/ee/account/signin/*.js'],
+        contacts: ['e2e/contacts/createcontact/*.js*',
+            'e2e/contacts/editcontact/*.js*',
+            'e2e/contacts/creategroup/*.js*'],
+        products: ['e2e/products/createproduct/*.js',
+            'e2e/products/editproduct/*.js',
+            'e2e/products/importproducts/*.js'],
+        all: ['e2e/account/signup/*.js',
+            'e2e/account/signin/*.js',
+            'e2e/products/createproduct/*.js',
+            'e2e/products/editproduct/*.js',
+            'e2e/products/importproducts/*.js',
+            'e2e/contacts/createcontact/*.js*',
+            'e2e/contacts/editcontact/*.js*',
+            'e2e/contacts/creategroup/*.js*',
+            'e2e/businessuser/createbusinessuser/*.js*',
+            'e2e/businessuser/editbusinessuser/*.js*',
+            'e2e/businessunit/createbusinessunit/*.js*',
+            'e2e/businessunit/editbusinessunit/*.js*',
+            'e2e/updatecompanyinfo/*.js*']
+=======
+        registration: ['ee/ee/account/signup/signup.js',
+            'ee/ee/account/signin/signin.js',
+            'ee/ee/account/signin/forgotpassword.js'
+        ],
+>>>>>>> 39ae980... Integrate all modules of account into conf file
     },
     jasmineNodeOpts: {
         isVerbose: true,
