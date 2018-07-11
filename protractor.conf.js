@@ -11,6 +11,7 @@ var config = {
     },
     suites: {
 <<<<<<< HEAD
+<<<<<<< HEAD
         registration: ['ee/ee/account/signup/*.js',
             'ee/ee/account/signin/*.js'],
         contacts: ['e2e/contacts/createcontact/*.spec.js*',
@@ -56,6 +57,11 @@ var config = {
             'e2e/updatecompanyinfo/*.js*']
 =======
         registration: ['ee/ee/account/signup/signup.js',
+||||||| parent of 196e523... Fix suite name in conf file
+        registration: ['ee/ee/account/signup/signup.js',
+=======
+        account: ['ee/ee/account/signup/signup.js',
+>>>>>>> 196e523... Fix suite name in conf file
             'ee/ee/account/signin/signin.js',
             'ee/ee/account/signin/forgotpassword.js'
         ],
