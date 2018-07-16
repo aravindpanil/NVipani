@@ -12,6 +12,7 @@ var config = {
     suites: {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         registration: ['ee/ee/account/signup/*.js',
             'ee/ee/account/signin/*.js'],
         contacts: ['e2e/contacts/createcontact/*.spec.js*',
@@ -64,6 +65,15 @@ var config = {
 >>>>>>> 196e523... Fix suite name in conf file
             'ee/ee/account/signin/signin.js',
             'ee/ee/account/signin/forgotpassword.js'
+||||||| parent of 651c742... Temporary Changes to Integrate Contacts Suite
+        account: ['ee/ee/account/signup/signup.js',
+            'ee/ee/account/signin/signin.js',
+            'ee/ee/account/signin/forgotpassword.js'
+=======
+        account: ['ee/ee/account/signup/signup.js'
+            //'ee/ee/account/signin/signin.js',
+            //'ee/ee/account/signin/forgotpassword.js'
+>>>>>>> 651c742... Temporary Changes to Integrate Contacts Suite
         ],
 >>>>>>> 39ae980... Integrate all modules of account into conf file
     },

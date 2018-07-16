@@ -7,13 +7,14 @@ var subs = require('../common/subSegment');
 
 describe('Sign up', function () {
 
-    var data, signup;
+    var data, signup,temp;
 
     data = require('./signupdata');
     signup = require('../common/sign.common');
+    temp = require('./temp');
     var generateOTP = element(by.xpath('//button[@aria-label=\'Generate OTP\']'));
     var otp = element(by.model('otp'));
-    var nxt = element(by.xpath('//button[@aria-label=\'Next\' and @aria-hidden=\'false\']'));
+    var nxt = element(by.xpath('//button[@aria-label=\'next\' and @aria-hidden=\'false\']'));
     var start = element(by.xpath('//button[@aria-label=\'Start your 45 days free trial\']'));
     var username = element(by.xpath('//input[@aria-label=\'Email/Mobile No.\']'));
     var password = element(by.model('password'));
@@ -152,10 +153,8 @@ describe('Sign up', function () {
                     flag = 0;
                     if (subseg) {
                         var showDetails = element(by.xpath('//label[text()=\'Show Details\' and ..//label[text()=\'' + seg + '\']]'));
-                        showDet
-
-
-                        ails.click();
+                        
+                        showDetails.click();
                         var subsegData = getsubSegmentData(seg, subseg);
                         for (var i = 0; i < subsegData.length; i++) {
                             var subSegment = element(by.xpath('//md-checkbox[@ng-model=\'node.isChecked\' and .//label[text()=\'' + subsegData[i] + '\']]'));
@@ -192,6 +191,9 @@ describe('Sign up', function () {
                 }
             });
             return;
+        }
+        else{
+            done("No trading selected",null)
         }
     }
 
