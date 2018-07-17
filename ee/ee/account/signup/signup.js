@@ -7,11 +7,10 @@ var subs = require('../common/subSegment');
 
 describe('Sign up', function () {
 
-    var data, signup,temp;
+    var data, signup;
 
     data = require('./signupdata');
     signup = require('../common/sign.common');
-    temp = require('./temp');
     var generateOTP = element(by.xpath('//button[@aria-label=\'Generate OTP\']'));
     var otp = element(by.model('otp'));
     var nxt = element(by.xpath('//button[@aria-label=\'next\' and @aria-hidden=\'false\']'));
