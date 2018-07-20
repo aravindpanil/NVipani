@@ -10,9 +10,9 @@ The conf file has a suite enabled for each branch. Enter the suite you want to e
 
 ```
 suites: {
-        "Account": ["ee/ee/Account/signin/signin.js",
-            "ee/ee/Account/signin/forgotpassword.js",
-            "ee/ee/Account/signup/signup.js"
+        "Account": ['ee/ee/Account/signin/signin.js',
+            'ee/ee/Account/signin/forgotpassword.js',
+            'ee/ee/Account/signup/signup.js'
         ]
     }
 ``` 
