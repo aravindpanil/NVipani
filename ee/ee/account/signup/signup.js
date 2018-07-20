@@ -4,7 +4,6 @@ var config = browser.params;
 var subs = require('../common/subSegment');
 
 describe('Sign up', function () {
-
     var data, signup;
     data = require('./signupdata');
     signup = require('../common/sign.common');
@@ -23,7 +22,6 @@ describe('Sign up', function () {
         browser.sleep(1000);
     });
 
-
     function getsubSegment(seg) {
         if (seg === 'Cereals')
             return subs.Cereals;
@@ -38,7 +36,6 @@ describe('Sign up', function () {
         else if (seg === 'Apparel')
             return subs.Apparel;
     }
-
 
     function getsubSegmentData(seg, subseg) {
         if (seg === 'Cereals' && subseg.Cereals)
@@ -60,25 +57,18 @@ describe('Sign up', function () {
         var segs = ['Cereals', 'Coffee', 'Vegetables', 'Yarn', 'Fabric', 'Apparel'];
 
         for (var k = 0; k < seg.length; k++) {
-
             var flag = 0;
 
             for (var i = 0; i < segs.length; i++) {
-
                 if (seg[k] === segs[i]) {
-
                     flag = 1;
-
                     if (subseg) {
-
                         var sub = getsubSegment(seg[k]);
                         var subsegdata = getsubSegmentData(seg[k], subseg);
-
                         if (subsegdata === 0)
                             return false;
 
                         for (var j = 0; j < subsegdata.length; j++) {
-
                             var flag1 = 0;
                             for (var z = 0; z < sub.length; z++) {
 
@@ -102,7 +92,6 @@ describe('Sign up', function () {
 
         if (seg) {
             var segs = ['Rice', 'Coffee', 'Textiles', 'Fruits and Vegetables'];
-
             if (trad === 'Manufacturer') {
                 for (var j = 0; j < seg.length; j++) {
                     var flag = 0;
@@ -205,7 +194,6 @@ describe('Sign up', function () {
     function generateOTPFunction(Username, Password, done) {
 
         if (signup.validateUserRegisteredData(Username, Password)) {
-
             username.sendKeys(Username);
             password.sendKeys(Password);
 
