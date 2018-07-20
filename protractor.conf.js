@@ -6,7 +6,10 @@ var config = {
     onPrepare: function () {
         browser.driver.manage().window().maximize();
     },
-    suites: {},
+    suites: {
+        "Account": [
+        ]
+    },
     jasmineNodeOpts: {
         isVerbose: true,
         showColors: true,
