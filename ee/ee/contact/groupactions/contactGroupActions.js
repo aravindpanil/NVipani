@@ -8,13 +8,11 @@ describe('Group Actions', function () {
     var data = require('./groupactiondata');
     var sign = require('../../account/common/sign.common');
 
-
     beforeAll(function () {
         browser.get('http://staging.nvipani.com/#!/signin');
     });
 
     afterEach(function () {
-        //browser.refresh();
         browser.sleep(1000);
         sign.logout();
     });
@@ -76,7 +74,6 @@ describe('Group Actions', function () {
 
 
     data.forEach(function (obj) {
-
         it('should do a group action', function () {
             console.log(obj.description);
             sign.login(obj);
