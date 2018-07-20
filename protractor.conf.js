@@ -3,18 +3,15 @@
 var config = {
     troubleshoot: true,
     baseUrl: 'http://staging.nvipani.com/#!/',
-    onPrepare: function() {
+    onPrepare: function () {
         browser.driver.manage().window().maximize();
     },
     suites: {
-        suite1: ['js file1',
-            'js file 2',
-            'js file 3'],
-
-        suite2: ['js file1',
-            'jsfile2']
+        "Contact": [
+            "/ee/ee/contact/groupactions/contactGroupActions.js"
+        ]
     },
-    
+
     jasmineNodeOpts: {
         isVerbose: true,
         showColors: true,
@@ -25,5 +22,5 @@ var config = {
 config.multiCapabilities = [
     { browserName: 'chrome' }
 ];
-const _config = config;
-export { _config as config };
+
+exports.config = config;
