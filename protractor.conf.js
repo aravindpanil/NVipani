@@ -7,11 +7,10 @@ var config = {
         browser.driver.manage().window().maximize();
     },
     suites: {
-        "Contact": [
-            "/ee/ee/contact/groupactions/contactGroupActions.js"
+        contact:[
+            'ee/ee/contact/groupactions/contactGroupActions.js'
         ]
     },
-
     jasmineNodeOpts: {
         isVerbose: true,
         showColors: true,
@@ -22,5 +21,4 @@ var config = {
 config.multiCapabilities = [
     { browserName: 'chrome' }
 ];
-
 exports.config = config;
