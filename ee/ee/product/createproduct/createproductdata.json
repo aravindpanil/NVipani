@@ -4,9 +4,9 @@
     "password": "12345678"
   },
   {
-    "category": "Apparel (APPRL)",
+    "category": "Cereals (CERLS)",
     "product": {
-      "productName": "Cotton Apparel (COTAP)",
+      "productName": "Brown Rice 1KG",
       "productHsnCode": [
         {
           "hsnSearch": "901"
