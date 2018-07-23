@@ -1,13 +1,33 @@
 [
   {
-    "username": "registerBuser@test.com",
-    "password": "registerBuser"
+    "username": "test123@gmail.com",
+    "password": "12345678"
+  },
+  {
+    "action": "Enable",
+    "Offers": [
+      "ABCD"
+    ]
+  },
+  {
+    "action": "Disable",
+    "Offers": [
+      "EFGH",
+      "ABCD"
+    ]
   },
   {
     "action": "Delete",
     "Offers": [
-      "efgh",
-      "abcd"
+      "EFGH"
+    ]
+  },
+  {
+    "action": "Delete",
+    "Offers": [
+      "ABCD",
+      "EFGH",
+      "IJKL"
     ]
   }
 ]

@@ -7,12 +7,7 @@ var config = {
         browser.driver.manage().window().maximize();
     },
     suites: {
-        suite1: ['js file1',
-            'js file 2',
-            'js file 3'],
-
-        suite2: ['js file1',
-            'jsfile2']
+        offer: ['ee/ee/offer/groupactions/offerGroupActions.js']
     },
     
     jasmineNodeOpts: {
