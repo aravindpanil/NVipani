@@ -44,7 +44,7 @@ describe('Create Product', function () {
     });
 
     function categoryFunction(productCategory, done) {
-        var category = element(by.xpath('//md-select[contains(@aria-label,\'Category\')]'));
+        var category = element(by.xpath('//md-select[contains(@aria-label,\'sub-category\')]'));
         category.click();
         if (category.isDisplayed() && productCategory) {
             var selectCategory = element(by.xpath('//md-option[./div[text()=\'' + productCategory + '\']]'));
@@ -138,7 +138,7 @@ describe('Create Product', function () {
                                                                 UOM.clear().then(function () {
                                                                     UOM.sendKeys(uom.uomSearch);
                                                                     uom.uomCode.forEach(function (code) {
-                                                                        var selectUOM = element(by.xpath('//div[following-sibling::div[./label[text()=\'' + code + '\']]]'));
+                                                                        var selectUOM = element(by.xpath('//div[following-sibli"ng::div[./label[text()=\'' + code + '\']]]'));
                                                                         sign.isClickable(selectUOM, function (error, ele) {
                                                                             if (ele)
                                                                                 ele.click();

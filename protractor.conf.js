@@ -7,7 +7,7 @@ var config = {
         browser.driver.manage().window().maximize();
     },
     suites: {
-        suite1: ['ee/ee/product/groupactions/prouctGroupActions.js']
+        suite1: ['ee/ee/product/createproduct/createProduct.js']
     },
     
     jasmineNodeOpts: {
