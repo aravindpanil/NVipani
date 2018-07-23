@@ -1,8 +1,13 @@
 [
-  {"username":"registerBuser@test.com","password":"registerBuser"},
   {
-    "action":"Delete",
-    "Offers":["efgh","abcd"]
+    "username": "registerBuser@test.com",
+    "password": "registerBuser"
+  },
+  {
+    "action": "Delete",
+    "Offers": [
+      "efgh",
+      "abcd"
+    ]
   }
 ]
-

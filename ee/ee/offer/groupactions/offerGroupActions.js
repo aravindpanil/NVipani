@@ -26,11 +26,11 @@ describe('Group Actions', function () {
         sign.logout();
     });
 
-    function selectOrderFunction(offers,done){
+    function selectOrderFunction(offers, done) {
 
-        if(offers) {
+        if (offers) {
             offers.forEach(function (offer) {
-                var selectoffer=element(by.xpath('//md-checkbox[@ng-model=\'offer.selected\' and ../../following-sibling::td[.//h5[text()=\''+offer+'\']]]'));
+                var selectoffer = element(by.xpath('//md-checkbox[@ng-model=\'offer.selected\' and ../../following-sibling::td[.//h5[text()=\'' + offer + '\']]]'));
                 if (offer) {
                     selectoffer.isPresent().then(function (res) {
                         if (res) {
@@ -46,17 +46,17 @@ describe('Group Actions', function () {
             done(null);
         }
         else
-            done("Missing Offers",null);
+            done("Missing Offers", null);
     }
 
-    function groupActionFunction(action,done){
-        if(action){
-            var groupactionButton=element(by.xpath('//button[@aria-label=\'Group Actions\']'));
+    function groupActionFunction(action, done) {
+        if (action) {
+            var groupactionButton = element(by.xpath('//button[@aria-label=\'Group Actions\']'));
             groupactionButton.click();
-            if(groupactionButton.isPresent() && groupactionButton.isDisplayed()) {
-                var selectgroupaction=element(by.xpath('//button[@aria-label=\''+action+'\' and ../../../@aria-hidden=\'false\']'));
-                sign.isClickable(selectgroupaction,function (error,ele) {
-                    if(ele)
+            if (groupactionButton.isPresent() && groupactionButton.isDisplayed()) {
+                var selectgroupaction = element(by.xpath('//button[@aria-label=\'' + action + '\' and ../../../@aria-hidden=\'false\']'));
+                sign.isClickable(selectgroupaction, function (error, ele) {
+                    if (ele)
                         selectgroupaction.click();
                     else
                         done(new Error(error));
@@ -74,14 +74,14 @@ describe('Group Actions', function () {
 
         it('should do a group action', function () {
 
-            selectOrderFunction(data.Offers,function (error,ele) {
-                if(error){
+            selectOrderFunction(data.Offers, function (error, ele) {
+                if (error) {
                     console.log(error);
                     return;
                 }
 
-                groupActionFunction(data.action,function (error) {
-                    if(error){
+                groupActionFunction(data.action, function (error) {
+                    if (error) {
                         console.log(error);
                         return;
                     }
