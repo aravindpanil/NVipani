@@ -25,5 +25,5 @@ var config = {
 config.multiCapabilities = [
     { browserName: 'chrome' }
 ];
-const _config = config;
-export { _config as config };
+
+exports.config = config;
