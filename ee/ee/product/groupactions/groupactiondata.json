@@ -1,10 +1,29 @@
 [
-  {"username":"registerBuser@test.com","password":"registerBuser"},
+  {"username":"test123@gmail.com","password":"12345678"},
+  {
+    "action":"Enable",
+    "Products":[
+      {"productName":"Pineapple","productBrand":"YNG","productUOM":"Pcs"}
+    ]
+  },
   {
     "action":"Disable",
     "Products":[
-      {"productName":"Cotton Apparel","productBrand":"Silk","productUOM":"Box (51Nos)"},
-      {"productName":"Cotton Apparel","productBrand":"abcd","productUOM":"Box (12Bag)"}
+      {"productName":"Pineapple","productBrand":"YNG","productUOM":"Pcs"},
+      {"productName":"Coffee Berries","productBrand":"cofee (brew)","productUOM":"Box"}
+    ]
+  },
+  {
+    "action":"Delete",
+    "Products":[
+      {"productName":"Pineapple","productBrand":"YNG","productUOM":"Pcs"}
+    ]
+  },
+  {
+    "action":"Delete",
+    "Products":[
+      {"productName":"Pineapple","productBrand":"YNG","productUOM":"Kgs"},
+      {"productName":"Coffee Berries","productBrand":"cofee (brew)","productUOM":"Box"}
     ]
   }
 ]
