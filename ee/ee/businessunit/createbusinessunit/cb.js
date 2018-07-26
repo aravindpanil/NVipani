@@ -5,23 +5,22 @@ var config = browser.params;
 
 describe('Create Business User', function () {
 
-    var i=0;
-    var data=require('./cbu');
-    var sign=require('../../account/common/sign.common');
-
-    var tab=element(by.xpath('//md-tab-item[text()=\'Business Units\']'));
-    var BunitType=element(by.id('businessUnitType'));
-    var addBunit=element(by.id('add-business-unit'));//New+ button
-    var incharge=element(by.id('addBunitIncharge'));
-    var BunitName=element(by.model('businessUnit.name'));
-    var gstin=element(by.model('businessUnit.gstinNumber'));
-    var pan=element(by.model('businessUnit.panNumber'));
-    var step2=element(by.id('createStep-2'));
-    var step3=element(by.id('createStep-3'));
-    var step4=element(by.id('createStep-4'));
-    var createBunit=element(by.id('createBunit'));
-    var closeaddBunit=element(by.id('closeAddBunit'));
-    var refreshBunit=element(by.id('refreshAddBunit'));
+    var i = 0;
+    var data = require('./cbu');
+    var sign = require('../../account/common/sign.common');
+    var tab = element(by.xpath('//md-tab-item[text()=\'Business Units\']'));
+    var BunitType = element(by.id('businessUnitType'));
+    var addBunit = element(by.id('add-business-unit'));//New+ button
+    var incharge = element(by.id('addBunitIncharge'));
+    var BunitName = element(by.model('businessUnit.name'));
+    var gstin = element(by.model('businessUnit.gstinNumber'));
+    var pan = element(by.model('businessUnit.panNumber'));
+    var step2 = element(by.id('createStep-2'));
+    var step3 = element(by.id('createStep-3'));
+    var step4 = element(by.id('createStep-4'));
+    var createBunit = element(by.id('createBunit'));
+    var closeaddBunit = element(by.id('closeAddBunit'));
+    var refreshBunit = element(by.id('refreshAddBunit'));
 
     beforeAll(function () {
         browser.get('');
@@ -45,46 +44,45 @@ describe('Create Business User', function () {
 
 
 
-    
-    function BunitNameFunction(bunitName,done){
-        if(bunitName){
+
+    function BunitNameFunction(bunitName, done) {
+        if (bunitName) {
             BunitName.sendKeys(bunitName);
-            done(null,null);
+            done(null, null);
         }
         else
-            done("Missing Business Unit Name",BunitName);
+            done("Missing Business Unit Name", BunitName);
     }
 
-    function inchargeFunction(Incharge,done){
+    function inchargeFunction(Incharge, done) {
 
         incharge.click();
-        if(Incharge){
-            
+        if (Incharge) {
+
             var op = element(by.id(Incharge));
             op.isPresent().then(function (res) {
-                if(res){
+                if (res) {
                     op.click();
-                    done(null,null);
+                    done(null, null);
                 }
-                else
-                {
-                    console.log("Using default incharge as"+Incharge+" not a business user");
+                else {
+                    console.log("Using default incharge as" + Incharge + " not a business user");
                     var option = element(by.id(data[0].username));
                     option.click();
-                    done(null,null);
+                    done(null, null);
                 }
-                    //done("No such Incharge-"+Incharge,incharge);
+                //done("No such Incharge-"+Incharge,incharge);
             });
         }
-        else{
+        else {
             var option = element(by.id(data[0].username));
             option.click();
-            done(null,null);
+            done(null, null);
         }
     }
 
-    function BunitTypeFunction(bunitType,area,loading,unloading){
-        if(bunitType) {
+    function BunitTypeFunction(bunitType, area, loading, unloading) {
+        if (bunitType) {
             BunitType.click();
             if (BunitType.isPresent() && BunitType.isDisplayed()) {
                 var selectType = element(by.xpath('//md-option[./div[text()=\'' + bunitType + '\']]'));
@@ -92,7 +90,7 @@ describe('Create Business User', function () {
                     if (res) {
                         selectType.click();
                         if (bunitType === 'Ware House') {
-                            if(area) {
+                            if (area) {
                                 if (area.NoOfUnits && area.unitofMeasure && !isNaN(area.NoOfUnits)) {
                                     var areanoofUnits = element(by.model('businessUnit.warehouseDetails.capacity.numberOfUnits'));
                                     var areaunitofmeasure = element(by.xpath('//md-select[@ng-model=\'businessUnit.warehouseDetails.capacity.unitOfMeasure\']'));
@@ -107,7 +105,7 @@ describe('Create Business User', function () {
                                     }
                                 }
                             }
-                            if(loading) {
+                            if (loading) {
                                 if (loading.loadingCapacityUnits && loading.loadingunitofMeasure && !isNaN(loading.loadingCapacityUnits)) {
                                     var loadingnoofUnits = element(by.model('businessUnit.warehouseDetails.loadingCapacity.numberOfUnits'));
                                     loadingnoofUnits.sendKeys(loading.loadingCapacityUnits);
@@ -125,7 +123,7 @@ describe('Create Business User', function () {
                                         loadingduration.sendKeys(loading.loadingDuration);
                                 }
                             }
-                            if(unloading) {
+                            if (unloading) {
                                 if (unloading.unloadingCapacityUnits && unloading.unloadingunitofMeasure && !isNaN(unloading.unloadingCapacityUnits)) {
                                     var unloadingnoofUnits = element(by.model('businessUnit.warehouseDetails.unLoadingCapacity.numberOfUnits'));
                                     unloadingnoofUnits.sendKeys(unloading.unloadingCapacityUnits);
@@ -150,11 +148,11 @@ describe('Create Business User', function () {
         }
     }
 
-    function gstinpanFunction(gstinNo,panNo){
+    function gstinpanFunction(gstinNo, panNo) {
         if (gstinNo) {
             gstin.sendKeys(gstinNo);
             gstin.getAttribute('aria-invalid').then(function (attr) {
-                if(attr === 'true')
+                if (attr === 'true')
                     gstin.clear().then(function () {
                         gstin.sendKeys('');
                         console.log("Invlalid gstin number");
@@ -165,7 +163,7 @@ describe('Create Business User', function () {
         if (panNo) {
             pan.sendKeys(panNo);
             pan.getAttribute('aria-invalid').then(function (attr) {
-                if(attr === 'true')
+                if (attr === 'true')
                     pan.clear().then(function () {
                         pan.sendKeys('');
                         console.log("Invlalid pan number");
@@ -174,18 +172,18 @@ describe('Create Business User', function () {
         }
     }
 
-    function phoneNoFunction(phoneNumber){
+    function phoneNoFunction(phoneNumber) {
         if (phoneNumber) {
             var phonesTab = element(by.xpath('//md-tab-item[text()=\'Phones\']'));
             phonesTab.click();
             phoneNumber.forEach(function (mobile) {
-                if(mobile.number) {
+                if (mobile.number) {
                     var phone = element(by.id('addBunitphone-' + phoneNumber.indexOf(mobile)));
                     if (mobile.phoneType) {
                         var phonetype = phone.element(by.id('addBunitPhoneType'));
                         phonetype.click();
-                        if(phonetype.isDisplayed()) {
-                            if(mobile.phoneType !== 'Mobile' && mobile.phoneType !== 'Office' && mobile.phoneType !== 'Work')
+                        if (phonetype.isDisplayed()) {
+                            if (mobile.phoneType !== 'Mobile' && mobile.phoneType !== 'Office' && mobile.phoneType !== 'Work')
                                 mobile.phoneType = 'Other';
                             var selectphonetype = element(by.xpath('//md-option[@id=\'addBunitPhone-' + mobile.phoneType + '\' and ../../../@aria-hidden=\'false\']'));
                             selectphonetype.click();
@@ -197,7 +195,7 @@ describe('Create Business User', function () {
                         if (attr === 'true')
                             phoneno.clear().then(function () {
                                 phoneno.sendKeys('');
-                                console.log("wrong format of phone number :",mobile.number);
+                                console.log("wrong format of phone number :", mobile.number);
                             });
                     });
                 }
@@ -210,18 +208,18 @@ describe('Create Business User', function () {
         }
     }
 
-    function emailFunction(Email){
+    function emailFunction(Email) {
         if (Email) {
             var emailsTab = element(by.xpath('//md-tab-item[text()=\'Emails\']'));
             emailsTab.click();
             Email.forEach(function (mail) {
-                if(mail.mailid) {
+                if (mail.mailid) {
                     var email = element(by.id('addBunitEmail-' + Email.indexOf(mail)));
                     if (mail.emailType) {
                         var emailtype = email.element(by.id('addBunitEmailType'));
                         emailtype.click();
-                        if(emailtype.isDisplayed()) {
-                            if(mail.emailType !== 'Work' && mail.emailType !== 'Personal')
+                        if (emailtype.isDisplayed()) {
+                            if (mail.emailType !== 'Work' && mail.emailType !== 'Personal')
                                 mail.emailType = 'Other';
                             var selectemailtype = element(by.xpath('//md-option[@id=\'addBunitType-' + mail.emailType + '\' and ../../../@aria-hidden=\'false\']'));
                             selectemailtype.click();
@@ -233,7 +231,7 @@ describe('Create Business User', function () {
                         if (attr === 'true')
                             emailid.clear().then(function () {
                                 emailid.sendKeys('');
-                                console.log("wrong format of email :",mail.mailid);
+                                console.log("wrong format of email :", mail.mailid);
                             });
                     });
                 }
@@ -246,10 +244,10 @@ describe('Create Business User', function () {
         }
     }
 
-    function addressFunction(address){
-    var typenum={"Billing":"0","Shipping":"1","Receiving":"2","Invoice":"3"}    
+    function addressFunction(address) {
+        var typenum = { "Billing": "0", "Shipping": "1", "Receiving": "2", "Invoice": "3" }
         address.forEach(function (addr) {
-            if(addr.addressLine || addr.city || addr.state || addr.country || addr.pinCode) {
+            if (addr.addressLine || addr.city || addr.state || addr.country || addr.pinCode) {
                 var type;
                 if (addr.addressType) {
                     type = addr.addressType;
@@ -257,12 +255,12 @@ describe('Create Business User', function () {
                 else {
                     type = "Billing";
                 }
-                element(by.xpath('//md-tab-item[text()=\''+type+'\']')).click();//induvidial type
-                var ele = element.all(by.xpath('//md-content[@id=\''+type+'\']/div'));//full row of tabs
-                ele.count().then(function(count) {
-                    var addButton=element(by.id("companyAddAddresses-"+typenum[type]));
+                element(by.xpath('//md-tab-item[text()=\'' + type + '\']')).click();//induvidial type
+                var ele = element.all(by.xpath('//md-content[@id=\'' + type + '\']/div'));//full row of tabs
+                ele.count().then(function (count) {
+                    var addButton = element(by.id("companyAddAddresses-" + typenum[type]));
                     addButton.click();
-                    var addressElement = element(by.id(type+"-"+(count-1)));
+                    var addressElement = element(by.id(type + "-" + (count - 1)));
                     if (addr.addressLine) {
                         var addressline = addressElement.element(by.model('address.addressLine'));
                         addressline.sendKeys(addr.addressLine);
@@ -288,8 +286,8 @@ describe('Create Business User', function () {
         });
     }
 
-    function accountFunction(account){
-        if(account) {
+    function accountFunction(account) {
+        if (account) {
             if (account.accountNo && account.bankName && account.ifscCode) {
                 var accountnumber = element(by.model('businessUnit.bankAccountDetails.bankAccountNumber'));
                 var accounttype = element(by.xpath('//md-select[@ng-model=\'businessUnit.bankAccountDetails.accountType\']'));
@@ -319,24 +317,24 @@ describe('Create Business User', function () {
 
     data.forEach(function (data) {
         it('should create a business unit', function () {
-            console.log("Test case ",i);
+            console.log("Test case ", i);
             i++;
 
-            BunitNameFunction(data.businessUnitName,function (error,ele) {
-                if(error){
+            BunitNameFunction(data.businessUnitName, function (error, ele) {
+                if (error) {
                     console.log(error);
                     return;
                 }
 
-                inchargeFunction(data.incharge,function (error,ele) {
-                    if(error){
+                inchargeFunction(data.incharge, function (error, ele) {
+                    if (error) {
                         console.log(error);
                         return;
                     }
-                    
-                   BunitTypeFunction(data.businessUnitType,data.area,data.loading,data.unloading);
 
-                    gstinpanFunction(data.gstinNo,data.panNo);
+                    BunitTypeFunction(data.businessUnitType, data.area, data.loading, data.unloading);
+
+                    gstinpanFunction(data.gstinNo, data.panNo);
 
                     step2.click();
 
@@ -355,10 +353,10 @@ describe('Create Business User', function () {
                     createBunit.click();
 
                     console.log("\n");
-                    
+
                 });
             });
-            
+
         });
     });
 });

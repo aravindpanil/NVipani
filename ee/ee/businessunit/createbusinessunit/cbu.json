@@ -1,130 +1,126 @@
 [
-    {
-        "username": "9999999955",
-        "password": "qwertyuiop",
-        "trading": "Distributor",
-        "segment": [
-            "Coffee"
-        ]
-    },
-    {
-      "incharge": "asdfghjadk@gmail.com",
-      "businessUnitName": "ChittoorBranch",
-      "email": [
-        {
-          "emailType": "Work",
-          "mailid": "chtr@branch.com"
-        },
-        {
-          "emailType": "Personal",
-          "mailid": "sefs@branch.com"
-        },
-        {
-          "emailType": "Work",
-          "mailid": "dsfesa@branch.com"
-        }
-      ],
-      "phoneNumber": [
-        {
-          "number": "1234567890"
-        },
-        {
-          "number": "7392746103"
-        },
-        {
-          "number": "9876543210"
-        }
-      ],
-      "address": [
-        {
-          "addressType": "Invoice",
-          "addressLine": "526,JeevanBheema Nager",
-          "city": "Bengulure",
-          "state": "Karnataka",
-          "country": "India",
-          "pinCode": "123456"
-        },
-        {
-          "addressType": "Receiving",
-          "addressLine": "526,JeevanBheema Nager",
-          "city": "Bengulure",
-          "state": "Karnataka",
-          "country": "India",
-          "pinCode": "123456"
-        },
-        {
-          "addressType": "Invoice",
-          "addressLine": "526,JeevanBheema Nager",
-          "city": "Bengulure",
-          "state": "Karnataka",
-          "country": "India",
-          "pinCode": "123456"
-        }
-      ],
-      "account": {
-        "accountNo": "1234567654",
-        "accountType": "Saving",
-        "bankName": "sbi",
-        "ifscCode": "BKID0001047"
+  {
+    "username": "test123@gmail.com",
+    "password": "12345678"
+  },
+  {
+    "incharge": "test123@gmail.com",
+    "businessUnitName": "ChittoorBranch",
+    "email": [
+      {
+        "emailType": "Work",
+        "mailid": "chtr@branch.com"
+      },
+      {
+        "emailType": "Personal",
+        "mailid": "sefs@branch.com"
+      },
+      {
+        "emailType": "Work",
+        "mailid": "dsfesa@branch.com"
       }
-    },
-    {
-        "incharge": "asdfghjk@gmail.com",
-        "businessUnitType": "Ware House",
-        "area": {
-          "NoOfUnits": "12",
-          "unitofMeasure": "Ampules"
-        },
-        "loading": {
-          "loadingCapacityUnits": "13",
-          "loadingunitofMeasure": "Bags",
-          "loadingDuration": "5"
-        },
-        "businessUnitName": "IndiranagarBranch",
-        "gstinNo": "1223",
-        "panNo": "1432",
-        "email": [
-          {
-            "emailType": "Office",
-            "mailid": "bangulure@branch.com"
-          },
-          {
-            "emailType": "Personal",
-            "mailid": "qdfbg"
-          }
-        ],
-        "phoneNumber": [
-          {
-            "phoneType": "Work",
-            "number": "12345670"
-          },
-          {
-            "phoneType": "Office",
-            "number": "1234567890"
-          }
-        ],
-        "address": [
-          {
-            "addressType": "Invoice",
-            "addressLine": "526,JeevanBheema Nager",
-            "city": "Bengulure",
-            "state": "Karnataka",
-            "country": "India",
-            "pinCode": "123456"
-          },
-          {
-            "addressLine": "526,JeevanBheema Nager",
-            "city": "Bengulure",
-            "state": "Karnataka",
-            "country": "India",
-            "pinCode": "123456"
-          }
-        ],
-        "account": {
-          "accountNo": "1234567654",
-          "accountType": "Saving",
-          "bankName": "sbi",
-          "ifscCode": "1234"
-        }
+    ],
+    "phoneNumber": [
+      {
+        "number": "1234567890"
+      },
+      {
+        "number": "7392746103"
+      },
+      {
+        "number": "9876543210"
       }
+    ],
+    "address": [
+      {
+        "addressType": "Invoice",
+        "addressLine": "526,JeevanBheema Nager",
+        "city": "Bengulure",
+        "state": "Karnataka",
+        "country": "India",
+        "pinCode": "123456"
+      },
+      {
+        "addressType": "Receiving",
+        "addressLine": "526,JeevanBheema Nager",
+        "city": "Bengulure",
+        "state": "Karnataka",
+        "country": "India",
+        "pinCode": "123456"
+      },
+      {
+        "addressType": "Invoice",
+        "addressLine": "526,JeevanBheema Nager",
+        "city": "Bengulure",
+        "state": "Karnataka",
+        "country": "India",
+        "pinCode": "123456"
+      }
+    ],
+    "account": {
+      "accountNo": "1234567654",
+      "accountType": "Saving",
+      "bankName": "sbi",
+      "ifscCode": "BKID0001047"
+    }
+  },
+  {
+    "incharge": "asdfghjk@gmail.com",
+    "businessUnitType": "Ware House",
+    "area": {
+      "NoOfUnits": "12",
+      "unitofMeasure": "Ampules"
+    },
+    "loading": {
+      "loadingCapacityUnits": "13",
+      "loadingunitofMeasure": "Bags",
+      "loadingDuration": "5"
+    },
+    "businessUnitName": "IndiranagarBranch",
+    "gstinNo": "1223",
+    "panNo": "1432",
+    "email": [
+      {
+        "emailType": "Office",
+        "mailid": "bangulure@branch.com"
+      },
+      {
+        "emailType": "Personal",
+        "mailid": "qdfbg"
+      }
+    ],
+    "phoneNumber": [
+      {
+        "phoneType": "Work",
+        "number": "12345670"
+      },
+      {
+        "phoneType": "Office",
+        "number": "1234567890"
+      }
+    ],
+    "address": [
+      {
+        "addressType": "Invoice",
+        "addressLine": "526,JeevanBheema Nager",
+        "city": "Bengulure",
+        "state": "Karnataka",
+        "country": "India",
+        "pinCode": "123456"
+      },
+      {
+        "addressLine": "526,JeevanBheema Nager",
+        "city": "Bengulure",
+        "state": "Karnataka",
+        "country": "India",
+        "pinCode": "123456"
+      }
+    ],
+    "account": {
+      "accountNo": "1234567654",
+      "accountType": "Saving",
+      "bankName": "sbi",
+      "ifscCode": "1234"
+    }
+  }
 ]
