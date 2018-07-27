@@ -22,28 +22,14 @@ describe('Create Business User', function () {
     var closeaddBunit = element(by.id('closeAddBunit'));
     var refreshBunit = element(by.id('refreshAddBunit'));
 
-    beforeAll(function () {
+    beforeAll(function(){
         browser.get('');
-        sign.login(data[0]);
-        sign.companyProfile();
-    });
-
-    beforeEach(function () {
-        browser.refresh();
-        tab.click();
-        addBunit.click();
-    });
+    })
 
     afterEach(function () {
         browser.sleep(1000);
-    });
-
-    afterAll(function () {
         sign.logout();
     });
-
-
-
 
     function BunitNameFunction(bunitName, done) {
         if (bunitName) {
@@ -316,7 +302,12 @@ describe('Create Business User', function () {
 
 
     data.forEach(function (data) {
+
         it('should create a business unit', function () {
+            sign.login(data);
+            sign.companyProfile();
+            tab.click();
+            addBunit.click();
             console.log("Test case ", i);
             i++;
 
@@ -334,7 +325,7 @@ describe('Create Business User', function () {
 
                     BunitTypeFunction(data.businessUnitType, data.area, data.loading, data.unloading);
 
-                    gstinpanFunction(data.gstinNo, data.panNo);
+                    /*gstinpanFunction(data.gstinNo, data.panNo);
 
                     step2.click();
 
@@ -348,7 +339,7 @@ describe('Create Business User', function () {
 
                     step4.click();
 
-                    accountFunction(data.account);
+                    accountFunction(data.account);*/
 
                     createBunit.click();
 
