@@ -1,4 +1,5 @@
 
+
 'use strict';
 
 var config = browser.params;
@@ -10,9 +11,9 @@ describe('Create an Offer',function () {
     var fs = require('fs');
     var selectedData=require('./selectedProducts');
     var continueButton=element(by.xpath('//button[@aria-label=\'Continue\' and @aria-hidden=\'false\']'));
-
+    var i=0;
     beforeAll(function () {
-        browser.get('http://staging.nvipani.com/#!/signin');
+        browser.get('');
         sign.login(data[0]);
     });
 
@@ -28,15 +29,18 @@ describe('Create an Offer',function () {
     function selectProductFunction(productDetails,done){
 
         if(productDetails) {
+            
             selectedData = [];
             productDetails.forEach(function (product) {
                 var selectProduct = element(by.xpath('//*[@ng-model=\'inventory.selected\' and ../..//h5[text()=\'' + product.productName + ' - ' + product.productUOM + '\'] and ../..//h6[text()=\'' + product.productBrand + '\']]'));
                     if (product.productName && product.productBrand && product.productUOM) {
                     selectProduct.isPresent().then(function (res) {
                         if (res) {
+                            
                             selectProduct.click();
+                            //console.log("Selecteddd");
 
-                            selectedData.push({
+                            /*selectedData.push({
                                 productName: product.productName,
                                 productBrand: product.productBrand,
                                 productUOM: product.productUOM,
@@ -44,7 +48,7 @@ describe('Create an Offer',function () {
                             });
                             fs.writeFile('./selectedProducts.json', JSON.stringify(selectedData), 'utf-8', function (err) {
                                 if (err) throw err;
-                            });
+                            });*/
                         }
                         else
                             done("Invalid details for Product-" + productDetails.indexOf(product), selectProduct);
@@ -66,18 +70,21 @@ describe('Create an Offer',function () {
     }
 
     function offerDetailsFunction(name,type,validity,done) {
+        //console.log(validity)
         if(name){
             var offername=element(by.model('offerName'));
             offername.sendKeys(name);
 
             if(type){
+                //console.log("enteredd type")
                 var offertype=element(by.xpath('//h5[text()=\''+type+'\' and ../@aria-hidden=\'false\']'));
                 offertype.isPresent().then(function (res) {
                     if(res){
                         offertype.click();
-
+                        //console.log("type clicked")
                         if(validity){
                             if(validity.validFrom && validity.validTill){
+                                //console.log("enteredddd");
                                 var today=new Date();
                                 var from=new Date(dateConversion(validity.validFrom));
                                 var till=new Date(dateConversion(validity.validTill));
@@ -140,6 +147,7 @@ describe('Create an Offer',function () {
     
     function visibilityFunction(visibility,contacts,businessUnits,done) {
         if(visibility){
+        
          var selectvisibility=element(by.xpath('//h5[text()=\''+visibility+'\']'));
          selectvisibility.isPresent().then(function (res) {
              if(res){
@@ -150,14 +158,19 @@ describe('Create an Offer',function () {
                      businesscontact.click();
                      if(businesscontact.isPresent() && businesscontact.isDisplayed()){
                          if(businessUnits) {
+                             var lastTerm;
                              businessUnits.forEach(function (businessContact) {
+                                lastTerm=businessContact
                                  browser.sleep(5000);
                                  var selectbusinescontact = element(by.xpath('//md-option[.//text()=\'' + businessContact + '\'and @aria-hidden=\'false\']'));
                                  selectbusinescontact.isPresent().then(function (res) {
                                      if (res)
                                          selectbusinescontact.click();
+                                         
                                  });
+
                              });
+                             element(by.xpath('//md-option[.//text()=\''+lastTerm+'\'  and @aria-hidden=\'false\']')).sendKeys(protractor.Key.ESCAPE);
                          }
                      }
 
@@ -196,6 +209,8 @@ describe('Create an Offer',function () {
 
             done(null,null);
         }
+        //console.log("Finished");
+        
     }
 
     function paymentFunction(paymentTerms,paymentModes){
@@ -203,41 +218,55 @@ describe('Create an Offer',function () {
             var paymentterms=element(by.model('paymentTerms'));
             paymentterms.click();
             if(paymentTerms && paymentterms.isPresent() && paymentterms.isDisplayed()){
+                var lastTerm;
                 paymentTerms.forEach(function (term) {
+                    lastTerm=term;
                     var selectpaymentterm=element(by.xpath('//md-option[.//text()=\''+term+'\' and @aria-hidden=\'false\']'));
+                    browser.driver.executeScript("arguments[0].scrollIntoView();", selectpaymentterm.getWebElement());
                     selectpaymentterm.click();
+                    //console.log("clickedd "+term);
                 });
+                element(by.xpath('//md-option[.//text()=\''+lastTerm+'\' ]')).sendKeys(protractor.Key.ESCAPE);
             }
         }
 
 
         if(paymentModes){
+            //browser.actions().sendKeys(protractor.Key.ESCAPE).perform();
             var paymentmodes=element(by.model('paymentModes'));
             paymentmodes.click();
+            //console.log("Clicked Payment mode");
             if(paymentModes && paymentmodes.isPresent() && paymentmodes.isDisplayed()){
+                var lastTerm;
                 paymentModes.forEach(function (mode) {
+                    lastTerm=mode;
                     var selectpaymentmode=element(by.xpath('//md-option[.//text()=\''+mode+'\' and @aria-hidden=\'false\']'));
+                    browser.driver.executeScript("arguments[0].scrollIntoView();", selectpaymentmode.getWebElement());
                     selectpaymentmode.click();
                 });
+                element(by.xpath('//md-option[.//text()=\''+lastTerm+'\']')).sendKeys(protractor.Key.ESCAPE);
             }
         }
     }
 
     data.forEach(function (data) {
         it('should create an offer', function () {
-
+            console.log("Test"+i)
+            i++;
             selectProductFunction(data.productDetails, function (error, ele) {
                 if (error) {
                     console.log(error);
                     return;
                 }
 
-                var createOffer = element(by.xpath('//button[@aria-label=\'Create Offer\' and ../../@aria-hidden=\'false\']'));
+                
+                var createOffer = element(by.xpath('//button[@aria-label=\'Create Offer\' and @aria-expanded=\'false\']'));
                 sign.isClickable(createOffer, function (error, ele) {
                     if (ele) {
 
                         createOffer.click();
-
+                        var selectType=element(by.xpath('//button[@aria-label=\''+data.offerType+'\']'))
+                        selectType.click();
                         offerDetailsFunction(data.offerName,data.offerType,data.validity,function (error,ele) {
                             if(error){
                                 console.log(error);
@@ -255,6 +284,7 @@ describe('Create an Offer',function () {
                                 paymentFunction(data.paymentTerms,data.paymentModes);
 
                                 var placeOffer=element(by.xpath('//button[@aria-label=\'Place Offer\']'));
+                                //browser.driver.executeScript("arguments[0].scrollIntoView();", placeOffer.getWebElement());
                                 placeOffer.click();
                             });
                         });
@@ -266,3 +296,4 @@ describe('Create an Offer',function () {
         });
     });
 });
+
