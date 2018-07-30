@@ -1,18 +1,18 @@
 var config = browser.params;
 
-describe('Add Business User',function () {
+describe('Add Business User', function () {
 
-    var i=0;
-    var data=require('./customData');
-    var sign=require('../account/common/sign.common');
-
-    var tab=element(by.xpath('//md-tab-item[text()=\'Business Users\']'));
-    var addBusinessUser=element(by.id('add-business-user'));
-    var userGroup=element(by.xpath('//md-select[@ng-model=\'businessUser.userGroup\']'));
-    var emailId=element(by.model('businessUser.username'));
-    var createBusinessUser=element(by.id('create-business-user'));
-    var verifyBusinessUser=element(by.xpath('//div[@data-ng-show=\'success\' and ../../../@name=\'addBusinessUserForm\']'));
-    var closeButton=element(by.id('close-add-business-user'));
+    
+    var i = 0;
+    var data = require('./cbuser');
+    var sign = require('../account/common/sign.common');
+    var tab = element(by.xpath('//md-tab-item[text()=\'Business Users\']'));
+    var addBusinessUser = element(by.id('add-business-user'));
+    var userGroup = element(by.xpath('//md-select[@ng-model=\'businessUser.userGroup\']'));
+    var emailId = element(by.model('businessUser.username'));
+    var createBusinessUser = element(by.id('create-business-user'));
+    var verifyBusinessUser = element(by.xpath('//div[@data-ng-show=\'success\' and ../../../@name=\'addBusinessUserForm\']'));
+    var closeButton = element(by.id('close-add-business-user'));
 
     beforeEach(function () {
         browser.get('');
@@ -20,67 +20,66 @@ describe('Add Business User',function () {
 
     afterEach(function () {
         browser.sleep(1000);
-        sign.logout()
+        sign.logout();
     });
 
-    function VerifyBusinessUser(password,email){
+    function VerifyBusinessUser(password, email) {
         console.log("entereddd")
         var EC = protractor.ExpectedConditions;
-        var uname=element(by.xpath('//td[contains(text(),\''+email+'\')]'))
+        var uname = element(by.xpath('//td[contains(text(),\'' + email + '\')]'));
         uname.click();
-        var resendLink=element(by.xpath('//h6[@ng-click=\'resendLink()\']'))
+        var resendLink = element(by.xpath('//h6[@ng-click=\'resendLink()\']'))
         resendLink.click()
-        var extractText=element(by.xpath('//div[@data-ng-show=\'success\']'))
-        extractText.getText().then(function(txt){
+        var extractText = element(by.xpath('//div[@data-ng-show=\'success\']'))
+
+        extractText.getText().then(function (txt) {
             console.log(txt)
-            var text=txt.split(" :");
+            var text = txt.split(" :");
             console.log(text)
-            cancel=element(by.xpath('//button[@ng-click=\'cancel();\']'))
+            cancel = element(by.xpath('//button[@ng-click=\'cancel();\']'))
             cancel.click();
             sign.logout();
             browser.get(text[1]);
             var passWord = element(by.id('businessuserpassword'));
             browser.wait(EC.visibilityOf(passWord), 5000);
             passWord.sendKeys(password);
-            var activateButton=element(by.id('activate'));
+            var activateButton = element(by.id('activate'));
             activateButton.click();
         });
-        
-
-        
     }
 
-    function userGroupFunction(Usergroup,done){
+    function userGroupFunction(Usergroup, done) {
         userGroup.click();
-        if(Usergroup){
-        if(userGroup.isDisplayed()){
-            var selectusergroup=element(by.id(Usergroup));
-            sign.isClickable(selectusergroup,function (error,ele) {
-                if(ele) {
-                    selectusergroup.click();
-                    done(null,null);
-                }
-                else
-                    done(error,ele);
-            });
+
+        if (Usergroup) {
+            if (userGroup.isDisplayed()) {
+                var selectusergroup = element(by.id(Usergroup));
+                sign.isClickable(selectusergroup, function (error, ele) {
+                    if (ele) {
+                        selectusergroup.click();
+                        done(null, null);
+                    }
+                    else
+                        done(error, ele);
+                });
+            }
         }
-        
-        }
-        else{
+        else {
             done("missing type");
+        }
     }
-    }
-    function emailFunction(email,done){
-        if(email){
+
+    function emailFunction(email, done) {
+        if (email) {
             emailId.sendKeys(email);
             emailId.getAttribute('aria-invalid').then(function (attr) {
-                if(attr === 'true')
+                if (attr === 'true')
                     emailId.clear().then(function () {
                         emailId.sendKeys('');
-                        done("Invalid Email ",email);
+                        done("Invalid Email ", email);
                     });
                 else
-                    done(null,null);
+                    done(null, null);
             });
         }
         else
@@ -88,18 +87,18 @@ describe('Add Business User',function () {
     }
 
     data.forEach(function (data) {
-        
+
         it('should add a Business User', function () {
-            console.log("Test "+i);
+            console.log("Test " + i);
             i++;
             browser.get('')
             sign.login(data)
             sign.companyProfile()
             tab.click();
-            
-            addBusinessUser.click();    
-            userGroupFunction(data.usergroup,function (error,ele) {
-                if(error){
+
+            addBusinessUser.click();
+            userGroupFunction(data.usergroup, function (error, ele) {
+                if (error) {
                     console.log(error);
                     sign.logout()
                     console.log("signed out")
@@ -107,26 +106,25 @@ describe('Add Business User',function () {
                 }
                 console.log("finished 1");
 
-                emailFunction(data.email,function (error,ele) {
-                    if(error){
+                emailFunction(data.email, function (error, ele) {
+                    if (error) {
                         console.log(error);
                         return;
                     }
                     console.log("finished 2");
-                    sign.isClickable(createBusinessUser,function (error,ele) {
-                        if(ele){
+                    sign.isClickable(createBusinessUser, function (error, ele) {
+                        if (ele) {
                             createBusinessUser.click();
-                            console.log("button clickedd")
-                            
-                            closeButton.click()
-                            VerifyBusinessUser(data.buserpwd,data.email)
+                            console.log("button clickedd");
+                            browser.sleep(3000);
+                            //closeButton.click();
+                            VerifyBusinessUser(data.buserpwd, data.email);
                         }
                         else {
                             console.log(error);
                             return;
-                        } 
+                        }
                     });
-
                 });
             });
         });
