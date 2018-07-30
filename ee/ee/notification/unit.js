@@ -9,13 +9,10 @@ describe('Create Business User', function () {
     var data = require('./cbu');
     var sign = require('../account/common/sign.common');
     var tab = element(by.xpath('//md-tab-item[text()=\'Business Units\']'));
-    var BunitType = element(by.id('businessUnitType'));
     var addBunit = element(by.id('add-business-unit'));
     var incharge = element(by.id('addBunitIncharge'));
     var BunitName = element(by.model('businessUnit.name'));
     var createBunit = element(by.id('createBunit'));
-    var closeaddBunit = element(by.id('closeAddBunit'));
-    var refreshBunit = element(by.id('refreshAddBunit'));
 
     beforeAll(function(){
         browser.get('');
