@@ -12,24 +12,15 @@ describe('Add Business User',function () {
     var emailId=element(by.model('businessUser.username'));
     var createBusinessUser=element(by.id('create-business-user'));
     var verifyBusinessUser=element(by.xpath('//div[@data-ng-show=\'success\' and ../../../@name=\'addBusinessUserForm\']'));
-    //div[@data-ng-show='success' and ../../../@name='addBusinessUserForm']
     var closeButton=element(by.id('close-add-business-user'));
-
-    beforeAll(function () {
-    });
 
     beforeEach(function () {
         browser.get('');
-        
     });
 
     afterEach(function () {
-        //console.log("refreshedd")
         browser.sleep(1000);
         sign.logout()
-    });
-
-    afterAll(function () {
     });
 
     function VerifyBusinessUser(password,email){
@@ -53,7 +44,6 @@ describe('Add Business User',function () {
             passWord.sendKeys(password);
             var activateButton=element(by.id('activate'));
             activateButton.click();
-            //sign.logout();
         });
         
 
@@ -61,7 +51,6 @@ describe('Add Business User',function () {
     }
 
     function userGroupFunction(Usergroup,done){
-        //console.log("gp anme")
         userGroup.click();
         if(Usergroup){
         if(userGroup.isDisplayed()){
@@ -78,8 +67,7 @@ describe('Add Business User',function () {
         
         }
         else{
-            //closeButton.click()
-            done("missing type")
+            done("missing type");
     }
     }
     function emailFunction(email,done){
@@ -113,7 +101,6 @@ describe('Add Business User',function () {
             userGroupFunction(data.usergroup,function (error,ele) {
                 if(error){
                     console.log(error);
-                    //closeButton.click()
                     sign.logout()
                     console.log("signed out")
                     return;
@@ -137,9 +124,7 @@ describe('Add Business User',function () {
                         else {
                             console.log(error);
                             return;
-                        }
-                        
-
+                        } 
                     });
 
                 });
