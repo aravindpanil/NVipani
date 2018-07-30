@@ -56,7 +56,51 @@ describe('Create Business User', function () {
             done(null, null);
         }
     }
+    
+    function addUsers(users,businessUnitName,done){
+        if(users){
+            var unitName=element(by.xpath('//td/span[contains(text(),\''+businessUnitName+' (RegisteredOffice)\')]'))
+            sign.isClickable(unitName,function (error,ele) {
+                if(ele) {
+                    unitName.click();
+                    done(null,null);
+                }
+                else
+                    done(error,ele);
+            });
 
+            var buserTab=element(by.xpath('//md-tab-item[contains(text(),\'Business User\') and ..//md-tab-item[contains(text(),\'Basic Info\')]]'))
+            buserTab.click();
+
+            var addUnitUser=element(by.xpath('//button[@aria-label=\'addUnitUsers\']'))
+            addUnitUser.click();
+            
+            var input=element(by.xpath('//input[@aria-label=\'Search for Users\']'))
+            users.forEach(function(user){
+                console.log(user);
+                input.sendKeys(user);
+
+                var selectuser=element(by.xpath('//li[.//text()=\''+user+'\']'));
+                selectuser.isPresent().then(function (res) {
+                if(res)
+                    selectuser.click();
+                });
+                
+                //li[.//text()='gs@g.com']
+                
+            })
+
+            var addButton=element(by.xpath('//button[@aria-label=\'AddUser\' and @aria-hidden=\'false\']'))
+            addButton.click();
+            var updateButton=element(by.xpath('//button[@aria-label=\'Update\']'))
+            updateButton.click();
+        }
+        else
+        {
+            done("No additional users")
+        }
+
+    }
     data.forEach(function (data) {
 
         it('should create a business unit', function () {
@@ -80,6 +124,13 @@ describe('Create Business User', function () {
                     }
                     createBunit.click();
                     console.log("\n");
+
+                    addUsers(data.users,data.businessUnitName,function(error,ele){
+                        if(error){
+                            console.log(error);
+                            return;
+                        }
+                    });
                 });
             });
 

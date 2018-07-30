@@ -1,14 +1,16 @@
 [
   {
-    "username": "test123@gmail.com",
-    "password": "12345678",
-    "incharge": "test123@gmail.com",
-    "businessUnitName": "testbranch4"
+    "username": "9999999955",
+    "password": "qwertyuiop",
+    "incharge": "ncharge@a.com",
+    "businessUnitName": "nit1",
+    "users":["ubuser1@a.com","ubuser2@a.com"]
   },
   {
     "username": "test3@gmail.com",
     "password": "12345678",
-    "incharge": "test3@gmail.com",
-    "businessUnitName": "testbranch2"
+    "incharge": "ncharge@b.com",
+    "businessUnitName": "nit2",
+    "users":["ubuser1@b.com","ubuser2@b.com"]
   }
 ]

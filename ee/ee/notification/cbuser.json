@@ -3,7 +3,42 @@
         "username": "9999999955",
         "password": "qwertyuiop",
         "usergroup": "Manager",
-        "email": "test11@temp3.com",
+        "email": "ncharge@a.com",
+        "buserpwd": "qtwertyuiop"
+    },
+    {
+        "username": "test3@gmail.com",
+        "password": "12345678",
+        "usergroup": "Manager",
+        "email": "ncharge@b.com",
+        "buserpwd": "qtwertyuiop"
+    },
+    {
+        "username": "9999999955",
+        "password": "qwertyuiop",
+        "usergroup": "Manager",
+        "email": "ubuser1@a.com",
+        "buserpwd": "qtwertyuiop"
+    },
+    {
+        "username": "9999999955",
+        "password": "qwertyuiop",
+        "usergroup": "Manager",
+        "email": "ubuser2@a.com",
+        "buserpwd": "qtwertyuiop"
+    },
+    {
+        "username": "test3@gmail.com",
+        "password": "12345678",
+        "usergroup": "Manager",
+        "email": "ubuser1@b.com",
+        "buserpwd": "qtwertyuiop"
+    },
+    {
+        "username": "test3@gmail.com",
+        "password": "12345678",
+        "usergroup": "Manager",
+        "email": "ubuser2@b.com",
         "buserpwd": "qtwertyuiop"
     }
 ]
