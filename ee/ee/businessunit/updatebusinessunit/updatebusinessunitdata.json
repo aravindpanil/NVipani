@@ -1,5 +1,10 @@
 [
-  {"username":"registerBuser@test.com","password":"registerBuser", "trading": "Distributor","segment": ["Coffee"]},
+  {"username":"9980998098",
+    "password":"user123user",
+    "businessUnitName":"basebranch",
+     "trading": "Distributor",
+     "segment": ["Coffee"]},
+
   {
     "type":"delete",
     "businessUnitName":"TirupatiBranch",
@@ -33,37 +38,6 @@
   },
   {
     "businessUnitName":"ChittoorBranch",
-    "email":[{"emailType":"Work","mailid":"chtr@branch.com"},{"emailType":"Personal","mailid":"sefs@branch.com"},{"emailType":"Work","mailid":"dsfesa@branch.com"}],
-    "phoneNumber":[{"number":"1234567890"}, {"number":"7392746103"},{"number":"9876543210"}],
-    "address":[
-      {
-        "addressType":"Invoice",
-        "addressLine": "526,JeevanBheema Nager",
-        "city": "Bengulure",
-        "state": "Karnataka",
-        "country": "India",
-        "pinCode": "123456"
-      },
-      {
-        "addressType":"Receiving",
-        "addressLine": "526,JeevanBheema Nager",
-        "city": "Bengulure",
-        "state": "Karnataka",
-        "country": "India",
-        "pinCode": "123456"
-      },
-      {
-        "addressType":"Invoice",
-        "addressLine": "526,JeevanBheema Nager",
-        "city": "Bengulure",
-        "state": "Karnataka",
-        "country": "India",
-        "pinCode": "123456"
-      }
-    ]
-  },
-  {
-    "businessUnitName":"TirupatiBranch",
     "email":[{"emailType":"Work"}],
     "phoneNumber":[{"number":"1234567890"}],
     "address": [
@@ -82,19 +56,7 @@
         "pinCode":"123456"
       }
     ]
-  },
-  {
-    "businessUnitName":"AnantapurBranch",
-    "email":[{"emailType":"Work","mailid":"anathapur@branch.com"}],
-    "phoneNumber":[{"number":"1234567890"}, {"number":"7392746103"},{"number":"9876543210"}],
-    "address": [
-      {
-        "addressLine": "526,JeevanBheema Nager",
-        "city": "Bengulure",
-        "state": "Karnataka",
-        "country": "India",
-        "pinCode": "123456"
-      }
-    ]
   }
+  
+ 
 ]

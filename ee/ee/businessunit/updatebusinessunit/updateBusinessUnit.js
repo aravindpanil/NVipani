@@ -16,7 +16,7 @@ describe('Create Business User', function () {
     var updateButton=element(by.xpath('//button[@aria-label=\'Update\' and @aria-hidden=\'false\']'));
 
     beforeAll(function () {
-        browser.get('http://staging.nvipani.com/#!/signin');
+        browser.get('http://staging.nvipani.com/#!/');
         sign.login(data[0]);
         sign.companyProfile();
     });
@@ -219,6 +219,7 @@ describe('Create Business User', function () {
             }
         }
     }
+  
 
     function deleteordisableFunction(type,done){
 
@@ -239,13 +240,18 @@ describe('Create Business User', function () {
         else
             done(null,null);
     }
-
     data.forEach(function (data) {
+        
         it('should create a business user', function () {
+console.log(data.businessUnitName);
 
             if (data.businessUnitName) {
-
-                var unitname=element(by.xpath('//td[./span[text()=\''+data.businessUnitName+'\']]'));
+            var unitname;
+            //td[./span[text()='TirupatiBranch']
+                
+                
+                unitname=element(by.xpath('//td[./span[contains(text(), \''+data.businessUnitName+'\' )]]'));
+                
                 sign.isClickable(unitname,function (error,ele) {
                     if(ele){
                         unitname.click();
@@ -274,8 +280,10 @@ describe('Create Business User', function () {
                             accountFunction(data.account);
 
                             updateButton.click();
-                        });
-                    }
+                        
+                    });
+                }  
+                   
                     else {
                         console.log(error);
                     }
