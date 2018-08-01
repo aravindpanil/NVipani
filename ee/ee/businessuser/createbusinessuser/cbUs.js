@@ -3,8 +3,8 @@ var config = browser.params;
 describe('Add Business User',function () {
 
     var i=0;
-    var data=require('./cbUser');
-    var sign=require('../../account/common/sign.common');
+    var data=require('./customData');
+    var sign=require('../account/common/sign.common');
 
     var tab=element(by.xpath('//md-tab-item[text()=\'Business Users\']'));
     var addBusinessUser=element(by.id('add-business-user'));
@@ -12,29 +12,59 @@ describe('Add Business User',function () {
     var emailId=element(by.model('businessUser.username'));
     var createBusinessUser=element(by.id('create-business-user'));
     var verifyBusinessUser=element(by.xpath('//div[@data-ng-show=\'success\' and ../../../@name=\'addBusinessUserForm\']'));
+    //div[@data-ng-show='success' and ../../../@name='addBusinessUserForm']
     var closeButton=element(by.id('close-add-business-user'));
 
     beforeAll(function () {
-        browser.get('');
-        sign.login(data[0]);
-        sign.companyProfile();
     });
 
     beforeEach(function () {
-        tab.click();
+        browser.get('');
+        
     });
 
     afterEach(function () {
-        browser.refresh();
+        //console.log("refreshedd")
+        browser.sleep(1000);
+        sign.logout()
     });
 
     afterAll(function () {
-        sign.logout();
     });
 
+    function VerifyBusinessUser(password,email){
+        console.log("entereddd")
+        var EC = protractor.ExpectedConditions;
+
+        var uname=element(by.xpath('//td[contains(text(),\''+email+'\')]'))
+        uname.click();
+        var resendLink=element(by.xpath('//h6[@ng-click=\'resendLink()\']'))
+        resendLink.click()
+        var extractText=element(by.xpath('//div[@data-ng-show=\'success\']'))
+        extractText.getText().then(function(txt){
+            console.log(txt)
+            var text=txt.split(" :");
+            console.log(text)
+            cancel=element(by.xpath('//button[@ng-click=\'cancel();\']'))
+            cancel.click();
+            sign.logout();
+            browser.get(text[1]);
+            var passWord = element(by.id('businessuserpassword'));
+            browser.wait(EC.visibilityOf(passWord), 5000);
+            passWord.sendKeys(password);
+            var activateButton=element(by.id('activate'));
+            activateButton.click();
+            //sign.logout();
+        });
+        
+
+        
+    }
+
     function userGroupFunction(Usergroup,done){
+        //console.log("gp anme")
         userGroup.click();
-        //console.log(Usergroup)
+        if(Usergroup){
         if(userGroup.isDisplayed()){
             var selectusergroup=element(by.id(Usergroup));
             sign.isClickable(selectusergroup,function (error,ele) {
@@ -46,6 +76,12 @@ describe('Add Business User',function () {
                     done(error,ele);
             });
         }
+        
+        }
+        else{
+            //closeButton.click()
+            done("missing type")
+    }
     }
     function emailFunction(email,done){
         if(email){
@@ -64,60 +100,23 @@ describe('Add Business User',function () {
             done("Missing Email ");
     }
 
-    function VerifyBusinessUser(password){
-
-        //var EC = protractor.ExpectedConditions;
-        //browser.wait(EC.visibilityOf(verifyBusinessUser), 5000);
-
-        verifyBusinessUser.getText().then(function (txt) {
-            console.log('hi');
-            var text = txt.split(". ");
-            text.then(function (slices) {
-                console.log('hey');
-                var verify=slices[1].split(" is");
-                console.log(verify[0]);
-                closeButton.click();
-                sign.logout();
-                browser.getCurrentUrl().then(function () {
-                    browser.set(verify[0]);
-                    var passWord = element(by.id('businessuserpassword'));
-                    browser.wait(EC.visibilityOf(passWord), 5000);
-                    passWord.sendKeys(password);
-                    var activateButton=element(by.id('activate'));
-                    activateButton.click();
-                    sign.logout();
-                });
-            });
-        });
-    }
-
-    function checkUser()
-    {
-        console.log("enteredd");
-        alreadyUsedUser=element(by.xpath('//mvard-toast[.//span[contains(text(),\'User is already used for some other company\')]]'));
-        alreadyUsedUser.isPresent().then(function (res) {
-            if(res){
-                console.log("User is already used for some other company");
-            }
-            else {
-                if (data.password && (data.password.length > 7)) {
-                    //browser.sleep(5000);
-                    VerifyBusinessUser(data.password);
-                    sign.login(data[0]);
-                    sign.companyProfile();
-                }
-            }
-        });
-    }
-
     data.forEach(function (data) {
-        console.log("Test "+i);
-        i++;
+        
         it('should add a Business User', function () {
+            console.log("Test "+i);
+            i++;
+            browser.get('')
+            sign.login(data)
+            sign.companyProfile()
+            tab.click();
+            //VerifyBusinessUser(data.buserpwd,data.email)
             addBusinessUser.click();    
             userGroupFunction(data.usergroup,function (error,ele) {
                 if(error){
                     console.log(error);
+                    //closeButton.click()
+                    sign.logout()
+                    console.log("signed out")
                     return;
                 }
                 console.log("finished 1");
@@ -131,44 +130,23 @@ describe('Add Business User',function () {
                     sign.isClickable(createBusinessUser,function (error,ele) {
                         if(ele){
                             createBusinessUser.click();
+                            console.log("button clickedd")
                             
-                            var alreadyUsedUser=element(by.xpath('//md-toast[.//span[contains(text(),\'User is already used for some other company\')]]'));
-                            var EC = protractor.ExpectedConditions;
-
-                            browser.driver.wait(function () {
-                                browser.wait(EC.visibilityOf(alreadyUsedUser), 10000);
-                                if(alreadyUsedUser)
-                                {
-                                    console.log("User already present");
-                                }
-                            });
-
-                            /*alreadyUsedUser.isPresent().then(function (res) {
-                                if(res){
-                                    console.log("User is already used for some other company");
-                                }
-                                else {
-                                    if (data.password && (data.password.length > 7)) {
-                                        browser.sleep(5000);
-                                        VerifyBusinessUser(data.password);
-                                        sign.login(data[0]);
-                                        sign.companyProfile();
-                                    }
-                                }
-                            });*/
-
-                        
-                            
+                            //closeButton.click()
+                            browser.sleep(5000);
+                            VerifyBusinessUser(data.buserpwd,data.email)
                         }
                         else {
                             console.log(error);
                             return;
                         }
+                        
+
                     });
 
                 });
             });
-
         });
     });
+
 });
