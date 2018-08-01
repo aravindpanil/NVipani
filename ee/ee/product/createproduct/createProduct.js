@@ -44,6 +44,11 @@ describe('Create Product', function () {
         browser.refresh();
     });
 
+    afterAll(function () {
+        sign.logout();
+    });
+
+
     function categoryFunction(productCategory, done) {
         var category = element(by.xpath('//md-select[contains(@aria-label,"sub-category")]'));
         category.click();
