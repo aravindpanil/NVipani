@@ -1,31 +1,28 @@
 [
-  {"username":"registerBuser@test.com","password":"registerBuser"},
   {
-    "groupType":"Customer",
-    "groupName":"sbi",
-    "groupDescription":"fcdvfbg",
+    "username":"9999999955","password":"qwertyuiop"
+  },
+  {
+    "groupName":"GP1",
+    "updateType":"Customer",    
+    "updateName":"group1",
+    "updateDescription":"lalalal",
     "contacts":["Anirud","Sai","Reddy"]
   },
   {
-    "groupType":"Customers",
-    "groupName":"sbi",
-    "groupDescription":"fcdvfbg",
-    "contacts":["Anirud","Sai","Reddy"]
+    "groupName":"group1",
+    "updateType":"Customer",    
+    "updateName":"GP1",
+    "updateDescription":"lalalal",
+    "contacts":["poiuy","Sai","Reddy"]
   },
   {
-    "groupType":"Customer",
-    "groupName":"sbi",
-    "contacts":["Anirud","Sai","Reddy"]
-  },
-  {
-    "groupType":"Customer",
-    "groupName":"sbi",
-    "groupDescription":"fcdvfbg"
-  },
-  {
-    "groupType":"Customer",
-    "groupName":"sbi",
-    "groupDescription":"fcdvfbg",
-    "contacts":["Anirud","Saibh","Reddy"]
+    "groupName":"GP2",
+    "updateType":"Customer",
+    "updateDescription":"lalalal",
+    "contacts":["poiuy","asdf","Reddy"]
   }
+
+
 ]
+
