@@ -11,8 +11,10 @@ describe('Update a Contact',function () {
     var form=element(by.name('editContactForm'));
     var updateButton=element(by.xpath('//button[@aria-label=\'Update\']'));
 
+
+
     beforeAll(function () {
-        browser.get('http://staging.nvipani.com/#!/signin');
+        browser.get('');
         sign.login(data[0]);
         element(by.id('nav-contacts')).click();
     });
@@ -240,7 +242,7 @@ describe('Update a Contact',function () {
             return 3;
     }
 
-    function addressFunction(address){
+    function addressFunction(address,done){
 
         if(address) {
             address.forEach(function (addr) {
@@ -255,6 +257,10 @@ describe('Update a Contact',function () {
                     var addressType = element(by.xpath('//form[@name=\'editContactForm\']//md-tab-item[text()=\'' + type + '\']'));
                     browser.driver.executeScript("arguments[0].scrollIntoView();", addressType.getWebElement());
                     //browser.driver.executeScript(form+'.scrollTo(0,0);');
+                    sign.isClickable(addressType,function (error,ele) {
+                        if(ele)
+                            console.log("lolol");
+                    });
                     addressType.click();
                     var ele = element.all(by.xpath('//form[@name=\'editContactForm\']//md-content[@id=\'' + type + '\']/div'));
                     ele.count().then(function (count) {
@@ -281,6 +287,8 @@ describe('Update a Contact',function () {
                             var addresspinCode = addressElement.element(by.model('address.pinCode'));
                             addresspinCode.sendKeys(addr.pinCode);
                         }
+                        done(null);
+                        
                     });
                 }
             });
@@ -309,10 +317,25 @@ describe('Update a Contact',function () {
 
                 emailFunction(contact.email);
 
-                addressFunction(contact.address);
+                addressFunction(contact.address,function(error){
+                    if(error){
+                        console.log(error);
 
-                updateButton.click();
-            });
+                return;
+                }
+                
+                
+                });
+
+                console.log("before update");
+
+                sign.isClickable(updateButton,function (error,ele) {
+                    if(ele)
+                        console.log("clickableeeeee");
+                    else  
+                        console.log("not clickable");
+                          });
         });
     });
+});
 });
