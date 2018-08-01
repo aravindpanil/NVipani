@@ -6,7 +6,7 @@ var config = browser.params;
 
 describe('Sign in',function () {
 
-    var data=require('./test_signin');
+    var data=require('./signindata');
     var signin=require('../common/sign.common');
 
     beforeEach(function () {

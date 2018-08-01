@@ -95,5 +95,18 @@
         "Cotton Yarn"
       ]
     }
+  },
+  {
+    "username": "user2@test1.com",
+    "password": "12345678",
+    "trading": "Retailer",
+    "segment": [
+      "Cereals"
+    ],
+    "subSegment": {
+      "Cereals": [
+        "Sona Masoori Rice"
+      ]
+    }
   }
 ]
