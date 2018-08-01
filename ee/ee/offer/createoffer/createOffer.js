@@ -24,6 +24,12 @@ describe('Create an Offer', function () {
         browser.sleep(1000);
     });
 
+    afterAll(function(){
+        browser.sleep(100);
+        sign.logout();
+
+    });
+
     function selectProductFunction(productDetails, done) {
 
         if (productDetails) {
