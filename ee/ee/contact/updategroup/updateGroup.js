@@ -1,5 +1,3 @@
-
-
 'use strict';
 var config = browser.params;
 
@@ -9,9 +7,9 @@ describe('Update a Group',function () {
     var sign = require('../../account/common/sign.common');
     var editButton=element(by.xpath('//button[@aria-label=\'edit button\']'));
     var updateButton=element(by.xpath('//button[@aria-label=\'Update\']'));
-
+    var i=0;
     beforeAll(function () {
-        browser.get('http://staging.nvipani.com/#!/signin');
+        browser.get('');
         sign.login(data[0]);
         element(by.id('nav-contacts')).click();
     });
@@ -70,19 +68,22 @@ describe('Update a Group',function () {
                     if(ele){
                         ele.click();
                     }
-                    else
+                    else{
+                        console.log("No such contact "+contact);
                         search.clear().then(function () {
                             search.sendKeys('');
                         });
+                    }
                 });
             });
         }
     }
 
     data.forEach(function (group) {
-
+        
         it('should update a group',function () {
-
+            console.log("Test case-"+i);
+            i++;
             if(group.groupName) {
                 var Name = element(by.xpath('//*[@id=\'contact_Groups\']//td[contains(text(),\'' + group.groupName + '\')]'));
                 sign.isClickable(Name,function (error,ele) {
@@ -91,7 +92,7 @@ describe('Update a Group',function () {
 
                        editButton.click();
 
-                       groupInfoFunction(group.groupType,group.groupName,group.groupDescription,function (error) {
+                       groupInfoFunction(group.updateType,group.updateName,group.updateDescription,function (error) {
                           if(error) {
                               console.log(error);
                               return;
