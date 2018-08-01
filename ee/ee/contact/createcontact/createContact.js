@@ -9,7 +9,7 @@ describe('Create a Contact',function () {
     var form=element(by.name('addContactsForm'));
 
     beforeAll(function () {
-        browser.get('http://staging.nvipani.com/#!/signin');
+        browser.get('');
         sign.login(data[0]);
         element(by.id('nav-contacts')).click();
     });
@@ -39,8 +39,10 @@ describe('Create a Contact',function () {
                     addContact = element(by.id('contact_Suppliers')).element(by.id('create-supplier'));
                     newContact = element(by.id('contact_Suppliers')).element(by.id('menu'));
                     contactAdd = element(by.xpath('//button[@aria-label=\'New Contact\' and ../../../@aria-hidden=\'false\']'));
-
                 }
+            
+
+                
                 sign.isClickable(addContact, function (error, ele) {
                     if (ele) {
                         ele.click();
@@ -68,7 +70,7 @@ describe('Create a Contact',function () {
                 done(new Error('Invalid Type'));
         }
         else
-            done(new Error('Missing Type'));
+            console.log('Missing Type');
     }
 
     function basicinfoFunction(basicinfo,done){
@@ -80,23 +82,45 @@ describe('Create a Contact',function () {
                 var showMore=form.element(by.xpath('//div[@aria-label=\'Show More Or Less Link\']'));
                 if(basicinfo.fName || basicinfo.mName || basicinfo.lName || basicinfo.companyName || basicinfo.gstinNo || basicinfo.aadharNo || basicinfo.payment) {
                     showMore.click();
-                    if (basicinfo.fName) {
+                    {
+                        if (basicinfo.fName) {
                         var fname = form.element(by.model('firstName'));
                         fname.sendKeys(basicinfo.fName);
                     }
+                    else{
+                        console.log("no first name");
+                    }
+                }
+                    
+                 {
+
                     if (basicinfo.mName) {
                         var mname = form.element(by.model('middleName'));
                         mname.sendKeys(basicinfo.mName);
                     }
-                    if(basicinfo.lName){
+                    else{
+                        console.log("empty middle name");
+                    }
+                }
+                {
+                        if(basicinfo.lName){
                         var lname = form.element(by.model('lastName'));
                         lname.sendKeys(basicinfo.lName);
                     }
+                else{
+                    console.log("empty last name");
+                }}
+                {
                     if(basicinfo.companyName){
                         var companyname=form.element(by.id('companyName'));
                         companyname.sendKeys(basicinfo.companyName);
-                    }
-                    if(basicinfo.payment){
+                   } 
+                else{
+                    console.log("empty company name");
+
+                }  }
+                    {
+                        if(basicinfo.payment){
                         var payment=form.element(by.model('paymentTerm'));
                         payment.click();
                         if(payment.isPresent() && payment.isDisplayed()){
@@ -107,7 +131,11 @@ describe('Create a Contact',function () {
                             });
                         }
                     }
-                    if(basicinfo.gstinNo){
+                else{
+                    console.log("error in payment");
+                }}
+                   {
+                        if(basicinfo.gstinNo){
                         var gstin=form.element(by.model('gstinNumber'));
                         gstin.sendKeys(basicinfo.gstinNo);
                         gstin.getAttribute('aria-invalid').then(function (attr) {
@@ -118,6 +146,9 @@ describe('Create a Contact',function () {
                             }
                         });
                     }
+                else{
+                    console.log("error in gstin");
+                }}
                     if(basicinfo.aadharNo){
                         var aadhar=form.element(by.model('contact.aadharNumber'));
                         aadhar.sendKeys(basicinfo.aadharNo);
@@ -264,6 +295,7 @@ describe('Create a Contact',function () {
             return 2;
         else if(type === 'Invoice')
             return 3;
+            
     }
 
     function addressFunction(address){
@@ -301,12 +333,18 @@ describe('Create a Contact',function () {
                             var addresscountry = addressElement.element(by.model('address.country'));
                             addresscountry.sendKeys(addr.country);
                         }
-                        if (addr.pinCode && (addr.pinCode.length === 6)) {
+                        {if (addr.pinCode && (addr.pinCode.length === 6)) {
                             var addresspinCode = addressElement.element(by.model('address.pinCode'));
                             addresspinCode.sendKeys(addr.pinCode);
-                        }
+                        }else{
+                            console.log("error in pincode");
+                        }}
                     });
                 }
+                else{
+                    console.log("error in address type");
+                }
+            
             });
         }
     }
