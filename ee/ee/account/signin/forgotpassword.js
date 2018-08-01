@@ -15,7 +15,7 @@ describe('Forgot Password', function () {
     var username = element(by.model('passwordcredentials.username'));
 
     beforeEach(function () {
-        browser.get('http://staging.nvipani.com/#!/signin');
+        browser.get('/#!/');
         forgot.click();
     });
 
@@ -85,6 +85,10 @@ describe('Forgot Password', function () {
         confirmpassword.sendKeys(ConfirmPassword);
 
         if(NewPassword.length < 8 || ConfirmPassword.length < 8) {
+            done("Invalid Password");
+            return;
+        }
+        if(NewPassword != ConfirmPassword){
             done("Invalid Password");
             return;
         }
