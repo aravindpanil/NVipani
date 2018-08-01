@@ -1,19 +1,15 @@
-
 'use strict';
 
 var config = browser.params;
 var subs = require('../common/subSegment');
 
-
 describe('Sign up', function () {
-
     var data, signup;
-
     data = require('./signupdata');
     signup = require('../common/sign.common');
     var generateOTP = element(by.xpath('//button[@aria-label=\'Generate OTP\']'));
     var otp = element(by.model('otp'));
-    var nxt = element(by.xpath('//button[@aria-label=\'Next\' and @aria-hidden=\'false\']'));
+    var nxt = element(by.xpath('//button[@aria-label=\'next\' and @aria-hidden=\'false\']'));
     var start = element(by.xpath('//button[@aria-label=\'Start your 45 days free trial\']'));
     var username = element(by.xpath('//input[@aria-label=\'Email/Mobile No.\']'));
     var password = element(by.model('password'));
@@ -25,7 +21,6 @@ describe('Sign up', function () {
     afterEach(function () {
         browser.sleep(1000);
     });
-
 
     function getsubSegment(seg) {
         if (seg === 'Cereals')
@@ -41,7 +36,6 @@ describe('Sign up', function () {
         else if (seg === 'Apparel')
             return subs.Apparel;
     }
-
 
     function getsubSegmentData(seg, subseg) {
         if (seg === 'Cereals' && subseg.Cereals)
@@ -61,8 +55,10 @@ describe('Sign up', function () {
 
     function exploreMore(seg, subseg) {
         var segs = ['Cereals', 'Coffee', 'Vegetables', 'Yarn', 'Fabric', 'Apparel'];
+
         for (var k = 0; k < seg.length; k++) {
             var flag = 0;
+
             for (var i = 0; i < segs.length; i++) {
                 if (seg[k] === segs[i]) {
                     flag = 1;
@@ -71,9 +67,11 @@ describe('Sign up', function () {
                         var subsegdata = getsubSegmentData(seg[k], subseg);
                         if (subsegdata === 0)
                             return false;
+
                         for (var j = 0; j < subsegdata.length; j++) {
                             var flag1 = 0;
                             for (var z = 0; z < sub.length; z++) {
+
                                 if (subsegdata[j] === sub[z]) {
                                     flag1 = 1;
                                 }
@@ -90,11 +88,10 @@ describe('Sign up', function () {
         return true;
     }
 
-
     function validateSegment(trad, seg, subseg) {
+
         if (seg) {
             var segs = ['Rice', 'Coffee', 'Textiles', 'Fruits and Vegetables'];
-
             if (trad === 'Manufacturer') {
                 for (var j = 0; j < seg.length; j++) {
                     var flag = 0;
@@ -132,8 +129,6 @@ describe('Sign up', function () {
         return false;
     }
 
-
-
     function selectSegment(trad, seg, subseg) {
         if (trad === 'Manufacturer') {
             seg.forEach(function (seg) {
@@ -152,10 +147,8 @@ describe('Sign up', function () {
                     flag = 0;
                     if (subseg) {
                         var showDetails = element(by.xpath('//label[text()=\'Show Details\' and ..//label[text()=\'' + seg + '\']]'));
-                        showDet
 
-
-                        ails.click();
+                        showDetails.click();
                         var subsegData = getsubSegmentData(seg, subseg);
                         for (var i = 0; i < subsegData.length; i++) {
                             var subSegment = element(by.xpath('//md-checkbox[@ng-model=\'node.isChecked\' and .//label[text()=\'' + subsegData[i] + '\']]'));
@@ -193,12 +186,14 @@ describe('Sign up', function () {
             });
             return;
         }
+        else {
+            done("No trading selected", null)
+        }
     }
 
     function generateOTPFunction(Username, Password, done) {
 
         if (signup.validateUserRegisteredData(Username, Password)) {
-
             username.sendKeys(Username);
             password.sendKeys(Password);
 

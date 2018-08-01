@@ -1,4 +1,5 @@
 
+
 'use strict';
 
 var config = browser.params;
@@ -9,7 +10,7 @@ describe('Sign in',function () {
     var signin=require('../common/sign.common');
 
     beforeEach(function () {
-        browser.get('http://staging.nvipani.com/#!/signin');
+        browser.get('');
     });
 
     afterEach(function () {
@@ -24,7 +25,7 @@ describe('Sign in',function () {
                 var username = element(by.model('credentials.username'));
                 var password = element(by.model('credentials.password'));
                 var button = element(by.xpath('//form[@name=\'signup\']/button[@aria-label=\'Login\']'));
-
+                
                 username.sendKeys(data.username);
                 password.sendKeys(data.password);
 
