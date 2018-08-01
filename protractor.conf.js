@@ -7,7 +7,9 @@ var config = {
         browser.driver.manage().window().maximize();
     },
     suites: {
-        "Account": [
+        "Account": ['ee/ee/account/signup/signup.js',
+            'ee/ee/account/signin/signin.js',
+            'ee/ee/account/signin/forgotpassword.js'
         ]
     },
     jasmineNodeOpts: {
