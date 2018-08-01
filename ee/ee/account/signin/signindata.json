@@ -1,6 +1,7 @@
 [
   {"username" : "9591966940", "password" : "saianirud"},
   {"username" : "959196694"},
+  {"password" : "saianirud"},
   {"username" : "959196694", "password" : "saianirud"},
   {"username" : "saianirud@", "password" : "saianirud"},
   {"username" : "9591966944", "password" : "sai"},
@@ -8,6 +9,5 @@
   {"username" : "saianirudh1000@gmail.com", "password" : "asdfghjkl"},
   {"username" : "9591966946", "password" : "saianirud"},
   {"username" : "9591966945", "password" : "saianirud"},
-  {"username" : "saianirudh1000@gmail.com", "password" : "saianirud"},
-  {"username" : "test123@gmail.com", "password" : "12345678"}
+  {"username" : "saianirudh1000@gmail.com", "password" : "saianirud"}
 ]
