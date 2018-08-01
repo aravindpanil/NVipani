@@ -7,8 +7,7 @@ var config = {
         browser.driver.manage().window().maximize();
     },
     suites: {
-        notification: ['ee/ee/notification/user.js',
-            'ee/ee/notification/unit.js']
+        notification: ['ee/ee/offer/createoffer/createOffer.js']
     },
     
     jasmineNodeOpts: {

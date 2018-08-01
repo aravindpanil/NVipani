@@ -1,14 +1,16 @@
 [
-  {"username":"registerBuser@test.com","password":"registerBuser"},
+  {"username":"test123@gmail.com","password":"12345678"},
   {
     "productDetails":[
-      {"productName":"Cotton Apparel","productBrand":"abcd","productUOM":"Box (12Bag)"},
-      {"productName":"Cotton Apparel","productBrand":"Silk","productUOM":"Box (51Nos)"}
+      {"productName":"Basmati (BSMT)","productBrand":"India","productUOM":"Amp"}
     ],
-    "offerName":"abcd",
+    "offerName":"lmopq",
     "offerType":"Sell",
     "visibility":"Public",
     "paymentTerms":["Net 30","Net 45"],
-    "paymentModes":["Cash","Cheque"]
+    "paymentModes":["Cash","Cheque"],
+    "validity":{"validFrom":"21-06-2018","validTill":"30-08-2018"}
+  
   }
+  
 ]

@@ -1,18 +1,17 @@
-
 'use strict';
 
 var config = browser.params;
 
-describe('Create an Offer',function () {
+describe('Create an Offer', function () {
 
     var data = require('./createofferdata');
-    var sign=require('../../account/common/sign.common');
+    var sign = require('../../account/common/sign.common');
     var fs = require('fs');
-    var selectedData=require('./selectedProducts');
-    var continueButton=element(by.xpath('//button[@aria-label=\'Continue\' and @aria-hidden=\'false\']'));
-
+    var selectedData = require('./selectedProducts');
+    var continueButton = element(by.xpath('//button[@aria-label=\'Continue\' and @aria-hidden=\'false\']'));
+    var i = 0;
     beforeAll(function () {
-        browser.get('http://staging.nvipani.com/#!/signin');
+        browser.get('');
         sign.login(data[0]);
     });
 
@@ -25,18 +24,21 @@ describe('Create an Offer',function () {
         browser.sleep(1000);
     });
 
-    function selectProductFunction(productDetails,done){
+    function selectProductFunction(productDetails, done) {
 
-        if(productDetails) {
+        if (productDetails) {
+
             selectedData = [];
             productDetails.forEach(function (product) {
                 var selectProduct = element(by.xpath('//*[@ng-model=\'inventory.selected\' and ../..//h5[text()=\'' + product.productName + ' - ' + product.productUOM + '\'] and ../..//h6[text()=\'' + product.productBrand + '\']]'));
-                    if (product.productName && product.productBrand && product.productUOM) {
+                if (product.productName && product.productBrand && product.productUOM) {
                     selectProduct.isPresent().then(function (res) {
                         if (res) {
-                            selectProduct.click();
 
-                            selectedData.push({
+                            selectProduct.click();
+                            //console.log("Selecteddd");
+
+                            /*selectedData.push({
                                 productName: product.productName,
                                 productBrand: product.productBrand,
                                 productUOM: product.productUOM,
@@ -44,7 +46,7 @@ describe('Create an Offer',function () {
                             });
                             fs.writeFile('./selectedProducts.json', JSON.stringify(selectedData), 'utf-8', function (err) {
                                 if (err) throw err;
-                            });
+                            });*/
                         }
                         else
                             done("Invalid details for Product-" + productDetails.indexOf(product), selectProduct);
@@ -56,39 +58,42 @@ describe('Create an Offer',function () {
             done(null, null);
         }
         else
-            done("Missing ProductDetails",null);
+            done("Missing ProductDetails", null);
     }
 
     function dateConversion(date) {
-        var slices=date.split("-");
-        var convertedDate=slices[2]+"-"+slices[1]+"-"+slices[0];
+        var slices = date.split("-");
+        var convertedDate = slices[2] + "-" + slices[1] + "-" + slices[0];
         return convertedDate;
     }
 
-    function offerDetailsFunction(name,type,validity,done) {
-        if(name){
-            var offername=element(by.model('offerName'));
+    function offerDetailsFunction(name, type, validity, done) {
+        //console.log(validity)
+        if (name) {
+            var offername = element(by.model('offerName'));
             offername.sendKeys(name);
 
-            if(type){
-                var offertype=element(by.xpath('//h5[text()=\''+type+'\' and ../@aria-hidden=\'false\']'));
+            if (type) {
+                //console.log("enteredd type")
+                var offertype = element(by.xpath('//h5[text()=\'' + type + '\' and ../@aria-hidden=\'false\']'));
                 offertype.isPresent().then(function (res) {
-                    if(res){
+                    if (res) {
                         offertype.click();
-
-                        if(validity){
-                            if(validity.validFrom && validity.validTill){
-                                var today=new Date();
-                                var from=new Date(dateConversion(validity.validFrom));
-                                var till=new Date(dateConversion(validity.validTill));
-                                if(from <= today && from <= till){
-                                    var setvalidity=element(by.xpath('//md-checkbox[@aria-label=\'offer validation\']'));
+                        //console.log("type clicked")
+                        if (validity) {
+                            if (validity.validFrom && validity.validTill) {
+                                //console.log("enteredddd");
+                                var today = new Date();
+                                var from = new Date(dateConversion(validity.validFrom));
+                                var till = new Date(dateConversion(validity.validTill));
+                                if (from <= today && from <= till) {
+                                    var setvalidity = element(by.xpath('//md-checkbox[@aria-label=\'offer validation\']'));
                                     setvalidity.click();
-                                    var validFrom=element(by.model('validFrom')).element(by.xpath('.//input[@class=\'md-datepicker-input\']'));
+                                    var validFrom = element(by.model('validFrom')).element(by.xpath('.//input[@class=\'md-datepicker-input\']'));
                                     validFrom.clear().then(function () {
                                         validFrom.sendKeys(validity.validFrom);
                                     });
-                                    var validTill=element(by.model('validTill')).element(by.xpath('.//input[@class=\'md-datepicker-input\']'));
+                                    var validTill = element(by.model('validTill')).element(by.xpath('.//input[@class=\'md-datepicker-input\']'));
                                     validTill.clear().then(function () {
                                         validTill.sendKeys(validity.validTill);
                                     });
@@ -98,24 +103,24 @@ describe('Create an Offer',function () {
 
                         continueButton.click();
 
-                        done(null,null);
+                        done(null, null);
                     }
                     else
-                        done("Invalid Offer Type",offertype);
+                        done("Invalid Offer Type", offertype);
                 });
             }
             else
-                done("Missing Offer Type",null);
+                done("Missing Offer Type", null);
         }
         else
-            done("Missing Offer Name",null);
+            done("Missing Offer Name", null);
     }
 
     function selectQuantityFunction(type) {
-        if(type === "Buy"){
+        if (type === "Buy") {
             selectedData.forEach(function (product) {
                 var stock = element(by.xpath('//input[@ng-model=\'product.numberOfUnits\' and ../..//h5[text()=\'' + product.productName + ' - ' + product.productUOM + '\'] and ../..//h6[text()=\'' + product.productBrand + '\']]'));
-                if(product.productQuantity && !isNaN(product.productQuantity) && product.productQuantity > 0) {
+                if (product.productQuantity && !isNaN(product.productQuantity) && product.productQuantity > 0) {
                     stock.clear().then(function () {
                         stock.sendKeys(product.productQuantity);
                     });
@@ -125,136 +130,159 @@ describe('Create an Offer',function () {
 
         continueButton.click();
     }
-    
+
     function selectContacts(contacts) {
         contacts.forEach(function (contact) {
-            var search=element(by.xpath('//input[@aria-label=\'Search for Contacts ,Groups\']'));
+            var search = element(by.xpath('//input[@aria-label=\'Search for Contacts ,Groups\']'));
             search.sendKeys(contact);
-            var selectcontact=element(by.xpath('//li[.//text()=\''+contact+'\']'));
+            var selectcontact = element(by.xpath('//li[.//text()=\'' + contact + '\']'));
             selectcontact.isPresent().then(function (res) {
-                if(res)
+                if (res)
                     selectcontact.click();
             });
         });
     }
-    
-    function visibilityFunction(visibility,contacts,businessUnits,done) {
-        if(visibility){
-         var selectvisibility=element(by.xpath('//h5[text()=\''+visibility+'\']'));
-         selectvisibility.isPresent().then(function (res) {
-             if(res){
-                 selectvisibility.click();
 
-                 if(visibility === 'BusinessUnit'){
-                     var businesscontact=element(by.xpath('//md-select[@ng-model=\'businessContacts\']'));
-                     businesscontact.click();
-                     if(businesscontact.isPresent() && businesscontact.isDisplayed()){
-                         if(businessUnits) {
-                             businessUnits.forEach(function (businessContact) {
-                                 browser.sleep(5000);
-                                 var selectbusinescontact = element(by.xpath('//md-option[.//text()=\'' + businessContact + '\'and @aria-hidden=\'false\']'));
-                                 selectbusinescontact.isPresent().then(function (res) {
-                                     if (res)
-                                         selectbusinescontact.click();
-                                 });
-                             });
-                         }
-                     }
+    function visibilityFunction(visibility, contacts, businessUnits, done) {
+        if (visibility) {
 
-                     continueButton.click();
+            var selectvisibility = element(by.xpath('//h5[text()=\'' + visibility + '\']'));
+            selectvisibility.isPresent().then(function (res) {
+                if (res) {
+                    selectvisibility.click();
 
-                     done(null,null);
-                 }
-                 else {
-                     if(contacts)
-                         selectContacts(contacts);
+                    if (visibility === 'BusinessUnit') {
+                        var businesscontact = element(by.xpath('//md-select[@ng-model=\'businessContacts\']'));
+                        businesscontact.click();
+                        if (businesscontact.isPresent() && businesscontact.isDisplayed()) {
+                            if (businessUnits) {
+                                var lastTerm;
+                                businessUnits.forEach(function (businessContact) {
+                                    lastTerm = businessContact
+                                    browser.sleep(5000);
+                                    var selectbusinescontact = element(by.xpath('//md-option[.//text()=\'' + businessContact + '\'and @aria-hidden=\'false\']'));
+                                    selectbusinescontact.isPresent().then(function (res) {
+                                        if (res)
+                                            selectbusinescontact.click();
 
-                     continueButton.click();
+                                    });
 
-                     if(visibility === 'Private') {
-                         var privateoffervalidation = element(by.xpath('//*[@ng-model=\'selectedContacts\']//strong'));
-                         privateoffervalidation.isPresent().then(function (res) {
-                             if (res)
-                                 done(null,null);
-                             else
-                                 done('At least one Contact is required to Open Private offer', privateoffervalidation);
-                         });
-                     }
-                     else
-                         done(null,null);
-                 }
-             }
-             else
-                 done("Invalid Visibility",selectvisibility);
-         });
+                                });
+                                element(by.xpath('//md-option[.//text()=\'' + lastTerm + '\'  and @aria-hidden=\'false\']')).sendKeys(protractor.Key.ESCAPE);
+                            }
+                        }
+
+                        continueButton.click();
+
+                        done(null, null);
+                    }
+                    else {
+                        if (contacts)
+                            selectContacts(contacts);
+
+                        continueButton.click();
+
+                        if (visibility === 'Private') {
+                            var privateoffervalidation = element(by.xpath('//*[@ng-model=\'selectedContacts\']//strong'));
+                            privateoffervalidation.isPresent().then(function (res) {
+                                if (res)
+                                    done(null, null);
+                                else
+                                    done('At least one Contact is required to Open Private offer', privateoffervalidation);
+                            });
+                        }
+                        else
+                            done(null, null);
+                    }
+                }
+                else
+                    done("Invalid Visibility", selectvisibility);
+            });
         }
         else {
-            if(contacts)
+            if (contacts)
                 selectContacts(contacts);
 
             continueButton.click();
 
-            done(null,null);
+            done(null, null);
         }
+        //console.log("Finished");
+
     }
 
-    function paymentFunction(paymentTerms,paymentModes){
-        if(paymentTerms){
-            var paymentterms=element(by.model('paymentTerms'));
+    function paymentFunction(paymentTerms, paymentModes) {
+        if (paymentTerms) {
+            var paymentterms = element(by.model('paymentTerms'));
             paymentterms.click();
-            if(paymentTerms && paymentterms.isPresent() && paymentterms.isDisplayed()){
+            if (paymentTerms && paymentterms.isPresent() && paymentterms.isDisplayed()) {
+                var lastTerm;
                 paymentTerms.forEach(function (term) {
-                    var selectpaymentterm=element(by.xpath('//md-option[.//text()=\''+term+'\' and @aria-hidden=\'false\']'));
+                    lastTerm = term;
+                    var selectpaymentterm = element(by.xpath('//md-option[.//text()=\'' + term + '\' and @aria-hidden=\'false\']'));
+                    browser.driver.executeScript("arguments[0].scrollIntoView();", selectpaymentterm.getWebElement());
                     selectpaymentterm.click();
+                    //console.log("clickedd "+term);
                 });
+                element(by.xpath('//md-option[.//text()=\'' + lastTerm + '\' ]')).sendKeys(protractor.Key.ESCAPE);
             }
         }
 
 
-        if(paymentModes){
-            var paymentmodes=element(by.model('paymentModes'));
+        if (paymentModes) {
+            //browser.actions().sendKeys(protractor.Key.ESCAPE).perform();
+            var paymentmodes = element(by.model('paymentModes'));
             paymentmodes.click();
-            if(paymentModes && paymentmodes.isPresent() && paymentmodes.isDisplayed()){
+            //console.log("Clicked Payment mode");
+            if (paymentModes && paymentmodes.isPresent() && paymentmodes.isDisplayed()) {
+                var lastTerm;
                 paymentModes.forEach(function (mode) {
-                    var selectpaymentmode=element(by.xpath('//md-option[.//text()=\''+mode+'\' and @aria-hidden=\'false\']'));
+                    lastTerm = mode;
+                    var selectpaymentmode = element(by.xpath('//md-option[.//text()=\'' + mode + '\' and @aria-hidden=\'false\']'));
+                    browser.driver.executeScript("arguments[0].scrollIntoView();", selectpaymentmode.getWebElement());
                     selectpaymentmode.click();
                 });
+                element(by.xpath('//md-option[.//text()=\'' + lastTerm + '\']')).sendKeys(protractor.Key.ESCAPE);
             }
         }
     }
 
     data.forEach(function (data) {
         it('should create an offer', function () {
-
+            console.log("Test" + i)
+            i++;
             selectProductFunction(data.productDetails, function (error, ele) {
                 if (error) {
                     console.log(error);
                     return;
                 }
 
-                var createOffer = element(by.xpath('//button[@aria-label=\'Create Offer\' and ../../@aria-hidden=\'false\']'));
+
+                var createOffer = element(by.xpath('//button[@aria-label=\'Create Offer\' and @aria-expanded=\'false\']'));
                 sign.isClickable(createOffer, function (error, ele) {
                     if (ele) {
 
                         createOffer.click();
-
-                        offerDetailsFunction(data.offerName,data.offerType,data.validity,function (error,ele) {
-                            if(error){
+                        var selectType = element(by.xpath('//button[@aria-label=\'' + data.offerType + '\']'))
+                        selectType.click();
+                        offerDetailsFunction(data.offerName, data.offerType, data.validity, function (error, ele) {
+                            if (error) {
                                 console.log(error);
                                 return;
                             }
 
                             selectQuantityFunction(data.offerType);
 
-                            visibilityFunction(data.visibility,data.contacts,data.businessUnits,function (error,ele) {
-                                if(error){
+                            visibilityFunction(data.visibility, data.contacts, data.businessUnits, function (error, ele) {
+                                if (error) {
                                     console.log(error);
                                     return;
                                 }
 
-                                paymentFunction(data.paymentTerms,data.paymentModes);
+                                paymentFunction(data.paymentTerms, data.paymentModes);
 
-                                var placeOffer=element(by.xpath('//button[@aria-label=\'Place Offer\']'));
+                                var placeOffer = element(by.xpath('//button[@aria-label=\'Place Offer\']'));
+                                //browser.driver.executeScript("arguments[0].scrollIntoView();", placeOffer.getWebElement());
                                 placeOffer.click();
                             });
                         });
