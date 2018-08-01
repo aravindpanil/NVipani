@@ -29,12 +29,20 @@ describe('Check for notification', function () {
             var notifButton=element(by.xpath('//button[@aria-label=\'toggle-notification\']'));
             notifButton.click()
             var offer=element(by.xpath('//button[contains(@aria-label,\''+data.offername+'\')]'))
-            offer.isDisplayed().then(function (result) {
+            
+            offer.isPresent().then(function (result) {
                 if(result)
                     console.log("Offer notified");
                 else
                     console.log("Not notified");
             });
+            
+            /*offer.isDisplayed().then(function (result) {
+                if(result)
+                    console.log("Offer notified");
+                else
+                    console.log("Not notified");
+            });*/
             element(by.xpath('//md-tab-item[contains(text(),\'Notification\')]')).sendKeys(protractor.Key.ESCAPE);
         });
     });
