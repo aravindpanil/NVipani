@@ -11,7 +11,7 @@ describe('Create an Order',function () {
     var selectedData=require('./selectedProducts');
 
     beforeAll(function () {
-        browser.get('http://staging.nvipani.com/#!/signin');
+        browser.get('');
         sign.login(data[0]);
     });
 
@@ -28,6 +28,7 @@ describe('Create an Order',function () {
 
         if(productDetails) {
             selectedData = [];
+           
             productDetails.forEach(function (product) {
                 var selectProduct = element(by.xpath('//*[@ng-model=\'inventory.selected\' and ../..//h5[text()=\'' + product.productName + ' - ' + product.productUOM + '\'] and ../..//h6[text()=\'' + product.productBrand + '\']]'));
                 if (product.productName && product.productBrand && product.productUOM && product.productQuantity > 0) {
@@ -35,15 +36,15 @@ describe('Create an Order',function () {
                         if (res) {
                             selectProduct.click();
 
-                            selectedData.push({
-                                productName: product.productName,
-                                productBrand: product.productBrand,
-                                productUOM: product.productUOM,
-                                productQuantity: product.productQuantity
-                            });
-                            fs.writeFile('./selectedProducts.json', JSON.stringify(selectedData), 'utf-8', function (err) {
-                                if (err) throw err;
-                            });
+ //                           selectedData.push({
+   //                             productName: product.productName,
+     //                           productBrand: product.productBrand,
+       //                         productUOM: product.productUOM,
+         //                       productQuantity: product.productQuantity
+           //                 });
+                           // fs.writeFile('./selectedProducts.json', JSON.stringify(selectedData), 'utf-8', function (err) {
+                             //   if (err) throw err;
+                            //});
                         }
                         else
                             done("Invalid details for Product-" + productDetails.indexOf(product), selectProduct);
@@ -61,7 +62,7 @@ describe('Create an Order',function () {
     function selectQuantityFunction(type,done) {
 
         if(type && (type === 'Intra Stock')) {
-            var intrastock=element(by.xpath('//md-checkbox[@aria-label=\'Intra Stock\']'));
+            var intrastock=element(by.xpath('//md-checkbox[@aria-label=\'Stock Transfer\']'));
             var EC = protractor.ExpectedConditions;
             browser.wait(EC.visibilityOf(intrastock), 5000);
             intrastock.click();
@@ -91,20 +92,20 @@ describe('Create an Order',function () {
         });
     }
 
-    function selectBuyerandAgentFunction(buyerdata,mediatordata,type,address,done){
+    function selectBuyerandAgentFunction(buyerdata,mediatordata,orderType,address,done){
 
         var buyer;
 
-        if(type) {
-            buyer = element(by.xpath('//md-select[@ng-model=\'selOrder.buyer.businessUnit\' and @aria-hidden=\'false\']'));
-        }
-        else {
-            buyer = element(by.model('selOrder.buyer.contact'));
-        }
+            if(orderType == 'Purchase')
+                buyer = element(by.model('selOrder.seller.contact'));
+            else
+                buyer = element(by.model('selOrder.buyer.contact'));
+        
 
         buyer.click();
         if(buyerdata) {
             var selectBuyer = element(by.xpath('//md-option[.//*[text()=\'' + buyerdata + '\'] and ../../../@aria-hidden=\'false\']'));
+            browser.sleep(3000);
             sign.isClickable(selectBuyer, function (error, ele) {
                 if (ele) {
                     selectBuyer.click();
@@ -173,10 +174,12 @@ describe('Create an Order',function () {
                 var selectPaymentMethod = element(by.xpath('//md-option[./div[text()=\'' + paymentMethod + '\']]'));
                 sign.isClickable(selectPaymentMethod, function (error, ele) {
                     if (ele) {
+                        
+                        browser.driver.executeScript("arguments[0].scrollIntoView();", selectPaymentMethod.getWebElement());
                         selectPaymentMethod.click();
-                        var continueButton=element(by.xpath('//button[@aria-label=\'Continue\' and ../../../@aria-hidden=\'false\']'));
+                        var continueButton=element(by.xpath('//button[@aria-label=\'Place Order\']'));
                         continueButton.click();
-
+                        
                         done(null,null);
                     }
                     else{
@@ -189,10 +192,18 @@ describe('Create an Order',function () {
             done("Missing Payment Method",paymentMethod);
     }
 
-    function confirmFunction(done){
-        var confirmButton=element(by.xpath('//button[@aria-label=\'Confirm\']'));
+    function confirmFunction(orderType,done){
+    
+    if(orderType == 'Sale')
+        {      
+         var confirmButton=element(by.xpath('//button[@aria-label=\'Confirm\']'));
+        confirmButton.click();
+       }
+    else{
+        var confirmButton=element(by.xpath('//button[@aria-label=\'Accept\']'));
         confirmButton.click();
 
+    }
         var submitButton=element(by.xpath('//button[@aria-label=\'Submit\']'));
         submitButton.click();
 
@@ -215,11 +226,15 @@ describe('Create an Order',function () {
                         return;
                     }
 
-                    var createOrder = element(by.xpath('//button[@aria-label=\'Create order\']'));
+                    var createOrder = element(by.xpath('//button[@aria-label=\'Create Order\' and @aria-haspopup=\'true\']'));
                     sign.isClickable(createOrder, function (error, ele) {
                         if (ele) {
 
                             createOrder.click();
+                            var selectType=element(by.xpath('//button[@aria-label=\''+data.orderType+'\']'))
+                            selectType.click();
+    
+                            
 
                             selectQuantityFunction(data.type,function (error,ele) {
                                 if(error){
@@ -227,7 +242,7 @@ describe('Create an Order',function () {
                                     return;
                                 }
 
-                                selectBuyerandAgentFunction(data.buyer,data.mediator,data.type,data.address,function (error,ele) {
+                                selectBuyerandAgentFunction(data.buyer,data.mediator,data.orderType,data.address,function (error,ele) {
                                     if(error){
                                         console.log(error);
                                         return;
@@ -239,11 +254,11 @@ describe('Create an Order',function () {
                                             return;
                                         }
 
-                                        confirmFunction(function (error,ele) {
-                                            if(error){
-                                                console.log(error);
-                                                return;
-                                            }
+                                       confirmFunction(data.orderType,function (error,ele) {
+                                          if(error){
+                                               console.log(error);
+                                              return;
+                                          }
                                         });
 
                                         var closeButton=element(by.xpath('//button[@aria-label=\'close dialog\' and ../../../../@aria-hidden=\'false\']'));
@@ -251,7 +266,8 @@ describe('Create an Order',function () {
                                     });
                                 });
                             });
-                        }
+                        
+                    }
                         else
                             console.log("Select atleast one Product");
                     });
