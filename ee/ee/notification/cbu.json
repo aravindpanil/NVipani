@@ -2,15 +2,15 @@
   {
     "username": "test123@gmail.com",
     "password": "12345678",
-    "incharge": "ainchargeuser@test1.com",
+    "incharge": "ainchargeuser@test2.com",
     "businessUnitName": "aunit1",
-    "users":["a1user@test1.com","a2user@test1.com"]
+    "users":["a1user@test2.com","a2user@test2.com"]
   },
   {
     "username": "test3@gmail.com",
     "password": "12345678",
-    "incharge": "binchargeuser@test1.com",
+    "incharge": "binchargeuser@test2.com",
     "businessUnitName": "nit2",
-    "users":["b1user@test1.com","b2user@test1.com"]
+    "users":["b1user@test2.com","b2user@test2.com"]
   }
 ]

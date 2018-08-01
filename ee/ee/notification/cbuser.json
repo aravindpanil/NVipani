@@ -3,42 +3,42 @@
         "username": "test123@gmail.com",
         "password": "12345678",
         "usergroup": "Manager",
-        "email": "ainchargeuser@test1.com",
+        "email": "ainchargeuser@test2.com",
         "buserpwd": "qtwertyuiop"
     },
     {
         "username": "test3@gmail.com",
         "password": "12345678",
         "usergroup": "Manager",
-        "email": "binchargeuser@test1.com",
+        "email": "binchargeuser@test2.com",
         "buserpwd": "qtwertyuiop"
     },
     {
         "username": "test123@gmail.com",
         "password": "12345678",
         "usergroup": "Manager",
-        "email": "a1user@test1.com",
+        "email": "a1user@test2.com",
         "buserpwd": "qtwertyuiop"
     },
     {
         "username": "test123@gmail.com",
         "password": "12345678",
         "usergroup": "Manager",
-        "email": "a2user@test1.com",
+        "email": "a2user@test2.com",
         "buserpwd": "qtwertyuiop"
     },
     {
         "username": "test3@gmail.com",
         "password": "12345678",
         "usergroup": "Manager",
-        "email": "b1user@test1.com",
+        "email": "b1user@test2.com",
         "buserpwd": "qtwertyuiop"
     },
     {
         "username": "test3@gmail.com",
         "password": "12345678",
         "usergroup": "Manager",
-        "email": "b2user@test1.com",
+        "email": "b2user@test2.com",
         "buserpwd": "qtwertyuiop"
     }
 ]
