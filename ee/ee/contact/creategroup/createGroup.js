@@ -3,14 +3,14 @@
 'use strict';
 var config = browser.params;
 
-describe('Create a Group',function () {
-
+describe('Create a Group', function () {
+    var i = 0;
     var data = require('./creategroupdata');
     var sign = require('../../account/common/sign.common');
     var form = element(by.name('addGroupForm'));
 
     beforeAll(function () {
-        browser.get('http://staging.nvipani.com/#!/signin');
+        browser.get('');
         sign.login(data[0]);
         element(by.id('nav-contacts')).click();
     });
@@ -48,37 +48,44 @@ describe('Create a Group',function () {
         browser.refresh();
     });
 
-    function groupInfoFunction(type,name,description,done) {
-        if(type){
-            var grouptype=element(by.xpath('//md-select[@ng-model=\'groupType\']'));
+    function groupInfoFunction(type, name, description, done) {
+        if (type) {
+            var grouptype = element(by.xpath('//md-select[@ng-model=\'groupType\']'));
             grouptype.click();
-            if(grouptype.isPresent() && grouptype.isDisplayed()){
-                var selectgrouptype=element(by.xpath('//md-option[./div[text()=\''+type+'\']]'));
-                sign.isClickable(selectgrouptype,function (error,ele) {
-                    if(ele){
+            if (grouptype.isPresent() && grouptype.isDisplayed()) {
+                var selectgrouptype = element(by.xpath('//md-option[./div[text()=\'' + type + '\']]'));
+                sign.isClickable(selectgrouptype, function (error, ele) {
+                    if (ele) {
                         ele.click();
 
-                        if(name){
-                            var groupname=element(by.id('name'));
+                        if (name) {
+                            var groupname = element(by.id('name'));
                             groupname.sendKeys(name);
 
-                            if(description){
-                                var groupdescription=element(by.id('description'));
+                            if (description) {
+                                var groupdescription = element(by.id('description'));
                                 groupdescription.sendKeys(description);
                             }
 
                             done(null);
                         }
-                        else
-                            done(new Error('Missing Group Name'));
+                        else {
+                            console.log("Missing Group Name");
+                        }
+                        //console.log('Missing Group Name'));
                     }
-                    else
-                        done(new Error('Invalid Group Type'));
+                    else {
+                        console.log("Invalid Group Type");
+                    }
+                    //console.log('Invalid Group Type'));
                 });
             }
         }
-        else
-            done(new Error('Missing Group Type'));
+        else {
+            console.log("Missing type");
+            //console.log('Missing Group Type'));
+
+        }
     }
 
     function customContactsGroup(contactName) {
@@ -89,33 +96,35 @@ describe('Create a Group',function () {
                 if (ele) {
                     ele.click();
                 }
+                else
+                    console.log("No such Customer -" + name);
             });
         });
     }
 
     function locationCriteriaContactsGroup(address) {
 
-        if(address.addressCity) {
+        if (address.addressCity) {
             var addresscity = form.element(by.model('address.city'));
             addresscity.sendKeys(address.addressCity);
         }
 
-        if(address.addressState){
-            var addressstate=form.element(by.model('address.state'));
+        if (address.addressState) {
+            var addressstate = form.element(by.model('address.state'));
             addressstate.sendKeys(address.addressState);
         }
 
-        if(address.addressCountry){
-            var addresscountry=form.element(by.model('address.country'));
+        if (address.addressCountry) {
+            var addresscountry = form.element(by.model('address.country'));
             addresscountry.sendKeys(address.addressCountry);
         }
 
-        var addresspincode=form.element(by.model('address.pinCode'));
+        var addresspincode = form.element(by.model('address.pinCode'));
         addresspincode.sendKeys(address.pinCode);
     }
 
-    function addContactsFunction(contacts,done){
-        if(contacts) {
+    function addContactsFunction(contacts, done) {
+        if (contacts) {
             if (contacts.type) {
                 var contacttype = element(by.model('groupClassification.classificationType'));
                 contacttype.click();
@@ -132,22 +141,23 @@ describe('Create a Group',function () {
                                 done(null);
                             }
                             else if (contacts.type === 'Location Criteria') {
+                                //console.log("locc");
                                 if (contacts.address) {
                                     if (contacts.address.pinCode && !isNaN(contacts.address.pinCode) && contacts.address.pinCode.length === 6) {
                                         locationCriteriaContactsGroup(contacts.address);
                                         done(null);
                                     }
                                     else
-                                        done(new Error('Invalid PinCode'));
+                                        console.log('Invalid PinCode');
                                 }
                                 else
-                                    done(new Error("Missing PinCode"));
+                                    console.log("Missing PinCode");
                             }
                             else
                                 done(null);
                         }
                         else
-                            done(new Error('Invalid Contact Selection type'));
+                            console.log('Invalid Contact Selection type');
                     });
                 }
             }
@@ -161,22 +171,71 @@ describe('Create a Group',function () {
     }
 
     data.forEach(function (group) {
-        it('should create a group',function () {
-
-            groupInfoFunction(group.groupType,group.groupName,group.groupDescription,function (error) {
-                if(error){
+        it('should create a group', function () {
+            console.log("Test -" + i);
+            i++;
+            groupInfoFunction(group.groupType, group.groupName, group.groupDescription, function (error) {
+                if (error) {
                     console.log(error);
                     return;
                 }
 
-                addContactsFunction(group.contacts,function (error) {
-                    if(error){
+                addContactsFunction(group.contacts, function (error) {
+                    if (error) {
                         console.log(error);
                         return;
                     }
 
-                    var createButton=element(by.id('createGroup'));
+                    var createButton = element(by.id('createGroup'));
                     createButton.click();
+
+                    //to check if all contacts are added to the group
+                    if (group.contacts.type === 'All') {
+                        var noInGroup = 0;
+                        var noInContact = 0;
+                        console.log("Check for ALL");
+
+                        var createdGroup = element(by.xpath('//*[@id=\'contact_Groups\']//td[contains(text(),\'' + group.groupName + '\')]'));
+                        sign.isClickable(createdGroup, function (error, ele) {
+                            if (ele) {
+                                ele.click();
+                                var gType = group.groupType.slice(0, -1);
+                                var custelems = element.all(by.xpath('//*[@name=\'editGroupForm\']//h6[contains(text(),\'' + gType + '\')]'));
+                                custelems.count().then(function (size) {
+                                    noInGroup = size;
+                                });
+
+
+                                var cancelButton = element(by.xpath('//*[@name=\'editGroupForm\']//button[@ng-click=\'cancel()\']'));
+                                sign.isClickable(cancelButton, function (error, cancel) {
+                                    if (cancel)
+                                        cancel.click();
+                                    else
+                                        console.log("unable to cancel");
+                                });
+
+                                element(by.xpath('//md-tab-item[text()=\'' + group.groupType + '\']')).click();
+                                var custs = element.all(by.xpath('//*[@id=\'contact_' + group.groupType + '\']//tr[@pagination-id=\'paginationId\']'));
+
+
+                                custs.count().then(function (size) {
+                                    console.log("secondone " + size);
+                                    noInContact = size;
+                                });
+
+                                if (noInGroup === noInContact) {
+                                    console.log("All customers added");
+                                }
+                                else {
+                                    console.log("ERROR not all test cases added ");
+                                }
+                            }
+                            else
+                                console.log("No such Group -" + name);
+                        });
+
+                    }
+
                 });
             });
         });
