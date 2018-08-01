@@ -1,44 +1,44 @@
 [
     {
-        "username": "9999999955",
-        "password": "qwertyuiop",
+        "username": "test123@gmail.com",
+        "password": "12345678",
         "usergroup": "Manager",
-        "email": "ncharge@a.com",
+        "email": "ainchargeuser@test1.com",
         "buserpwd": "qtwertyuiop"
     },
     {
         "username": "test3@gmail.com",
         "password": "12345678",
         "usergroup": "Manager",
-        "email": "ncharge@b.com",
+        "email": "binchargeuser@test1.com",
         "buserpwd": "qtwertyuiop"
     },
     {
-        "username": "9999999955",
-        "password": "qwertyuiop",
+        "username": "test123@gmail.com",
+        "password": "12345678",
         "usergroup": "Manager",
-        "email": "ubuser1@a.com",
+        "email": "a1user@test1.com",
         "buserpwd": "qtwertyuiop"
     },
     {
-        "username": "9999999955",
-        "password": "qwertyuiop",
+        "username": "test123@gmail.com",
+        "password": "12345678",
         "usergroup": "Manager",
-        "email": "ubuser2@a.com",
+        "email": "a2user@test1.com",
         "buserpwd": "qtwertyuiop"
     },
     {
         "username": "test3@gmail.com",
         "password": "12345678",
         "usergroup": "Manager",
-        "email": "ubuser1@b.com",
+        "email": "b1user@test1.com",
         "buserpwd": "qtwertyuiop"
     },
     {
         "username": "test3@gmail.com",
         "password": "12345678",
         "usergroup": "Manager",
-        "email": "ubuser2@b.com",
+        "email": "b2user@test1.com",
         "buserpwd": "qtwertyuiop"
     }
 ]

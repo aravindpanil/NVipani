@@ -1,16 +1,16 @@
 [
   {
-    "username": "9999999955",
-    "password": "qwertyuiop",
-    "incharge": "ncharge@a.com",
-    "businessUnitName": "nit1",
-    "users":["ubuser1@a.com","ubuser2@a.com"]
+    "username": "test123@gmail.com",
+    "password": "12345678",
+    "incharge": "ainchargeuser@test1.com",
+    "businessUnitName": "aunit1",
+    "users":["a1user@test1.com","a2user@test1.com"]
   },
   {
     "username": "test3@gmail.com",
     "password": "12345678",
-    "incharge": "ncharge@b.com",
+    "incharge": "binchargeuser@test1.com",
     "businessUnitName": "nit2",
-    "users":["ubuser1@b.com","ubuser2@b.com"]
+    "users":["b1user@test1.com","b2user@test1.com"]
   }
 ]
