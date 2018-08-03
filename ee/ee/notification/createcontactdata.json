@@ -1,0 +1,8 @@
+[
+    {"username":"test123@gmail.com","password":"12345678"},
+    {
+      "type":"Customer",
+      "basicInfo":{"name":"Company2","fName":"Sai","lName":"Reddy","companyName":"abcd","payment":"Net 30","gstinNo":"123345","aadharNo":"888888888888"},
+      "email":[{"mailid":"test3@gmail.com"}]
+    }
+]
