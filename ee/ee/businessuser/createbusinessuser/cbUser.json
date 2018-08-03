@@ -1,5 +1,20 @@
 [
-    {"username":"9999999955","password":"qwertyuiop", "trading": "Distributor","segment": ["Coffee"]},
-    {"usergroup":"Manager","email":"sam@gail.com","password":"saianirud"},
-    {"usergroup":"Admin","email":"saianirud@","password":"saianirud"}
+    {
+        "username": "9999999955",
+        "password": "qwertyuiop",
+        "trading": "Distributor",
+        "segment": [
+            "Coffee"
+        ]
+    },
+    {
+        "usergroup": "Manager",
+        "email": "sam@gail.com",
+        "password": "saianirud"
+    },
+    {
+        "usergroup": "Admin",
+        "email": "saianirud@",
+        "password": "saianirud"
+    }
 ]

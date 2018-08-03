@@ -1,7 +1,17 @@
 [
-  {"username":"registerBuser@test.com","password":"registerBuser", "trading": "Distributor","segment": ["Coffee"]},
   {
-    "action":"Disable",
-    "BusinessUnits":["Bangulure Branch","TirupatiBranch"]
+    "username": "registerBuser@test.com",
+    "password": "registerBuser",
+    "trading": "Distributor",
+    "segment": [
+      "Coffee"
+    ]
+  },
+  {
+    "action": "Disable",
+    "BusinessUnits": [
+      "Bangulure Branch",
+      "TirupatiBranch"
+    ]
   }
 ]

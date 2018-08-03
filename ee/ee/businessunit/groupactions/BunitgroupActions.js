@@ -29,11 +29,11 @@ describe('Group Actions', function () {
         sign.logout();
     });
 
-    function selectBunitFunction(BusinessUnits,done){
+    function selectBunitFunction(BusinessUnits, done) {
 
-        if(BusinessUnits) {
+        if (BusinessUnits) {
             BusinessUnits.forEach(function (unit) {
-                    var selectbunit=element(by.xpath('//md-checkbox[../following-sibling::td[./span[text()=\''+unit+'\']]]'));
+                var selectbunit = element(by.xpath('//md-checkbox[../following-sibling::td[./span[text()=\'' + unit + '\']]]'));
                 if (unit) {
                     selectbunit.isPresent().then(function (res) {
                         if (res) {
@@ -52,14 +52,14 @@ describe('Group Actions', function () {
             done(new Error("Missing BusinessUnit Details"));
     }
 
-    function groupActionFunction(action,done){
-        if(action){
-            var groupactionButton=element(by.xpath('//button[@aria-label=\'Group Actions\']'));
+    function groupActionFunction(action, done) {
+        if (action) {
+            var groupactionButton = element(by.xpath('//button[@aria-label=\'Group Actions\']'));
             groupactionButton.click();
-            if(groupactionButton.isPresent() && groupactionButton.isDisplayed()) {
-                var selectgroupaction=element(by.xpath('//button[@aria-label=\''+action+'\']'));
-                sign.isClickable(selectgroupaction,function (error,ele) {
-                    if(ele)
+            if (groupactionButton.isPresent() && groupactionButton.isDisplayed()) {
+                var selectgroupaction = element(by.xpath('//button[@aria-label=\'' + action + '\']'));
+                sign.isClickable(selectgroupaction, function (error, ele) {
+                    if (ele)
                         selectgroupaction.click();
                     else
                         done(new Error(error));
@@ -77,14 +77,14 @@ describe('Group Actions', function () {
 
         it('should do a group action', function () {
 
-            selectBunitFunction(data.BusinessUnits,function (error,ele) {
-                if(error){
+            selectBunitFunction(data.BusinessUnits, function (error, ele) {
+                if (error) {
                     console.log(error);
                     return;
                 }
 
-                groupActionFunction(data.action,function (error) {
-                    if(error){
+                groupActionFunction(data.action, function (error) {
+                    if (error) {
                         console.log(error);
                         return;
                     }
