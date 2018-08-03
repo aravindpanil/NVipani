@@ -1,28 +1,38 @@
 [
   {
-    "username":"9999999955","password":"qwertyuiop"
+    "username": "9999999955",
+    "password": "qwertyuiop"
   },
   {
-    "groupName":"GP1",
-    "updateType":"Customer",    
-    "updateName":"group1",
-    "updateDescription":"lalalal",
-    "contacts":["Anirud","Sai","Reddy"]
+    "groupName": "GP1",
+    "updateType": "Customer",
+    "updateName": "group1",
+    "updateDescription": "lalalal",
+    "contacts": [
+      "Anirud",
+      "Sai",
+      "Reddy"
+    ]
   },
   {
-    "groupName":"group1",
-    "updateType":"Customer",    
-    "updateName":"GP1",
-    "updateDescription":"lalalal",
-    "contacts":["poiuy","Sai","Reddy"]
+    "groupName": "group1",
+    "updateType": "Customer",
+    "updateName": "GP1",
+    "updateDescription": "lalalal",
+    "contacts": [
+      "poiuy",
+      "Sai",
+      "Reddy"
+    ]
   },
   {
-    "groupName":"GP2",
-    "updateType":"Customer",
-    "updateDescription":"lalalal",
-    "contacts":["poiuy","asdf","Reddy"]
+    "groupName": "GP2",
+    "updateType": "Customer",
+    "updateDescription": "lalalal",
+    "contacts": [
+      "poiuy",
+      "asdf",
+      "Reddy"
+    ]
   }
-
-
 ]
-

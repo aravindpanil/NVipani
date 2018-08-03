@@ -1,13 +1,50 @@
 [
-  {"username":"9980998098","password":"user123user"},
   {
-    "type":"Customer",
-    "basicInfo":{"name":"Hdfgd","fName":"Sai","lName":"Reddy","companyName":"abcd","payment":"Net 30","gstinNo":"123345","aadharNo":"888888888888"},
-    "email":[{"emailType":"Office","mailid":"bangulure@branch.com"},{"mailid":"qdfbg"},{"mailid":"s@gmail.com"}],
-    "phoneNumber":[{"phoneType":"Work","number":"12345670"},{"phoneType":"Office","number":"1234567890"},{"number":"9591966941"},{"number":"89"}],
-    "address":[
+    "username": "9980998098",
+    "password": "user123user"
+  },
+  {
+    "type": "Customer",
+    "basicInfo": {
+      "name": "Hdfgd",
+      "fName": "Sai",
+      "lName": "Reddy",
+      "companyName": "abcd",
+      "payment": "Net 30",
+      "gstinNo": "123345",
+      "aadharNo": "888888888888"
+    },
+    "email": [
       {
-        "addressType":"Invoice",
+        "emailType": "Office",
+        "mailid": "bangulure@branch.com"
+      },
+      {
+        "mailid": "qdfbg"
+      },
+      {
+        "mailid": "s@gmail.com"
+      }
+    ],
+    "phoneNumber": [
+      {
+        "phoneType": "Work",
+        "number": "12345670"
+      },
+      {
+        "phoneType": "Office",
+        "number": "1234567890"
+      },
+      {
+        "number": "9591966941"
+      },
+      {
+        "number": "89"
+      }
+    ],
+    "address": [
+      {
+        "addressType": "Invoice",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -15,7 +52,7 @@
         "pinCode": "123456"
       },
       {
-        "addressType":"Receiving",
+        "addressType": "Receiving",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -23,7 +60,7 @@
         "pinCode": "123456"
       },
       {
-        "addressType":"Invoice",
+        "addressType": "Invoice",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -33,13 +70,47 @@
     ]
   },
   {
-    "type":"Customer",
-    "basicInfo":{"name":"div","fName":"","lName":"tantri","companyName":"","payment":"","gstinNo":"123345","aadharNo":""},
-    "email":[{"emailType":"Office","mailid":"bangulure@branch.com"},{"mailid":"qdfbg"},{"mailid":"s@gmail.com"}],
-    "phoneNumber":[{"phoneType":"Work","number":"12345670"},{"phoneType":"Office","number":"1234567890"},{"number":"9591966941"},{"number":"89"}],
-    "address":[
+    "type": "Customer",
+    "basicInfo": {
+      "name": "div",
+      "fName": "",
+      "lName": "tantri",
+      "companyName": "",
+      "payment": "",
+      "gstinNo": "123345",
+      "aadharNo": ""
+    },
+    "email": [
       {
-        "addressType":"Receiving",
+        "emailType": "Office",
+        "mailid": "bangulure@branch.com"
+      },
+      {
+        "mailid": "qdfbg"
+      },
+      {
+        "mailid": "s@gmail.com"
+      }
+    ],
+    "phoneNumber": [
+      {
+        "phoneType": "Work",
+        "number": "12345670"
+      },
+      {
+        "phoneType": "Office",
+        "number": "1234567890"
+      },
+      {
+        "number": "9591966941"
+      },
+      {
+        "number": "89"
+      }
+    ],
+    "address": [
+      {
+        "addressType": "Receiving",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -47,7 +118,7 @@
         "pinCode": "123456"
       },
       {
-        "addressType":"Receiving",
+        "addressType": "Receiving",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -55,7 +126,7 @@
         "pinCode": "123456"
       },
       {
-        "addressType":"Invoice",
+        "addressType": "Invoice",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -64,16 +135,48 @@
       }
     ]
   },
-
-
   {
-    "type":"Supplier",
-    "basicInfo":{"name":"idk","fName":"idk","lName":"Reddy","companyName":"abcd","payment":"Net 30","gstinNo":"123345","aadharNo":"888888888888"},
-    "email":[{"emailType":"Office","mailid":"bangulure@branch.com"},{"mailid":"qdfbg"},{"mailid":"s@gmail.com"}],
-    "phoneNumber":[{"phoneType":"Work","number":"12345670"},{"phoneType":"Office","number":"1234567890"},{"number":"9591966941"},{"number":"89"}],
-    "address":[
+    "type": "Supplier",
+    "basicInfo": {
+      "name": "idk",
+      "fName": "idk",
+      "lName": "Reddy",
+      "companyName": "abcd",
+      "payment": "Net 30",
+      "gstinNo": "123345",
+      "aadharNo": "888888888888"
+    },
+    "email": [
       {
-        "addressType":"Invoice",
+        "emailType": "Office",
+        "mailid": "bangulure@branch.com"
+      },
+      {
+        "mailid": "qdfbg"
+      },
+      {
+        "mailid": "s@gmail.com"
+      }
+    ],
+    "phoneNumber": [
+      {
+        "phoneType": "Work",
+        "number": "12345670"
+      },
+      {
+        "phoneType": "Office",
+        "number": "1234567890"
+      },
+      {
+        "number": "9591966941"
+      },
+      {
+        "number": "89"
+      }
+    ],
+    "address": [
+      {
+        "addressType": "Invoice",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -81,7 +184,7 @@
         "pinCode": "123456"
       },
       {
-        "addressType":"Receiving",
+        "addressType": "Receiving",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -89,7 +192,7 @@
         "pinCode": "123456"
       },
       {
-        "addressType":"Invoice",
+        "addressType": "Invoice",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -98,18 +201,48 @@
       }
     ]
   },
-
-
-
-
   {
-    "type":"Supplier",
-    "basicInfo":{"name":"Anirud","fName":"Sai","lName":"Reddy","companyName":"abcd","payment":"Net 30","gstinNo":"123345","aadharNo":"888888888888"},
-    "email":[{"emailType":"Office","mailid":"bangulure@branch.com"},{"mailid":"qdfbg"},{"mailid":"s@gmail.com"}],
-    "phoneNumber":[{"phoneType":"Work","number":"12345670"},{"phoneType":"Office","number":"1234567890"},{"number":"9591966941"},{"number":"89"}],
-    "address":[
+    "type": "Supplier",
+    "basicInfo": {
+      "name": "Anirud",
+      "fName": "Sai",
+      "lName": "Reddy",
+      "companyName": "abcd",
+      "payment": "Net 30",
+      "gstinNo": "123345",
+      "aadharNo": "888888888888"
+    },
+    "email": [
       {
-        "addressType":"Invoice",
+        "emailType": "Office",
+        "mailid": "bangulure@branch.com"
+      },
+      {
+        "mailid": "qdfbg"
+      },
+      {
+        "mailid": "s@gmail.com"
+      }
+    ],
+    "phoneNumber": [
+      {
+        "phoneType": "Work",
+        "number": "12345670"
+      },
+      {
+        "phoneType": "Office",
+        "number": "1234567890"
+      },
+      {
+        "number": "9591966941"
+      },
+      {
+        "number": "89"
+      }
+    ],
+    "address": [
+      {
+        "addressType": "Invoice",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -117,7 +250,7 @@
         "pinCode": "123456"
       },
       {
-        "addressType":"Receiving",
+        "addressType": "Receiving",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -125,24 +258,57 @@
         "pinCode": "123456"
       },
       {
-        "addressType":"Invoice",
+        "addressType": "Invoice",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
         "country": "India",
         "pinCode": "123456"
       }
-    ] 
+    ]
   },
-
   {
-    "type":"Customer",
-    "basicInfo":{"name":"Anirud","fName":"Sai","lName":"Reddy","companyName":"abcd","payment":"Net 30","gstinNo":"123345","aadharNo":"888888888888"},
-    "email":[{"emailType":"Office","mailid":"bangulure@branch.com"},{"mailid":"qdfbg"},{"mailid":"s@gmail.com"}],
-    "phoneNumber":[{"phoneType":"Work","number":"12345670"},{"phoneType":"Office","number":"1234567890"},{"number":"9591966941"},{"number":"89"}],
-    "address":[
+    "type": "Customer",
+    "basicInfo": {
+      "name": "Anirud",
+      "fName": "Sai",
+      "lName": "Reddy",
+      "companyName": "abcd",
+      "payment": "Net 30",
+      "gstinNo": "123345",
+      "aadharNo": "888888888888"
+    },
+    "email": [
       {
-        "addressType":"Invoice",
+        "emailType": "Office",
+        "mailid": "bangulure@branch.com"
+      },
+      {
+        "mailid": "qdfbg"
+      },
+      {
+        "mailid": "s@gmail.com"
+      }
+    ],
+    "phoneNumber": [
+      {
+        "phoneType": "Work",
+        "number": "12345670"
+      },
+      {
+        "phoneType": "Office",
+        "number": "1234567890"
+      },
+      {
+        "number": "9591966941"
+      },
+      {
+        "number": "89"
+      }
+    ],
+    "address": [
+      {
+        "addressType": "Invoice",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -150,7 +316,7 @@
         "pinCode": "123456"
       },
       {
-        "addressType":"Receiving",
+        "addressType": "Receiving",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
@@ -158,13 +324,13 @@
         "pinCode": "123456"
       },
       {
-        "addressType":"Invoice",
+        "addressType": "Invoice",
         "addressLine": "526,JeevanBheema Nager",
         "city": "Bengulure",
         "state": "Karnataka",
         "country": "India",
         "pinCode": "123456"
       }
-    ] 
+    ]
   }
 ]

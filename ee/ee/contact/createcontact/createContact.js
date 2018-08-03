@@ -2,11 +2,11 @@
 'use strict';
 var config = browser.params;
 
-describe('Create a Contact',function () {
+describe('Create a Contact', function () {
 
     var data = require('./createcontactdata');
-    var sign=require('../../account/common/sign.common');
-    var form=element(by.name('addContactsForm'));
+    var sign = require('../../account/common/sign.common');
+    var form = element(by.name('addContactsForm'));
 
     beforeAll(function () {
         browser.get('');
@@ -23,10 +23,10 @@ describe('Create a Contact',function () {
         browser.refresh();
     });
 
-    function typeFunction(type,done) {
+    function typeFunction(type, done) {
 
-        var addContact,newContact,contactAdd;
-        if(type) {
+        var addContact, newContact, contactAdd;
+        if (type) {
             if (type === 'Customer' || type === 'Supplier') {
                 if (type === 'Customer') {
                     element(by.xpath('//md-tab-item[text()=\'Customers\']')).click();
@@ -40,9 +40,9 @@ describe('Create a Contact',function () {
                     newContact = element(by.id('contact_Suppliers')).element(by.id('menu'));
                     contactAdd = element(by.xpath('//button[@aria-label=\'New Contact\' and ../../../@aria-hidden=\'false\']'));
                 }
-            
 
-                
+
+
                 sign.isClickable(addContact, function (error, ele) {
                     if (ele) {
                         ele.click();
@@ -73,87 +73,91 @@ describe('Create a Contact',function () {
             console.log('Missing Type');
     }
 
-    function basicinfoFunction(basicinfo,done){
+    function basicinfoFunction(basicinfo, done) {
 
-        if(basicinfo){
-            var contactName=form.element(by.id('displayName'));
-            if(basicinfo.name){
+        if (basicinfo) {
+            var contactName = form.element(by.id('displayName'));
+            if (basicinfo.name) {
                 contactName.sendKeys(basicinfo.name);
-                var showMore=form.element(by.xpath('//div[@aria-label=\'Show More Or Less Link\']'));
-                if(basicinfo.fName || basicinfo.mName || basicinfo.lName || basicinfo.companyName || basicinfo.gstinNo || basicinfo.aadharNo || basicinfo.payment) {
+                var showMore = form.element(by.xpath('//div[@aria-label=\'Show More Or Less Link\']'));
+                if (basicinfo.fName || basicinfo.mName || basicinfo.lName || basicinfo.companyName || basicinfo.gstinNo || basicinfo.aadharNo || basicinfo.payment) {
                     showMore.click();
                     {
                         if (basicinfo.fName) {
-                        var fname = form.element(by.model('firstName'));
-                        fname.sendKeys(basicinfo.fName);
-                    }
-                    else{
-                        console.log("no first name");
-                    }
-                }
-                    
-                 {
-
-                    if (basicinfo.mName) {
-                        var mname = form.element(by.model('middleName'));
-                        mname.sendKeys(basicinfo.mName);
-                    }
-                    else{
-                        console.log("empty middle name");
-                    }
-                }
-                {
-                        if(basicinfo.lName){
-                        var lname = form.element(by.model('lastName'));
-                        lname.sendKeys(basicinfo.lName);
-                    }
-                else{
-                    console.log("empty last name");
-                }}
-                {
-                    if(basicinfo.companyName){
-                        var companyname=form.element(by.id('companyName'));
-                        companyname.sendKeys(basicinfo.companyName);
-                   } 
-                else{
-                    console.log("empty company name");
-
-                }  }
-                    {
-                        if(basicinfo.payment){
-                        var payment=form.element(by.model('paymentTerm'));
-                        payment.click();
-                        if(payment.isPresent() && payment.isDisplayed()){
-                            var selectpayment=form.element(by.xpath('//div[text()=\''+basicinfo.payment+'\']'));
-                            sign.isClickable(selectpayment,function (error,ele) {
-                                if(ele)
-                                    ele.click();
-                            });
+                            var fname = form.element(by.model('firstName'));
+                            fname.sendKeys(basicinfo.fName);
+                        }
+                        else {
+                            console.log("no first name");
                         }
                     }
-                else{
-                    console.log("error in payment");
-                }}
-                   {
-                        if(basicinfo.gstinNo){
-                        var gstin=form.element(by.model('gstinNumber'));
-                        gstin.sendKeys(basicinfo.gstinNo);
-                        gstin.getAttribute('aria-invalid').then(function (attr) {
-                            if(attr === 'true'){
-                                gstin.clear().then(function () {
-                                    gstin.sendKeys('');
+
+                    {
+
+                        if (basicinfo.mName) {
+                            var mname = form.element(by.model('middleName'));
+                            mname.sendKeys(basicinfo.mName);
+                        }
+                        else {
+                            console.log("empty middle name");
+                        }
+                    }
+                    {
+                        if (basicinfo.lName) {
+                            var lname = form.element(by.model('lastName'));
+                            lname.sendKeys(basicinfo.lName);
+                        }
+                        else {
+                            console.log("empty last name");
+                        }
+                    }
+                    {
+                        if (basicinfo.companyName) {
+                            var companyname = form.element(by.id('companyName'));
+                            companyname.sendKeys(basicinfo.companyName);
+                        }
+                        else {
+                            console.log("empty company name");
+
+                        }
+                    }
+                    {
+                        if (basicinfo.payment) {
+                            var payment = form.element(by.model('paymentTerm'));
+                            payment.click();
+                            if (payment.isPresent() && payment.isDisplayed()) {
+                                var selectpayment = form.element(by.xpath('//div[text()=\'' + basicinfo.payment + '\']'));
+                                sign.isClickable(selectpayment, function (error, ele) {
+                                    if (ele)
+                                        ele.click();
                                 });
                             }
-                        });
+                        }
+                        else {
+                            console.log("error in payment");
+                        }
                     }
-                else{
-                    console.log("error in gstin");
-                }}
-                    if(basicinfo.aadharNo){
-                        var aadhar=form.element(by.model('contact.aadharNumber'));
+                    {
+                        if (basicinfo.gstinNo) {
+                            var gstin = form.element(by.model('gstinNumber'));
+                            gstin.sendKeys(basicinfo.gstinNo);
+                            gstin.getAttribute('aria-invalid').then(function (attr) {
+                                if (attr === 'true') {
+                                    gstin.clear().then(function () {
+                                        gstin.sendKeys('');
+                                    });
+                                }
+                            });
+                        }
+                        else {
+                            console.log("error in gstin");
+                        }
+                    }
+                    if (basicinfo.aadharNo) {
+                        var aadhar = form.element(by.model('contact.aadharNumber'));
                         aadhar.sendKeys(basicinfo.aadharNo);
                         aadhar.getAttribute('aria-invalid').then(function (attr) {
-                            if(attr === 'true'){
+                            if (attr === 'true') {
                                 aadhar.clear().then(function () {
                                     aadhar.sendKeys('');
                                 });
@@ -170,27 +174,27 @@ describe('Create a Contact',function () {
             done(new Error("Missing Basic Info"));
     }
 
-    function phoneNoFunction(phoneNumber){
+    function phoneNoFunction(phoneNumber) {
 
         var ele = element.all(by.xpath('//div[./div[@id=\'mobile-0\']]/div'));
         ele.count().then(function (val) {
             if (phoneNumber) {
                 phoneNumber.forEach(function (mobile) {
-                    if(mobile.number) {
+                    if (mobile.number) {
                         ele.count().then(function (count) {
-                            var phone = form.element(by.id('mobile-' + (count-val)));
+                            var phone = form.element(by.id('mobile-' + (count - val)));
                             var type;
                             if (mobile.phoneType) {
-                                type=mobile.phoneType;
-                                if(type !== 'Mobile' && type !== 'Home' && type !== 'Work')
+                                type = mobile.phoneType;
+                                if (type !== 'Mobile' && type !== 'Home' && type !== 'Work')
                                     type = 'Other';
                             }
                             else
                                 type = 'Mobile';
                             var phonetype = phone.element(by.model('phone.phoneType'));
                             phonetype.click();
-                            if(phonetype.isDisplayed()) {
-                                var selectphonetype = form.element(by.xpath('//md-option[./div[text()=\''+type+'\'] and ../../../@aria-hidden=\'false\']'));
+                            if (phonetype.isDisplayed()) {
+                                var selectphonetype = form.element(by.xpath('//md-option[./div[text()=\'' + type + '\'] and ../../../@aria-hidden=\'false\']'));
                                 selectphonetype.click();
                             }
                             var phoneno = phone.element(by.id('phoneNumber'));
@@ -201,7 +205,7 @@ describe('Create a Contact',function () {
                                         phoneno.sendKeys('');
                                     });
                                 }
-                                else{
+                                else {
                                     var addPhone = form.element(by.xpath('//*[@id=\'mobile-0\']//md-icon[@aria-label=\'favourite\']'));
                                     addPhone.click();
                                 }
@@ -211,35 +215,35 @@ describe('Create a Contact',function () {
                 });
             }
             ele.count().then(function (res) {
-                var minusButton=form.element(by.id('mobile-'+(res-val))).element(by.xpath('.//md-icon[@aria-label=\'favourite\']'));
-                if(res !== val) {
+                var minusButton = form.element(by.id('mobile-' + (res - val))).element(by.xpath('.//md-icon[@aria-label=\'favourite\']'));
+                if (res !== val) {
                     minusButton.click();
                 }
             });
         });
     }
 
-    function emailFunction(Email){
+    function emailFunction(Email) {
 
         var ele = element.all(by.xpath('//div[./div[@id=\'mobile-0\']]/div'));
         ele.count().then(function (val) {
             if (Email) {
                 Email.forEach(function (mail) {
-                    if(mail.mailid) {
+                    if (mail.mailid) {
                         ele.count().then(function (count) {
-                            var email = form.element(by.id('email-' + (count-val)));
+                            var email = form.element(by.id('email-' + (count - val)));
                             var type;
                             if (mail.emailType) {
-                                type=mail.emailType;
-                                if(type !== 'Work' && type !== 'Personal')
+                                type = mail.emailType;
+                                if (type !== 'Work' && type !== 'Personal')
                                     type = 'Other';
                             }
                             else
-                                type='Work';
+                                type = 'Work';
                             var emailtype = email.element(by.model('email.emailType'));
                             emailtype.click();
-                            if(emailtype.isDisplayed()) {
-                                var selectemailtype = form.element(by.xpath('//md-option[./div[text()=\''+type+'\'] and ../../../@aria-hidden=\'false\']'));
+                            if (emailtype.isDisplayed()) {
+                                var selectemailtype = form.element(by.xpath('//md-option[./div[text()=\'' + type + '\'] and ../../../@aria-hidden=\'false\']'));
                                 selectemailtype.click();
                             }
                             var emailid = email.element(by.id('email'));
@@ -259,22 +263,22 @@ describe('Create a Contact',function () {
                 });
             }
             ele.count().then(function (res) {
-                var minusButton=form.element(by.id('email-'+(res-val))).element(by.xpath('.//md-icon[@aria-label=\'favourite\']'));
-                if(res !== val) {
+                var minusButton = form.element(by.id('email-' + (res - val))).element(by.xpath('.//md-icon[@aria-label=\'favourite\']'));
+                if (res !== val) {
                     minusButton.click();
                 }
             });
         });
     }
 
-    function validatephonemailFunction(phoneNumber,emailId,done){
+    function validatephonemailFunction(phoneNumber, emailId, done) {
 
         phoneNoFunction(phoneNumber);
         emailFunction(emailId);
         form.element(by.id('mobile-0')).element(by.id('phoneNumber')).getAttribute('aria-invalid').then(function (attr) {
-            if(attr === 'true'){
+            if (attr === 'true') {
                 form.element(by.id('email-0')).element(by.id('email')).getAttribute('aria-invalid').then(function (atr) {
-                    if(atr === 'true'){
+                    if (atr === 'true') {
                         done(new Error('Atleast 1 phone number or email-id should be present'));
                     }
                     else
@@ -286,22 +290,22 @@ describe('Create a Contact',function () {
         });
     }
 
-    function AddressType(type){
-        if(type === 'Billing')
+    function AddressType(type) {
+        if (type === 'Billing')
             return 0;
-        else if(type === 'Shipping')
+        else if (type === 'Shipping')
             return 1;
-        else if(type === 'Receiving')
+        else if (type === 'Receiving')
             return 2;
-        else if(type === 'Invoice')
+        else if (type === 'Invoice')
             return 3;
-            
+
     }
 
-    function addressFunction(address){
+    function addressFunction(address) {
 
         form.element(by.id('step-3')).click();
-        if(address) {
+        if (address) {
             address.forEach(function (addr) {
                 if (addr.addressLine || addr.city || addr.state || addr.country || addr.pinCode) {
                     var type;
@@ -333,46 +337,48 @@ describe('Create a Contact',function () {
                             var addresscountry = addressElement.element(by.model('address.country'));
                             addresscountry.sendKeys(addr.country);
                         }
-                        {if (addr.pinCode && (addr.pinCode.length === 6)) {
-                            var addresspinCode = addressElement.element(by.model('address.pinCode'));
-                            addresspinCode.sendKeys(addr.pinCode);
-                        }else{
-                            console.log("error in pincode");
-                        }}
+                        {
+                            if (addr.pinCode && (addr.pinCode.length === 6)) {
+                                var addresspinCode = addressElement.element(by.model('address.pinCode'));
+                                addresspinCode.sendKeys(addr.pinCode);
+                            } else {
+                                console.log("error in pincode");
+                            }
+                        }
                     });
                 }
-                else{
+                else {
                     console.log("error in address type");
                 }
-            
+
             });
         }
     }
 
     data.forEach(function (contact) {
-        it('should create a contact',function () {
+        it('should create a contact', function () {
 
-            typeFunction(contact.type,function (error) {
-               if(error){
-                   console.log(error);
-                   return;
-               }
+            typeFunction(contact.type, function (error) {
+                if (error) {
+                    console.log(error);
+                    return;
+                }
 
-                basicinfoFunction(contact.basicInfo,function (error) {
-                    if(error){
+                basicinfoFunction(contact.basicInfo, function (error) {
+                    if (error) {
                         console.log(error);
                         return;
                     }
 
-                    validatephonemailFunction(contact.phoneNumber,contact.email,function (error) {
-                        if(error){
+                    validatephonemailFunction(contact.phoneNumber, contact.email, function (error) {
+                        if (error) {
                             console.log(error);
                             return;
                         }
 
                         addressFunction(contact.address);
 
-                        var createButton=element(by.xpath('//button[@aria-label=\'Create Contact\']'));
+                        var createButton = element(by.xpath('//button[@aria-label=\'Create Contact\']'));
                         createButton.click();
                     });
                 });

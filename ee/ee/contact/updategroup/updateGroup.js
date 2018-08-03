@@ -1,13 +1,13 @@
 'use strict';
 var config = browser.params;
 
-describe('Update a Group',function () {
+describe('Update a Group', function () {
 
     var data = require('./updategroupdata');
     var sign = require('../../account/common/sign.common');
-    var editButton=element(by.xpath('//button[@aria-label=\'edit button\']'));
-    var updateButton=element(by.xpath('//button[@aria-label=\'Update\']'));
-    var i=0;
+    var editButton = element(by.xpath('//button[@aria-label=\'edit button\']'));
+    var updateButton = element(by.xpath('//button[@aria-label=\'Update\']'));
+    var i = 0;
     beforeAll(function () {
         browser.get('');
         sign.login(data[0]);
@@ -23,29 +23,29 @@ describe('Update a Group',function () {
         browser.refresh();
     });
 
-    function groupInfoFunction(type,name,description,done) {
+    function groupInfoFunction(type, name, description, done) {
 
-        if(name){
-            var groupname=element(by.id('name'));
+        if (name) {
+            var groupname = element(by.id('name'));
             groupname.clear().then(function () {
                 groupname.sendKeys(name);
             });
         }
 
-        if(description){
-            var groupdescription=element(by.id('description'));
+        if (description) {
+            var groupdescription = element(by.id('description'));
             groupdescription.clear().then(function () {
                 groupdescription.sendKeys(description);
             });
         }
 
-        if(type){
-            var grouptype=element(by.xpath('//md-select[@ng-model=\'group.groupType\']'));
+        if (type) {
+            var grouptype = element(by.xpath('//md-select[@ng-model=\'group.groupType\']'));
             grouptype.click();
-            if(grouptype.isPresent() && grouptype.isDisplayed()){
-                var selectgrouptype=element(by.xpath('//md-option[./div[text()=\''+type+'\'] and ../../../@aria-hidden=\'false\']'));
-                sign.isClickable(selectgrouptype,function (error,ele) {
-                    if(ele) {
+            if (grouptype.isPresent() && grouptype.isDisplayed()) {
+                var selectgrouptype = element(by.xpath('//md-option[./div[text()=\'' + type + '\'] and ../../../@aria-hidden=\'false\']'));
+                sign.isClickable(selectgrouptype, function (error, ele) {
+                    if (ele) {
                         ele.click();
                         done(null);
                     }
@@ -58,18 +58,18 @@ describe('Update a Group',function () {
             done(null);
     }
 
-    function addContactsFunction(contacts){
-        if(contacts){
-            var search=element(by.xpath('//input[@aria-label=\'Search for Contacts to add to Group\']'));
+    function addContactsFunction(contacts) {
+        if (contacts) {
+            var search = element(by.xpath('//input[@aria-label=\'Search for Contacts to add to Group\']'));
             contacts.forEach(function (contact) {
                 search.sendKeys(contact);
-                var selectContact=element(by.xpath('//li[.//text()=\''+contact+'\']'));
-                sign.isClickable(selectContact,function (error,ele) {
-                    if(ele){
+                var selectContact = element(by.xpath('//li[.//text()=\'' + contact + '\']'));
+                sign.isClickable(selectContact, function (error, ele) {
+                    if (ele) {
                         ele.click();
                     }
-                    else{
-                        console.log("No such contact "+contact);
+                    else {
+                        console.log("No such contact " + contact);
                         search.clear().then(function () {
                             search.sendKeys('');
                         });
@@ -80,31 +80,31 @@ describe('Update a Group',function () {
     }
 
     data.forEach(function (group) {
-        
-        it('should update a group',function () {
-            console.log("Test case-"+i);
+
+        it('should update a group', function () {
+            console.log("Test case-" + i);
             i++;
-            if(group.groupName) {
+            if (group.groupName) {
                 var Name = element(by.xpath('//*[@id=\'contact_Groups\']//td[contains(text(),\'' + group.groupName + '\')]'));
-                sign.isClickable(Name,function (error,ele) {
-                   if(ele) {
-                       ele.click();
+                sign.isClickable(Name, function (error, ele) {
+                    if (ele) {
+                        ele.click();
 
-                       editButton.click();
+                        editButton.click();
 
-                       groupInfoFunction(group.updateType,group.updateName,group.updateDescription,function (error) {
-                          if(error) {
-                              console.log(error);
-                              return;
-                          }
+                        groupInfoFunction(group.updateType, group.updateName, group.updateDescription, function (error) {
+                            if (error) {
+                                console.log(error);
+                                return;
+                            }
 
-                          addContactsFunction(group.contacts);
+                            addContactsFunction(group.contacts);
 
-                          updateButton.click();
-                       });
-                   }
-                   else
-                       console.log(error);
+                            updateButton.click();
+                        });
+                    }
+                    else
+                        console.log(error);
                 });
             }
             else

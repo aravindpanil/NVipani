@@ -3,13 +3,13 @@
 'use strict';
 var config = browser.params;
 
-describe('Update a Contact',function () {
+describe('Update a Contact', function () {
 
     var data = require('./updatecontactdata');
     var sign = require('../../account/common/sign.common');
-    var editButton=element(by.xpath('//button[@aria-label=\'edit button\']'));
-    var form=element(by.name('editContactForm'));
-    var updateButton=element(by.xpath('//button[@aria-label=\'Update\']'));
+    var editButton = element(by.xpath('//button[@aria-label=\'edit button\']'));
+    var form = element(by.name('editContactForm'));
+    var updateButton = element(by.xpath('//button[@aria-label=\'Update\']'));
 
 
 
@@ -28,9 +28,9 @@ describe('Update a Contact',function () {
         browser.refresh();
     });
 
-    function typeFunction(type,updatetype,name,done) {
+    function typeFunction(type, updatetype, name, done) {
 
-        if(type) {
+        if (type) {
             if (type === 'Customer' || type === 'Supplier') {
                 if (type === 'Customer') {
                     element(by.xpath('//md-tab-item[text()=\'Customers\']')).click();
@@ -76,9 +76,9 @@ describe('Update a Contact',function () {
             done(new Error('Missing Type'));
     }
 
-    function basicinfoFunction(basicinfo){
+    function basicinfoFunction(basicinfo) {
 
-        if(basicinfo){
+        if (basicinfo) {
 
             form.element(by.xpath('//md-tab-item[text()=\'Basic Info\']')).click();
             if (basicinfo.fName) {
@@ -93,36 +93,36 @@ describe('Update a Contact',function () {
                     mname.sendKeys(basicinfo.mName);
                 });
             }
-            if(basicinfo.lName){
+            if (basicinfo.lName) {
                 var lname = form.element(by.id('lastName'));
                 lname.clear().then(function () {
                     lname.sendKeys(basicinfo.lName);
                 });
             }
-            if(basicinfo.companyName){
-                var companyname=form.element(by.id('companyName'));
+            if (basicinfo.companyName) {
+                var companyname = form.element(by.id('companyName'));
                 companyname.clear().then(function () {
                     companyname.sendKeys(basicinfo.companyName);
                 });
             }
-            if(basicinfo.payment){
-                var payment=form.element(by.model('paymentTerm'));
+            if (basicinfo.payment) {
+                var payment = form.element(by.model('paymentTerm'));
                 payment.click();
-                if(payment.isPresent() && payment.isDisplayed()){
-                    var selectpayment=form.element(by.xpath('//div[text()=\''+basicinfo.payment+'\']'));
-                    sign.isClickable(selectpayment,function (error,ele) {
-                        if(ele)
+                if (payment.isPresent() && payment.isDisplayed()) {
+                    var selectpayment = form.element(by.xpath('//div[text()=\'' + basicinfo.payment + '\']'));
+                    sign.isClickable(selectpayment, function (error, ele) {
+                        if (ele)
                             ele.click();
                     });
                 }
             }
-            if(basicinfo.gstinNo){
-                var gstin=form.element(by.model('contact.gstinNumber'));
+            if (basicinfo.gstinNo) {
+                var gstin = form.element(by.model('contact.gstinNumber'));
                 gstin.clear().then(function () {
                     gstin.sendKeys(basicinfo.gstinNo);
                 });
                 gstin.getAttribute('aria-invalid').then(function (attr) {
-                    if(attr === 'true'){
+                    if (attr === 'true') {
                         gstin.clear().then(function () {
                             gstin.sendKeys('');
                         });
@@ -132,119 +132,119 @@ describe('Update a Contact',function () {
         }
     }
 
-    function phoneNoFunction(phoneNumber){
+    function phoneNoFunction(phoneNumber) {
 
         var ele = element.all(by.xpath('//*[@id=\'contact_phone\']/div'));
         var addPhone = form.element(by.xpath('//*[@id=\'contact_phone\']//span[@aria-label=\'favourite\']'));
-            if (phoneNumber) {
-                var phonesTab = form.element(by.xpath('//md-tab-item[contains(text(),\'Phone\')]'));
-                phonesTab.click();
-                addPhone.click();
-                phoneNumber.forEach(function (mobile) {
-                    if(mobile.number) {
-                        ele.count().then(function (count) {
-                            var phone = form.element(by.id('mobile-' + (count-2)));
-                            var type;
-                            if (mobile.phoneType) {
-                                type=mobile.phoneType;
-                                if(type !== 'Mobile' && type !== 'Home' && type !== 'Work')
-                                    type = 'Other';
+        if (phoneNumber) {
+            var phonesTab = form.element(by.xpath('//md-tab-item[contains(text(),\'Phone\')]'));
+            phonesTab.click();
+            addPhone.click();
+            phoneNumber.forEach(function (mobile) {
+                if (mobile.number) {
+                    ele.count().then(function (count) {
+                        var phone = form.element(by.id('mobile-' + (count - 2)));
+                        var type;
+                        if (mobile.phoneType) {
+                            type = mobile.phoneType;
+                            if (type !== 'Mobile' && type !== 'Home' && type !== 'Work')
+                                type = 'Other';
+                        }
+                        else
+                            type = 'Mobile';
+                        var phonetype = phone.element(by.model('phone.phoneType'));
+                        phonetype.click();
+                        if (phonetype.isDisplayed()) {
+                            var selectphonetype = form.element(by.xpath('//md-option[./div[text()=\'' + type + '\'] and ../../../@aria-hidden=\'false\']'));
+                            selectphonetype.click();
+                        }
+                        var phoneno = phone.element(by.id('phoneNumber'));
+                        phoneno.sendKeys(mobile.number);
+                        phoneno.getAttribute('aria-invalid').then(function (attr) {
+                            if (attr === 'true') {
+                                phoneno.clear().then(function () {
+                                    phoneno.sendKeys('');
+                                });
                             }
-                            else
-                                type = 'Mobile';
-                            var phonetype = phone.element(by.model('phone.phoneType'));
-                            phonetype.click();
-                            if(phonetype.isDisplayed()) {
-                                var selectphonetype = form.element(by.xpath('//md-option[./div[text()=\''+type+'\'] and ../../../@aria-hidden=\'false\']'));
-                                selectphonetype.click();
+                            else {
+                                addPhone.click();
                             }
-                            var phoneno = phone.element(by.id('phoneNumber'));
-                            phoneno.sendKeys(mobile.number);
-                            phoneno.getAttribute('aria-invalid').then(function (attr) {
-                                if (attr === 'true') {
-                                    phoneno.clear().then(function () {
-                                        phoneno.sendKeys('');
-                                    });
-                                }
-                                else{
-                                    addPhone.click();
-                                }
-                            });
                         });
-                    }
-                });
-            }
-            ele.count().then(function (res) {
-                var minusButton=form.element(by.id('mobile-'+(res-2))).element(by.xpath('.//md-icon[@aria-label=\'favourite\']'));
-                if(res !== 2) {
-                    minusButton.click();
+                    });
                 }
             });
+        }
+        ele.count().then(function (res) {
+            var minusButton = form.element(by.id('mobile-' + (res - 2))).element(by.xpath('.//md-icon[@aria-label=\'favourite\']'));
+            if (res !== 2) {
+                minusButton.click();
+            }
+        });
     }
 
-    function emailFunction(Email){
+    function emailFunction(Email) {
 
         var ele = element.all(by.xpath('//*[@id=\'contact_email\']/div'));
         var addEmail = form.element(by.xpath('//*[@id=\'contact_email\']//span[@aria-label=\'favourite\']'));
-            if (Email) {
-                var emailTab = form.element(by.xpath('//md-tab-item[contains(text(),\'Email\')]'));
-                emailTab.click();
-                addEmail.click();
-                Email.forEach(function (mail) {
-                    if(mail.mailid) {
-                        ele.count().then(function (count) {
-                            var email = form.element(by.id('email-' + (count-2)));
-                            var type;
-                            if (mail.emailType) {
-                                type=mail.emailType;
-                                if(type !== 'Work' && type !== 'Personal')
-                                    type = 'Other';
+        if (Email) {
+            var emailTab = form.element(by.xpath('//md-tab-item[contains(text(),\'Email\')]'));
+            emailTab.click();
+            addEmail.click();
+            Email.forEach(function (mail) {
+                if (mail.mailid) {
+                    ele.count().then(function (count) {
+                        var email = form.element(by.id('email-' + (count - 2)));
+                        var type;
+                        if (mail.emailType) {
+                            type = mail.emailType;
+                            if (type !== 'Work' && type !== 'Personal')
+                                type = 'Other';
+                        }
+                        else
+                            type = 'Work';
+                        var emailtype = email.element(by.model('email.emailType'));
+                        emailtype.click();
+                        if (emailtype.isDisplayed()) {
+                            var selectemailtype = form.element(by.xpath('//md-option[./div[text()=\'' + type + '\'] and ../../../@aria-hidden=\'false\']'));
+                            selectemailtype.click();
+                        }
+                        var emailid = email.element(by.id('email'));
+                        emailid.sendKeys(mail.mailid);
+                        emailid.getAttribute('aria-invalid').then(function (attr) {
+                            if (attr === 'true')
+                                emailid.clear().then(function () {
+                                    emailid.sendKeys('');
+                                });
+                            else {
+                                addEmail.click();
                             }
-                            else
-                                type='Work';
-                            var emailtype = email.element(by.model('email.emailType'));
-                            emailtype.click();
-                            if(emailtype.isDisplayed()) {
-                                var selectemailtype = form.element(by.xpath('//md-option[./div[text()=\''+type+'\'] and ../../../@aria-hidden=\'false\']'));
-                                selectemailtype.click();
-                            }
-                            var emailid = email.element(by.id('email'));
-                            emailid.sendKeys(mail.mailid);
-                            emailid.getAttribute('aria-invalid').then(function (attr) {
-                                if (attr === 'true')
-                                    emailid.clear().then(function () {
-                                        emailid.sendKeys('');
-                                    });
-                                else {
-                                    addEmail.click();
-                                }
-                            });
                         });
-                    }
-                });
-            }
-            ele.count().then(function (res) {
-                var minusButton=form.element(by.id('email-'+(res-2))).element(by.xpath('.//md-icon[@aria-label=\'favourite\']'));
-                if(res !== 2) {
-                    minusButton.click();
+                    });
                 }
             });
+        }
+        ele.count().then(function (res) {
+            var minusButton = form.element(by.id('email-' + (res - 2))).element(by.xpath('.//md-icon[@aria-label=\'favourite\']'));
+            if (res !== 2) {
+                minusButton.click();
+            }
+        });
     }
 
-    function AddressType(type){
-        if(type === 'Billing')
+    function AddressType(type) {
+        if (type === 'Billing')
             return 0;
-        else if(type === 'Shipping')
+        else if (type === 'Shipping')
             return 1;
-        else if(type === 'Receiving')
+        else if (type === 'Receiving')
             return 2;
-        else if(type === 'Invoice')
+        else if (type === 'Invoice')
             return 3;
     }
 
-    function addressFunction(address,done){
+    function addressFunction(address, done) {
 
-        if(address) {
+        if (address) {
             address.forEach(function (addr) {
                 if (addr.addressLine || addr.city || addr.state || addr.country || addr.pinCode) {
                     var type;
@@ -257,8 +257,8 @@ describe('Update a Contact',function () {
                     var addressType = element(by.xpath('//form[@name=\'editContactForm\']//md-tab-item[text()=\'' + type + '\']'));
                     browser.driver.executeScript("arguments[0].scrollIntoView();", addressType.getWebElement());
                     //browser.driver.executeScript(form+'.scrollTo(0,0);');
-                    sign.isClickable(addressType,function (error,ele) {
-                        if(ele)
+                    sign.isClickable(addressType, function (error, ele) {
+                        if (ele)
                             console.log("lolol");
                     });
                     addressType.click();
@@ -288,7 +288,7 @@ describe('Update a Contact',function () {
                             addresspinCode.sendKeys(addr.pinCode);
                         }
                         done(null);
-                        
+
                     });
                 }
             });
@@ -296,16 +296,16 @@ describe('Update a Contact',function () {
     }
 
     data.forEach(function (contact) {
-        it('should update a contact',function () {
+        it('should update a contact', function () {
 
-            typeFunction(contact.type,contact.updatetype,contact.name,function (error) {
-                if(error) {
+            typeFunction(contact.type, contact.updatetype, contact.name, function (error) {
+                if (error) {
                     console.log(error);
                     return;
                 }
 
-                var contactName=form.element(by.xpath('//*[@id=\'displayName\' and @aria-invalid=\'false\']'));
-                if(contact.updatename) {
+                var contactName = form.element(by.xpath('//*[@id=\'displayName\' and @aria-invalid=\'false\']'));
+                if (contact.updatename) {
                     contactName.clear().then(function () {
                         contactName.sendKeys(contact.updatename);
                     });
@@ -317,25 +317,25 @@ describe('Update a Contact',function () {
 
                 emailFunction(contact.email);
 
-                addressFunction(contact.address,function(error){
-                    if(error){
+                addressFunction(contact.address, function (error) {
+                    if (error) {
                         console.log(error);
 
-                return;
-                }
-                
-                
+                        return;
+                    }
+
+
                 });
 
                 console.log("before update");
 
-                sign.isClickable(updateButton,function (error,ele) {
-                    if(ele)
+                sign.isClickable(updateButton, function (error, ele) {
+                    if (ele)
                         console.log("clickableeeeee");
-                    else  
+                    else
                         console.log("not clickable");
-                          });
+                });
+            });
         });
     });
-});
 });
