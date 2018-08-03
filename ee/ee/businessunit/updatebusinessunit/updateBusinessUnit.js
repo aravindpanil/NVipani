@@ -5,16 +5,16 @@ var config = browser.params;
 
 describe('Update Business Unit', function () {
 
-    var data=require('./updatebusinessunitdata');
-    var sign=require('../../account/common/sign.common');
+    var data = require('./updatebusinessunitdata');
+    var sign = require('../../account/common/sign.common');
 
-    var tab=element(by.xpath('//md-tab-item[text()=\'Business Units\']'));
-    var editBunit=element(by.id('business-unit-edit-icon'));
-    var BunitName=element(by.model('businessUnit.name'));
-    var gstin=element(by.model('businessUnit.gstinNumber'));
-    var pan=element(by.model('businessUnit.panNumber'));
-    var updateButton=element(by.xpath('//button[@aria-label=\'Update\' and @aria-hidden=\'false\']'));
-    var i=0
+    var tab = element(by.xpath('//md-tab-item[text()=\'Business Units\']'));
+    var editBunit = element(by.id('business-unit-edit-icon'));
+    var BunitName = element(by.model('businessUnit.name'));
+    var gstin = element(by.model('businessUnit.gstinNumber'));
+    var pan = element(by.model('businessUnit.panNumber'));
+    var updateButton = element(by.xpath('//button[@aria-label=\'Update\' and @aria-hidden=\'false\']'));
+
     beforeAll(function () {
         browser.get('http://staging.nvipani.com/#!/');
         sign.login(data[0]);
@@ -35,18 +35,18 @@ describe('Update Business Unit', function () {
         //sign.logout();
     });
 
-    function AddressType(type){
-        if(type === 'Billing')
+    function AddressType(type) {
+        if (type === 'Billing')
             return 0;
-        else if(type === 'Shipping')
+        else if (type === 'Shipping')
             return 1;
-        else if(type === 'Receiving')
+        else if (type === 'Receiving')
             return 2;
-        else if(type === 'Invoice')
+        else if (type === 'Invoice')
             return 3;
     }
 
-    function gstinpanFunction(gstinNo,panNo){
+    function gstinpanFunction(gstinNo, panNo) {
         if (gstinNo) {
             gstin.getText().then(function (txt) {
                 var text = txt;
@@ -54,7 +54,7 @@ describe('Update Business Unit', function () {
                     gstin.sendKeys(gstinNo);
                 });
                 gstin.getAttribute('aria-invalid').then(function (attr) {
-                    if(attr === 'true')
+                    if (attr === 'true')
                         gstin.clear().then(function () {
                             gstin.sendKeys(text);
                         });
@@ -69,7 +69,7 @@ describe('Update Business Unit', function () {
                     pan.sendKeys(panNo);
                 });
                 pan.getAttribute('aria-invalid').then(function (attr) {
-                    if(attr === 'true')
+                    if (attr === 'true')
                         pan.clear().then(function () {
                             pan.sendKeys(text);
                         });
@@ -78,12 +78,12 @@ describe('Update Business Unit', function () {
         }
     }
 
-    function phoneFunction(phoneNumber){
+    function phoneFunction(phoneNumber) {
         if (phoneNumber) {
             var phonesTab = element(by.xpath('//md-tab-item[contains(text(),\'Phone\')]'));
             phonesTab.click();
             var ele = element.all(by.xpath('//md-content[./div/*[@id=\'editBunitAddPhones\']]/div'));
-            ele.count().then(function(i) {
+            ele.count().then(function (i) {
                 phoneNumber.forEach(function (mobile) {
                     if (mobile.number) {
                         var addPhone = element(by.id('editBunitAddPhones'));
@@ -113,12 +113,12 @@ describe('Update Business Unit', function () {
         }
     }
 
-    function emailFunction(emailId){
+    function emailFunction(emailId) {
         if (emailId) {
             var emailsTab = element(by.xpath('//md-tab-item[contains(text(),\'E-mail\')]'));
             emailsTab.click();
             var ele = element.all(by.xpath('//md-content[./div/*[@id=\'editBunitAddEmails\']]/div'));
-            ele.count().then(function(i) {
+            ele.count().then(function (i) {
                 emailId.forEach(function (mail) {
                     if (mail.mailid) {
                         var addEmail = element(by.id('editBunitAddEmails'));
@@ -227,26 +227,26 @@ describe('Update Business Unit', function () {
             done(null,null)
         }
     }
-  
 
-    function deleteordisableFunction(type,done){
 
-        if(type){
-            if(type === 'delete') {
+    function deleteordisableFunction(type, done) {
+
+        if (type) {
+            if (type === 'delete') {
                 var deleteButton = element(by.xpath('//button[@aria-label=\'delete business unit\']'));
                 deleteButton.click();
                 done("Business Unit deleted", null);
             }
-            else if(type === 'disable/enable'){
-                var toggle=element(by.model('businessUnit.toggle'));
+            else if (type === 'disable/enable') {
+                var toggle = element(by.model('businessUnit.toggle'));
                 toggle.click();
-                done('Business Unit disabled/enabled',null);
+                done('Business Unit disabled/enabled', null);
             }
             else
-                done(null,null);
+                done(null, null);
         }
         else
-            done(null,null);
+            done(null, null);
     }
     data.forEach(function (data) {
         
@@ -256,30 +256,30 @@ describe('Update Business Unit', function () {
             //console.log(data.businessUnitName);
 
             if (data.businessUnitName) {
-            var unitname;
-            //td[./span[text()='TirupatiBranch']
-                
-                
-                unitname=element(by.xpath('//td[./span[contains(text(), \''+data.businessUnitName+'\' )]]'));
-                
-                sign.isClickable(unitname,function (error,ele) {
-                    if(ele){
+                var unitname;
+                //td[./span[text()='TirupatiBranch']
+
+
+                unitname = element(by.xpath('//td[./span[contains(text(), \'' + data.businessUnitName + '\' )]]'));
+
+                sign.isClickable(unitname, function (error, ele) {
+                    if (ele) {
                         unitname.click();
                         editBunit.click();
 
-                        deleteordisableFunction(data.type,function (error,ele) {
-                            if(error){
+                        deleteordisableFunction(data.type, function (error, ele) {
+                            if (error) {
                                 console.log(error);
                                 return;
                             }
 
-                            if(data.updateBunitName) {
+                            if (data.updateBunitName) {
                                 BunitName.clear().then(function () {
                                     BunitName.sendKeys(data.updateBunitName);
                                 });
                             }
 
-                            gstinpanFunction(data.gstinNo,data.panNo);
+                            gstinpanFunction(data.gstinNo, data.panNo);
 
                             phoneFunction(data.phoneNumber);
 

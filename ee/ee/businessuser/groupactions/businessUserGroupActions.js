@@ -7,7 +7,7 @@ describe('Business User Group Actions', function () {
     var data = require('./groupactiondata');
     var sign = require('../../account/common/sign.common');
     var tab = element(by.xpath('//md-tab-item[text()=\'Business Users\']'));
-    var selectbuser=[];
+    var selectbuser = [];
 
     beforeAll(function () {
         browser.get('http://staging.nvipani.com/#!/signin');
@@ -23,21 +23,21 @@ describe('Business User Group Actions', function () {
             BusinessUsers.forEach(function (user) {
                 selectbuser.push(element(by.xpath('//md-checkbox[../..//td[text()=\'' + user + '\']]')));
             });
-            for(var ele in selectbuser){
+            for (var ele in selectbuser) {
                 ele = element(ele);
                 ele.click();
             }
-                /*selectbuser.getAttribute('class').then(function(text){
-                    console.log("A"+text);
-                })
-                selectbuser.isPresent().then(function (res) {
-                    if (res) {
-                        selectbuser.click();
-                    }
-                    else {
-                        done(new Error("Invalid details for BusinessUser-" + user));
-                    }
-                });*/
+            /*selectbuser.getAttribute('class').then(function(text){
+                console.log("A"+text);
+            })
+            selectbuser.isPresent().then(function (res) {
+                if (res) {
+                    selectbuser.click();
+                }
+                else {
+                    done(new Error("Invalid details for BusinessUser-" + user));
+                }
+            });*/
         }
         else
             done(new Error("Missing BusinessUser Details in Data Set"));
