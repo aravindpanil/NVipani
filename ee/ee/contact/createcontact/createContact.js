@@ -25,97 +25,52 @@ describe('Create a Contact', function () {
 
     function typeFunction(type, done) {
 
-        if(!type){
+        if (!type) {
             done("Missing data")
         }
+        else {
+            var newContact = element(by.xpath('(//button[text()=\'Create New Customer /Supplier\'])[1]'));
+            var newContPill = element(by.xpath('//button[@aria-label=\'New\' and @aria-owns=\'menu_container_3\']'));
+            var SelectType = element(by.xpath('//md-select[@ng-model=\'customerType\']'));
+            var optionType = element(by.xpath('//md-option[@value=\'' + type + '\']'))
 
-        var newContact = element(by.xpath('(//button[text()=\'Create New Customer /Supplier\'])[1]'));
-        var newContPill = element(by.xpath('//button[@aria-label=\'New\' and @aria-owns=\'menu_container_3\']'));
-        var SelectType = element(by.xpath('//md-select[@ng-model=\'customerType\']'));
-        var optionType = element(by.xpath('//md-option[@value=\'' + type + '\']'))
+            sign.isClickable(newContact, function (error, ele) {
+                if (ele) {
+                    ele.click();
+                }
 
-        sign.isClickable(newContact, function (error, ele) {
-            if (ele) {
-                ele.click();
-            }
+                else {
+                    newContPill.click();
+                    var newCont = element(by.xpath('(//button[@aria-label=\'New Contact\'])[2]'));
+                    newCont.click();
+                }
+            });
 
-            else {
-                newContPill.click();
-                var newCont = element(by.xpath('(//button[@aria-label=\'New Contact\'])[2]'));
-                newCont.click();
-            }
-        });
+            sign.isClickable(SelectType, function (error, ele) {
+                if (error) {
+                    console.log(error)
+                }
 
-        sign.isClickable(SelectType, function (error, ele) {
-            if (error) {
-                console.log(error)
-            }
+                else {
+                    ele.click();
+                }
 
-            else {
-                ele.click();
-            }
+            });
 
-        });
+            browser.sleep(1000)
 
-        browser.sleep(1000)
+            sign.isClickable(optionType, function (error, ele) {
+                if (error) {
+                    console.log(error)
+                }
 
-        sign.isClickable(optionType, function (error, ele) {
-            if (error) {
-                console.log(error)
-            }
+                else {
+                    ele.click();
+                }
+            });
 
-            else {
-                ele.click();
-            }
-        });
-
-        done();
-        /*  //var addContact, newContact, contactAdd;
-         if (type) {
-             if (type === 'Customer' || type === 'Supplier') {
-                 if (type === 'Customer') {
-                     element(by.xpath('//md-tab-item[text()=\'Customers\']')).click();
-                     addContact = element(by.id('contact_Customers')).element(by.id('create-customer'));
-                     newContact = element(by.id('contact_Customers')).element(by.id('menu'));
-                     contactAdd = element(by.xpath('//button[@aria-label=\'New Contact\' and ../../../@aria-hidden=\'false\']'));
-                 }
-                 else if (type === 'Supplier') {
-                     element(by.xpath('//md-tab-item[text()=\'Suppliers\']')).click();
-                     addContact = element(by.id('contact_Suppliers')).element(by.id('create-supplier'));
-                     newContact = element(by.id('contact_Suppliers')).element(by.id('menu'));
-                     contactAdd = element(by.xpath('//button[@aria-label=\'New Contact\' and ../../../@aria-hidden=\'false\']'));
-                 }
- 
- 
- 
-                 sign.isClickable(addContact, function (error, ele) {
-                     if (ele) {
-                         ele.click();
-                     }
-                     else {
-                         sign.isClickable(newContact, function (error, ele) {
-                             if (ele) {
-                                 ele.click();
-                                 sign.isClickable(contactAdd, function (error, ele) {
-                                     if (ele)
-                                         ele.click();
-                                     else
-                                         console.log(error);
-                                 });
-                             }
-                             else {
-                                 console.log(error);
-                             }
-                         });
-                     }
-                 });
-                 done(null);
-             }
-             else
-                 done(new Error('Invalid Type'));
-         }
-         else
-             console.log('Missing Type'); */
+            done();
+        }
     }
 
     function basicinfoFunction(basicinfo, done) {
