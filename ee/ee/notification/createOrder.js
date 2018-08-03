@@ -5,10 +5,10 @@ var config = browser.params;
 describe('Create an Order',function () {
 
     var data = require('./createorderdata');
-    var sign=require('../../account/common/sign.common');
+    var sign=require('../account/common/sign.common');
     var fs = require('fs');
     var selectedData=require('./selectedProducts');
-
+    var i=0;
     beforeAll(function () {
         browser.get('');
         sign.login(data[0]);
@@ -20,8 +20,13 @@ describe('Create an Order',function () {
     });
 
     afterEach(function () {
-        browser.sleep(1000);
+        browser.sleep(100);
     });
+
+    afterAll(function(){
+        browser.sleep(1000)
+        sign.logout()
+    })
 
     function selectProductFunction(productDetails,done){
 
@@ -35,15 +40,15 @@ describe('Create an Order',function () {
                         if (res) {
                             selectProduct.click();
 
- //                           selectedData.push({
-   //                             productName: product.productName,
-     //                           productBrand: product.productBrand,
-       //                         productUOM: product.productUOM,
-         //                       productQuantity: product.productQuantity
-           //                 });
-                           // fs.writeFile('./selectedProducts.json', JSON.stringify(selectedData), 'utf-8', function (err) {
-                             //   if (err) throw err;
-                            //});
+                            selectedData.push({
+                                productName: product.productName,
+                                productBrand: product.productBrand,
+                                productUOM: product.productUOM,
+                                productQuantity: product.productQuantity
+                            });
+                            fs.writeFile('./selectedProducts.json', JSON.stringify(selectedData), 'utf-8', function (err) {
+                               if (err) throw err;
+                            });
                         }
                         else
                             done("Invalid details for Product-" + productDetails.indexOf(product), selectProduct);
@@ -59,8 +64,21 @@ describe('Create an Order',function () {
     }
 
     function selectQuantityFunction(type,done) {
+        
+        selectedData.forEach(function (product) {
+            var productquantity = element(by.xpath('//input[@ng-model=\'singleproduct.numberOfUnits\' and ../../..//h5[text()=\'' + product.productName + ' - ' + product.productUOM + '\'] and ../../..//h6[text()=\'' + product.productBrand + '\']]'));
+            var EC = protractor.ExpectedConditions;
+            browser.wait(EC.visibilityOf(productquantity), 5000);
+            productquantity.clear().then(function () {
+                productquantity.sendKeys(product.productQuantity);
+            });
+        });
+        var continueButton = element(by.xpath('//button[@aria-label=\'Continue\' and @aria-hidden=\'false\']'));
+        continueButton.click();
+        console.log("clicked continue")
 
-        if(type && (type === 'Intra Stock')) {
+        done(null,null)
+        /*if(type && (type === 'Intra Stock')) {
             var intrastock=element(by.xpath('//md-checkbox[@aria-label=\'Stock Transfer\']'));
             var EC = protractor.ExpectedConditions;
             browser.wait(EC.visibilityOf(intrastock), 5000);
@@ -88,11 +106,11 @@ describe('Create an Order',function () {
                     }
                 });
             }
-        });
+        });*/
     }
 
     function selectBuyerandAgentFunction(buyerdata,mediatordata,orderType,address,done){
-
+        console.log("enteredd select buyer func")
         var buyer;
 
             if(orderType == 'Purchase')
@@ -102,6 +120,7 @@ describe('Create an Order',function () {
         
 
         buyer.click();
+        console.log("clickefd")
         if(buyerdata) {
             var selectBuyer = element(by.xpath('//md-option[.//*[text()=\'' + buyerdata + '\'] and ../../../@aria-hidden=\'false\']'));
             browser.sleep(3000);
@@ -218,7 +237,8 @@ describe('Create an Order',function () {
 
     data.forEach(function (data) {
         it('should create an order', function () {
-
+                console.log("Test"+i)
+                i++;
                 selectProductFunction(data.productDetails, function (error, ele) {
                     if (error) {
                         console.log(error);

@@ -1,12 +1,12 @@
 [
-  {"username":"9980998098","password":"user123user"},
+  {"username":"9999999955","password":"qwertyuiop"},
   
   {
     "productDetails":[
       {"productName":"Basmati (BSMT)","productBrand":"India","productUOM":"Amp","productQuantity":"12"}
     ],
     "orderType":"Purchase",
-    "buyer":"test1",
+    "buyer":"asdf",
     "address":{
       "addressLine":"12-34 Jeevan Bheema Nagar",
       "city":"Bangalore",
@@ -15,21 +15,6 @@
       "pinCode":"576104"
     },
     "paymentMethod":"Net 30"
-  },
-  {
-    "productDetails":[
-      {"productName":"Basmati (BSMT)","productBrand":"India","productUOM":"Amp","productQuantity":"12"}
-    ],
-    "orderType":"Sale",
-    "buyer":"test1",
-    "address":{
-      "addressLine":"12-34 Jeevan Bheema Nagar",
-      "city":"Bangalore",
-      "state":"Karnataka",
-      "country":"India",
-      "pinCode":"576104"
-    },
-    "paymentMethod":"Net 15"
   }
 
 ]
