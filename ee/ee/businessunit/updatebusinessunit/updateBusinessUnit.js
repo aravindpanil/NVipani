@@ -14,7 +14,7 @@ describe('Update Business Unit', function () {
     var gstin = element(by.model('businessUnit.gstinNumber'));
     var pan = element(by.model('businessUnit.panNumber'));
     var updateButton = element(by.xpath('//button[@aria-label=\'Update\' and @aria-hidden=\'false\']'));
-
+    var i=0;
     beforeAll(function () {
         browser.get('http://staging.nvipani.com/#!/');
         sign.login(data[0]);
@@ -190,6 +190,7 @@ describe('Update Business Unit', function () {
                             addresspinCode.sendKeys(addr.pinCode);
                             
                         }
+                        //console.log("pin enetered")
                     });
                 }
             });
@@ -290,7 +291,7 @@ describe('Update Business Unit', function () {
                                 console.log(error);
                                 return;
                             });
-                            
+                            console.log("after address")
                             //accountFunction(data.account);
 
                             accountFunction(data.account,function(error,ele){
@@ -298,7 +299,7 @@ describe('Update Business Unit', function () {
                                 console.log(error);
                                 return;
                             });
-                            //console.log("after")
+                            console.log("after")
 
                             sign.isClickable(updateButton,function(error,ele){
                                 if(ele){

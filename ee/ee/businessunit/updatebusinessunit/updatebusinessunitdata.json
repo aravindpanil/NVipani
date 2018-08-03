@@ -20,13 +20,6 @@
         "state": "Karnataka",
         "country": "India",
         "pinCode": "123456"
-      },
-      {
-        "addressLine": "526,JeevanBheema Nager",
-        "city": "Bengulure",
-        "state": "Karnataka",
-        "country": "India",
-        "pinCode": "123456"
       }
     ],
     "account": {
@@ -38,7 +31,7 @@
   },
   {
     
-    "businessUnitName":"BangulureBranch",
+    "businessUnitName":"ChittoorBranch",
     "email":[{"emailType":"Work"}],
     "phoneNumber":[{"number":"1234567890"}],
     "address": [

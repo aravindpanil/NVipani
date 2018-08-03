@@ -8,7 +8,7 @@ var config = {
         browser.driver.manage().window().maximize();
     },
     suites: {
-        business: [//'ee/ee/businessunit/createbusinessunit/createBusinessUnit.js',
+        business: ['ee/ee/businessunit/createbusinessunit/createBusinessUnit.js',
         'ee/ee/businessunit/updatebusinessunit/updateBusinessUnit.js']
     },
     jasmineNodeOpts: {
