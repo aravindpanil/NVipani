@@ -1,13 +1,13 @@
 [
-  {"username":"9980998098",
-    "password":"user123user",
+  {"username":"test123@gmail.com",
+    "password":"12345678",
     "businessUnitName":"basebranch",
      "trading": "Distributor",
      "segment": ["Coffee"]},
 
   {
     "type":"delete",
-    "businessUnitName":"TirupatiBranch",
+    "businessUnitName":"testbranch1",
     "gstinNo":"1223",
     "panNo":"1432",
     "email":[{"emailType":"Office","mailid":"bangulure@branch.com"},{"emailType":"Personal","mailid":"qdfbg"}],
@@ -37,19 +37,13 @@
     }
   },
   {
-    "businessUnitName":"ChittoorBranch",
+    
+    "businessUnitName":"BangulureBranch",
     "email":[{"emailType":"Work"}],
     "phoneNumber":[{"number":"1234567890"}],
     "address": [
       {
         "addressLine":"526,JeevanBheema Nager",
-        "city":"Bengulure",
-        "state":"Karnataka",
-        "country":"India",
-        "pinCode":"123456"
-      },
-      {
-        "addressLine":"528,JeevanBheema Nager",
         "city":"Bengulure",
         "state":"Karnataka",
         "country":"India",

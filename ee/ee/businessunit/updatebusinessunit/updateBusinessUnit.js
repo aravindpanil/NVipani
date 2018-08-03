@@ -3,7 +3,7 @@
 
 var config = browser.params;
 
-describe('Create Business User', function () {
+describe('Update Business Unit', function () {
 
     var data=require('./updatebusinessunitdata');
     var sign=require('../../account/common/sign.common');
@@ -14,7 +14,7 @@ describe('Create Business User', function () {
     var gstin=element(by.model('businessUnit.gstinNumber'));
     var pan=element(by.model('businessUnit.panNumber'));
     var updateButton=element(by.xpath('//button[@aria-label=\'Update\' and @aria-hidden=\'false\']'));
-
+    var i=0
     beforeAll(function () {
         browser.get('http://staging.nvipani.com/#!/');
         sign.login(data[0]);
@@ -27,11 +27,12 @@ describe('Create Business User', function () {
 
     afterEach(function () {
         //browser.refresh();
-        browser.sleep(1000);
+        browser.sleep(100);
     });
 
     afterAll(function () {
-        sign.logout();
+        browser.sleep(1000)
+        //sign.logout();
     });
 
     function AddressType(type){
@@ -147,10 +148,13 @@ describe('Create Business User', function () {
         }
     }
 
-    function addressFunction(address){
+    function addressFunction(address,done){
 
         if(address) {
+            var j=0
             address.forEach(function (addr) {
+                j++;
+                console.log("addr "+j)
                 if (addr.addressLine || addr.city || addr.state || addr.country || addr.pinCode) {
                     var type;
                     if (addr.addressType) {
@@ -184,14 +188,17 @@ describe('Create Business User', function () {
                         if (addr.pinCode && (addr.pinCode.length === 6)) {
                             var addresspinCode = addressElement.element(by.model('address.pinCode'));
                             addresspinCode.sendKeys(addr.pinCode);
+                            
                         }
                     });
                 }
             });
+            done(null,null)
         }
     }
 
-    function accountFunction(account){
+    function accountFunction(account,done){
+        console.log("enetredd account")
         if(account) {
             if (account.accountNo && account.bankName && account.ifscCode) {
                 var bankdetailsTab = element(by.xpath('//md-tab-item[text()=\'Bank Account Info\']'));
@@ -217,6 +224,7 @@ describe('Create Business User', function () {
                         });
                 });
             }
+            done(null,null)
         }
     }
   
@@ -242,8 +250,10 @@ describe('Create Business User', function () {
     }
     data.forEach(function (data) {
         
-        it('should create a business user', function () {
-console.log(data.businessUnitName);
+        it('should update a business unit', function () {
+            console.log("test "+i)
+            i++;
+            //console.log(data.businessUnitName);
 
             if (data.businessUnitName) {
             var unitname;
@@ -275,11 +285,29 @@ console.log(data.businessUnitName);
 
                             emailFunction(data.email);
 
-                            addressFunction(data.address);
+                            addressFunction(data.address,function(error,ele){
+                                if(error)
+                                console.log(error);
+                                return;
+                            });
+                            
+                            //accountFunction(data.account);
 
-                            accountFunction(data.account);
+                            accountFunction(data.account,function(error,ele){
+                                if(error)
+                                console.log(error);
+                                return;
+                            });
+                            //console.log("after")
 
-                            updateButton.click();
+                            sign.isClickable(updateButton,function(error,ele){
+                                if(ele){
+                                    
+                                    ele.click();
+                                }
+                                else
+                                    console.log("not clickable")
+                            })
                         
                     });
                 }  
