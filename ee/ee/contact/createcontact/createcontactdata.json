@@ -1,7 +1,7 @@
 [
   {
-    "username": "9980998098",
-    "password": "user123user"
+    "username": "test123@gmail.com",
+    "password": "12345678"
   },
   {
     "type": "Customer",
@@ -9,6 +9,7 @@
       "name": "Hdfgd",
       "fName": "Sai",
       "lName": "Reddy",
+      "mName": "Yolo",
       "companyName": "abcd",
       "payment": "Net 30",
       "gstinNo": "123345",
@@ -70,6 +71,8 @@
     ]
   },
   {
+    "username": "9980998098",
+    "password": "user123user",
     "type": "Customer",
     "basicInfo": {
       "name": "div",
@@ -136,6 +139,8 @@
     ]
   },
   {
+    "username": "9980998098",
+    "password": "user123user",
     "type": "Supplier",
     "basicInfo": {
       "name": "idk",
@@ -202,6 +207,8 @@
     ]
   },
   {
+    "username": "9980998098",
+    "password": "user123user",
     "type": "Supplier",
     "basicInfo": {
       "name": "Anirud",
@@ -268,6 +275,8 @@
     ]
   },
   {
+    "username": "9980998098",
+    "password": "user123user",
     "type": "Customer",
     "basicInfo": {
       "name": "Anirud",

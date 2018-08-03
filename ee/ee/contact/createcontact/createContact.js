@@ -10,10 +10,11 @@ describe('Create a Contact', function () {
 
     beforeAll(function () {
         browser.get('');
+        sign.login(data[0]);
     });
 
     beforeEach(function () {
-        sign.login(data[0]);
+
         element(by.id('nav-contacts')).click();
     });
 
@@ -24,7 +25,9 @@ describe('Create a Contact', function () {
 
     function typeFunction(type, done) {
 
-        console.log('type function')
+        if(!type){
+            done("Missing data")
+        }
 
         var newContact = element(by.xpath('(//button[text()=\'Create New Customer /Supplier\'])[1]'));
         var newContPill = element(by.xpath('//button[@aria-label=\'New\' and @aria-owns=\'menu_container_3\']'));
@@ -34,14 +37,12 @@ describe('Create a Contact', function () {
         sign.isClickable(newContact, function (error, ele) {
             if (ele) {
                 ele.click();
-                console.log('contact button');
             }
 
             else {
                 newContPill.click();
                 var newCont = element(by.xpath('(//button[@aria-label=\'New Contact\'])[2]'));
                 newCont.click();
-                console.log('new button');
             }
         });
 
@@ -118,8 +119,6 @@ describe('Create a Contact', function () {
     }
 
     function basicinfoFunction(basicinfo, done) {
-
-        console.log('basic Info function')
 
         if (basicinfo) {
             var contactName = form.element(by.id('displayName'));
@@ -217,7 +216,7 @@ describe('Create a Contact', function () {
                 done(new Error("Missing Name"));
         }
         else
-            done(new Error("Missing Basic Info"));
+            done("Missing Basic Info");
     }
 
     function phoneNoFunction(phoneNumber) {
@@ -406,7 +405,7 @@ describe('Create a Contact', function () {
 
             typeFunction(contact.type, function (error) {
                 if (error) {
-                    console.log(error);
+                    console.log(error)
                     return;
                 }
 
@@ -416,7 +415,7 @@ describe('Create a Contact', function () {
                         return;
                     }
 
-                    /* validatephonemailFunction(contact.phoneNumber, contact.email, function (error) {
+                    validatephonemailFunction(contact.phoneNumber, contact.email, function (error) {
                         if (error) {
                             console.log(error);
                             return;
@@ -426,7 +425,7 @@ describe('Create a Contact', function () {
 
                         var createButton = element(by.xpath('//button[@aria-label=\'Create Contact\']'));
                         createButton.click();
-                    }); */
+                    });
                 });
             });
         });
