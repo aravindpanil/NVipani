@@ -8,7 +8,7 @@ var config = {
     },
     suites: {
         contact:[
-            'ee/ee/contact/groupactions/contactGroupActions.js'
+            'ee/ee/contact/createcontact/createContact.js'
         ]
     },
     jasmineNodeOpts: {

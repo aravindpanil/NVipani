@@ -10,12 +10,11 @@ describe('Create a Contact', function () {
 
     beforeAll(function () {
         browser.get('');
-        sign.login(data[0]);
-        element(by.id('nav-contacts')).click();
     });
 
     beforeEach(function () {
-
+        sign.login(data[0]);
+        element(by.id('nav-contacts')).click();
     });
 
     afterEach(function () {
@@ -25,55 +24,102 @@ describe('Create a Contact', function () {
 
     function typeFunction(type, done) {
 
-        var addContact, newContact, contactAdd;
-        if (type) {
-            if (type === 'Customer' || type === 'Supplier') {
-                if (type === 'Customer') {
-                    element(by.xpath('//md-tab-item[text()=\'Customers\']')).click();
-                    addContact = element(by.id('contact_Customers')).element(by.id('create-customer'));
-                    newContact = element(by.id('contact_Customers')).element(by.id('menu'));
-                    contactAdd = element(by.xpath('//button[@aria-label=\'New Contact\' and ../../../@aria-hidden=\'false\']'));
-                }
-                else if (type === 'Supplier') {
-                    element(by.xpath('//md-tab-item[text()=\'Suppliers\']')).click();
-                    addContact = element(by.id('contact_Suppliers')).element(by.id('create-supplier'));
-                    newContact = element(by.id('contact_Suppliers')).element(by.id('menu'));
-                    contactAdd = element(by.xpath('//button[@aria-label=\'New Contact\' and ../../../@aria-hidden=\'false\']'));
-                }
+        console.log('type function')
 
+        var newContact = element(by.xpath('(//button[text()=\'Create New Customer /Supplier\'])[1]'));
+        var newContPill = element(by.xpath('//button[@aria-label=\'New\' and @aria-owns=\'menu_container_3\']'));
+        var SelectType = element(by.xpath('//md-select[@ng-model=\'customerType\']'));
+        var optionType = element(by.xpath('//md-option[@value=\'' + type + '\']'))
 
-
-                sign.isClickable(addContact, function (error, ele) {
-                    if (ele) {
-                        ele.click();
-                    }
-                    else {
-                        sign.isClickable(newContact, function (error, ele) {
-                            if (ele) {
-                                ele.click();
-                                sign.isClickable(contactAdd, function (error, ele) {
-                                    if (ele)
-                                        ele.click();
-                                    else
-                                        console.log(error);
-                                });
-                            }
-                            else {
-                                console.log(error);
-                            }
-                        });
-                    }
-                });
-                done(null);
+        sign.isClickable(newContact, function (error, ele) {
+            if (ele) {
+                ele.click();
+                console.log('contact button');
             }
-            else
-                done(new Error('Invalid Type'));
-        }
-        else
-            console.log('Missing Type');
+
+            else {
+                newContPill.click();
+                var newCont = element(by.xpath('(//button[@aria-label=\'New Contact\'])[2]'));
+                newCont.click();
+                console.log('new button');
+            }
+        });
+
+        sign.isClickable(SelectType, function (error, ele) {
+            if (error) {
+                console.log(error)
+            }
+
+            else {
+                ele.click();
+            }
+
+        });
+
+        browser.sleep(1000)
+
+        sign.isClickable(optionType, function (error, ele) {
+            if (error) {
+                console.log(error)
+            }
+
+            else {
+                ele.click();
+            }
+        });
+
+        done();
+        /*  //var addContact, newContact, contactAdd;
+         if (type) {
+             if (type === 'Customer' || type === 'Supplier') {
+                 if (type === 'Customer') {
+                     element(by.xpath('//md-tab-item[text()=\'Customers\']')).click();
+                     addContact = element(by.id('contact_Customers')).element(by.id('create-customer'));
+                     newContact = element(by.id('contact_Customers')).element(by.id('menu'));
+                     contactAdd = element(by.xpath('//button[@aria-label=\'New Contact\' and ../../../@aria-hidden=\'false\']'));
+                 }
+                 else if (type === 'Supplier') {
+                     element(by.xpath('//md-tab-item[text()=\'Suppliers\']')).click();
+                     addContact = element(by.id('contact_Suppliers')).element(by.id('create-supplier'));
+                     newContact = element(by.id('contact_Suppliers')).element(by.id('menu'));
+                     contactAdd = element(by.xpath('//button[@aria-label=\'New Contact\' and ../../../@aria-hidden=\'false\']'));
+                 }
+ 
+ 
+ 
+                 sign.isClickable(addContact, function (error, ele) {
+                     if (ele) {
+                         ele.click();
+                     }
+                     else {
+                         sign.isClickable(newContact, function (error, ele) {
+                             if (ele) {
+                                 ele.click();
+                                 sign.isClickable(contactAdd, function (error, ele) {
+                                     if (ele)
+                                         ele.click();
+                                     else
+                                         console.log(error);
+                                 });
+                             }
+                             else {
+                                 console.log(error);
+                             }
+                         });
+                     }
+                 });
+                 done(null);
+             }
+             else
+                 done(new Error('Invalid Type'));
+         }
+         else
+             console.log('Missing Type'); */
     }
 
     function basicinfoFunction(basicinfo, done) {
+
+        console.log('basic Info function')
 
         if (basicinfo) {
             var contactName = form.element(by.id('displayName'));
@@ -370,7 +416,7 @@ describe('Create a Contact', function () {
                         return;
                     }
 
-                    validatephonemailFunction(contact.phoneNumber, contact.email, function (error) {
+                    /* validatephonemailFunction(contact.phoneNumber, contact.email, function (error) {
                         if (error) {
                             console.log(error);
                             return;
@@ -380,7 +426,7 @@ describe('Create a Contact', function () {
 
                         var createButton = element(by.xpath('//button[@aria-label=\'Create Contact\']'));
                         createButton.click();
-                    });
+                    }); */
                 });
             });
         });
