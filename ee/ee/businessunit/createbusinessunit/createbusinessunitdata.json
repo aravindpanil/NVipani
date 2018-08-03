@@ -34,27 +34,6 @@
     ]
   },
   {
-    "businessUnitName":"TirupatiBranch",
-    "email":[{"emailType":"Work"}],
-    "phoneNumber":[{"number":"1234567890"}],
-    "address": [
-      {
-        "addressLine":"526,JeevanBheema Nager",
-        "city":"Bengulure",
-        "state":"Karnataka",
-        "country":"India",
-        "pinCode":"123456"
-      },
-      {
-        "addressLine":"528,JeevanBheema Nager",
-        "city":"Bengulure",
-        "state":"Karnataka",
-        "country":"India",
-        "pinCode":"123456"
-      }
-    ]
-  },
-  {
     "incharge":"asdfghjkl@gmail.com",
     "businessUnitType":"Ware House",
     "area":{"NoOfUnits":"12","unitofMeasure":"Ampules"},

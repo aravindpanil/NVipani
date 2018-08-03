@@ -6,7 +6,7 @@ var config = browser.params;
 describe('Create Business User', function () {
 
     var i = 0;
-    var data = require('./cbu');
+    var data = require('./createbusinessunitdata');
     var sign = require('../../account/common/sign.common');
     var tab = element(by.xpath('//md-tab-item[text()=\'Business Units\']'));
     var BunitType = element(by.id('businessUnitType'));
