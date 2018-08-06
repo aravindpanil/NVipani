@@ -1,5 +1,5 @@
 [
-  {"username":"9980998098","password":"user123user"},
+  {"username":"test123@gmail.com","password":"12345678"},
   {
     "category": "Food Products (FOODP)",
     "product":{"productName":"Basmati (BSMT)","productHsnCode":[{"hsnSearch":"100","Code":"100630"}],"productTaxGroup":[{"taxSearch":"12%","taxCode":["GST 12%"]},{"taxSearch":"18%","taxCode":["GST 18%"]}],"productUOM":[{"uomSearch":"Amp","uomCode":["Ampules"]}]},
@@ -12,15 +12,27 @@
         "mrp": "250",
         "alternateNoofUnits":"12",
         "alternateMRP":"1000"
-      },
+      }
       
+      
+    ]
+  },
+  {
+    "category": "Food Products (FOODP)",
+    "product":{"productName":"Basmati (BSMT)","productHsnCode":[{"hsnSearch":"100","Code":"100630"}],"productTaxGroup":[{"taxSearch":"12%","taxCode":["GST 12%"]},{"taxSearch":"18%","taxCode":["GST 18%"]}],"productUOM":[{"uomSearch":"Amp","uomCode":["Ampules"]}]},
+    "brand":{"brandName":"India","brandHsnCode":"100630","brandTaxGroup":"GST 18%","brandUOMs":["Box (51Nos)","nj dxk"]},
+    "inventory": [
       {
-        "UOM":{"UOMName":"Box"},
+        "type":"Add Simple UOM",
+        "UOM": {"UOMName":"Box"},
         "NoofUnits": "12",
-        "mrp": "250"
+        "mrp": "250",
+        "alternateNoofUnits":"12",
+        "alternateMRP":"1000"
       }
       
       
     ]
   }
+
 ]

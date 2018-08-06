@@ -3,27 +3,26 @@
   {
     "action":"Enable",
     "Products":[
-      {"productName":"Pineapple","productBrand":"YNG","productUOM":"Pcs"}
+      {"productName":"Basmati (BSMT)","productBrand":"India","productUOM":"Amp"}
     ]
   },
   {
     "action":"Disable",
     "Products":[
-      {"productName":"Pineapple","productBrand":"YNG","productUOM":"Pcs"},
-      {"productName":"Coffee Berries","productBrand":"cofee (brew)","productUOM":"Box"}
+      {"productName":"Basmati (BSMT)","productBrand":"India","productUOM":"Amp"}
     ]
   },
   {
     "action":"Delete",
     "Products":[
-      {"productName":"Pineapple","productBrand":"YNG","productUOM":"Pcs"}
+      {"productName":"Basmati (BSMT)","productBrand":"India","productUOM":"Amp"}
     ]
   },
   {
     "action":"Delete",
     "Products":[
-      {"productName":"Pineapple","productBrand":"YNG","productUOM":"Kgs"},
-      {"productName":"Coffee Berries","productBrand":"cofee (brew)","productUOM":"Box"}
+      {"productName":"Basmati (BSMT)","productBrand":"India","productUOM":"Amp"},
+      {"productName":"Basmati (BSMT)","productBrand":"India","productUOM":"Box"}
     ]
   }
 ]
